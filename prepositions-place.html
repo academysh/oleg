@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prepositions of Place — Headway Elementary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap">
+  <style>
+  /* ═══ Headway 5th edition — Elementary · design inspired by the Student's Book ═══ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  [hidden] { display: none !important; }
+  :root {
+    --red: #BB1D2F;  --red-dark: #8F1523;  --red-chev: #C95A55;
+    --pink: #FBE3E4; --pink-2: #F6CDD0;
+    --cream: #FFF2D1; --cream-line: #E9D69B;
+    --blue: #2B7BB9; --blue-dark: #1D5A8C; --blue-lt: #E4F0F9; --blue-line: #A9CBE4;
+    --green: #2E8B57; --green-bg: #E7F5EC; --green-border: #9FD1B3;
+    --wrong-bg: #FCE8EA; --wrong-border: #EDA9B1;
+    --text: #1F2A33; --muted: #5E6A73; --muted2: #8C97A0;
+    --border: #DCD5D1; --bg: #F6F3F0; --surface: #fff;
+    --card-bg: #FAF6F3; --card-line: #E3DAD5;
+    --r: 18px;          /* big radius: header bars */
+    --r-card: 14px;     /* cards */
+    --r-ctl: 10px;      /* buttons, inputs */
+    --header-h: 64px;
+    --shadow-card: 0 2px 10px rgba(60,30,20,.08);
+  }
+  body { font-family: 'Source Sans 3', 'Frutiger', 'Myriad Pro', 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 16px; }
+  button, input { font-family: inherit; }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--red); color: #fff; padding: 0 32px; height: var(--header-h);
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 30; overflow: hidden;
+    border-radius: 0 0 var(--r) var(--r);
+    box-shadow: 0 3px 12px rgba(0,0,0,.25);
+  }
+  header::before, header::after {
+    content: ''; position: absolute; top: 0; bottom: 0; width: 70px; pointer-events: none;
+    clip-path: polygon(0 0, 45% 0, 100% 50%, 45% 100%, 0 100%, 55% 50%);
+  }
+  header::before { right: 90px; background: rgba(255,255,255,.07); }
+  header::after  { right: 30px; background: rgba(255,255,255,.13); }
+  header > * { position: relative; z-index: 1; }
+  .logo { font-size: 21px; font-weight: 800; color: #fff; line-height: 1.15; letter-spacing: -.2px; }
+  .logo-sub { display: block; margin-top: 3px; font-size: 12px; font-weight: 600; color: rgba(255,255,255,.85); letter-spacing: .9px; text-transform: uppercase; }
+  .header-right { display: flex; align-items: center; gap: 12px; margin-right: 110px; }
+
+  /* "My mistakes" button in the header */
+  .mm-btn { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: var(--red); font-size: 14px; font-weight: 700; border: none; border-radius: var(--r-ctl); padding: 7px 8px 7px 14px; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,.25); transition: background .15s; white-space: nowrap; }
+  .mm-btn:hover { background: var(--pink); }
+  .mm-count { background: var(--red); color: #fff; border-radius: 8px; padding: 1px 8px; font-size: 13px; min-width: 24px; text-align: center; }
+  body.mist-mode .mm-btn { background: var(--cream); padding: 7px 14px; }
+
+  /* ── CONTROL STRIP ── */
+  .control-strip-sticky { position: sticky; top: var(--header-h); z-index: 9; background: var(--bg); padding-bottom: 6px; border-radius: 0 0 16px 16px; box-shadow: 0 4px 8px rgba(60,30,20,.06); }
+  .control-strip { max-width: 880px; margin: 0 auto; padding: 14px 18px 0; }
+  .topic-card { background: var(--surface); border: 1px solid var(--border); border-left: 6px solid var(--red); border-radius: var(--r-card); box-shadow: var(--shadow-card); overflow: hidden; }
+  .topic-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; padding: 10px 14px; }
+  .topic-row .back-btn { justify-self: start; }
+  .counter { display: flex; align-items: center; gap: 10px; justify-self: center; }
+  .topic-title { display: flex; align-items: center; gap: 12px; justify-self: end; }
+  .filter-label { font-size: 20px; font-weight: 700; color: var(--blue); white-space: nowrap; letter-spacing: -.2px; }
+  .round-badge { font-size: 14px; color: var(--muted); font-weight: 600; white-space: nowrap; }
+  .score-chips { display: flex; gap: 6px; }
+  .chip { font-size: 15px; font-weight: 700; padding: 3px 12px; border-radius: var(--r-ctl); white-space: nowrap; }
+  .chip-ok  { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+  .chip-err { background: var(--wrong-bg); color: var(--red); border: 1px solid var(--wrong-border); }
+
+  /* "Grammar Spot" button */
+  .rtog { font-size: 14px; font-weight: 700; padding: 6px 16px; border-radius: var(--r-ctl); cursor: pointer; border: 2px solid var(--blue); background: #fff; color: var(--blue); transition: all .15s; user-select: none; }
+  .rtog:hover { background: var(--blue-lt); }
+  .rtog.open  { background: var(--blue); color: #fff; }
+
+  .hint-body { display: none; margin: 0 14px 14px; padding: 0 16px 14px; border: 2px solid var(--blue); border-radius: 14px; background: #fff; animation: fadeIn .2s ease; max-height: 58vh; overflow-y: auto; }
+  .hint-body.open { display: block; }
+  .hint-body::before { content: 'Grammar Spot'; display: block; background: var(--blue); color: #fff; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; padding: 6px 16px; margin: 0 -16px 14px; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+
+  .scheme { font-size: 15px; line-height: 1.55; }
+  .scheme h3 { font-size: 12.5px; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: .7px; margin: 16px 0 6px; padding-bottom: 4px; border-bottom: 2px solid var(--pink-2); }
+  .scheme h3:first-child { margin-top: 0; }
+  /* rounded tables */
+  .stbl { border-collapse: separate; border-spacing: 0; width: 100%; margin-bottom: 4px; border: 1px solid var(--blue-line); border-radius: 12px; overflow: hidden; }
+  .stbl th { background: var(--blue-lt); color: var(--blue-dark); font-size: 12.5px; font-weight: 700; text-align: left; padding: 7px 10px; text-transform: uppercase; letter-spacing: .4px; }
+  .stbl td { padding: 7px 10px; color: var(--text); vertical-align: top; font-size: 15px; background: #fff; }
+  .stbl th, .stbl td { border: none; border-right: 1px solid var(--blue-line); border-bottom: 1px solid var(--blue-line); }
+  .stbl tr > *:last-child { border-right: none; }
+  .stbl tr:last-child > * { border-bottom: none; }
+  .stbl td code { background: none; color: var(--blue-dark); padding: 0; font-family: inherit; font-size: 15px; font-style: italic; font-weight: 600; }
+  .stbl tr:nth-child(even) td { background: #F7FBFE; }
+  .formula { display: inline-block; background: var(--cream); border: 1px solid var(--cream-line); border-radius: 10px; padding: 7px 14px; font-size: 15px; margin: 4px 0 10px; color: var(--text); }
+  .formula code { color: var(--red); font-family: inherit; font-weight: 700; font-style: italic; }
+  .close-btn { margin-top: 14px; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: var(--muted); cursor: pointer; border: 1px solid var(--border); background: #fff; padding: 5px 14px; border-radius: var(--r-ctl); transition: all .15s; }
+  .close-btn:hover { color: var(--red); border-color: var(--red); }
+
+  /* ── EXERCISES ── */
+  main { max-width: 880px; margin: 0 auto; padding: 20px 18px 60px; }
+  .exercises-card { background: var(--surface); border: 1px solid var(--border); border-top: 5px solid var(--red); border-radius: var(--r-card); box-shadow: var(--shadow-card); padding: 20px 20px 14px; margin-bottom: 16px; }
+  body.mist-mode .exercises-card { border-top-color: var(--blue); }
+  .mist-note { display: flex; align-items: center; gap: 8px; background: var(--cream); border: 1px solid var(--cream-line); border-radius: 12px; padding: 10px 14px; margin-bottom: 14px; font-size: 15px; }
+  .progress-track { height: 6px; background: var(--pink); border-radius: 4px; margin-bottom: 16px; overflow: hidden; }
+  .progress-fill  { height: 100%; background: var(--red); border-radius: 4px; transition: width .4s ease; width: 0%; }
+
+  /* every sentence is its own rounded card */
+  .sentence-card { border: 1.5px solid var(--card-line); border-radius: 12px; padding: 12px 14px 12px 12px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 12px; transition: background .2s, border-color .2s; background: var(--card-bg); }
+  .sentence-card:last-child { margin-bottom: 0; }
+  .sentence-card.checked-ok  { border-color: var(--green-border); background: var(--green-bg); }
+  .sentence-card.checked-err { border-color: var(--wrong-border); background: var(--wrong-bg); }
+  .num { font-size: 17px; font-weight: 700; color: var(--red); min-width: 26px; text-align: right; padding-top: 4px; flex-shrink: 0; }
+  .card-body { flex: 1; min-width: 0; }
+
+  .sent-line { font-size: 18px; line-height: 2.0; display: flex; flex-wrap: wrap; align-items: center; gap: 3px; }
+  .sent-line .word { white-space: nowrap; }
+  .dialogue { font-size: 18px; line-height: 2.0; display: flex; flex-direction: column; }
+  .dl { display: flex; flex-wrap: wrap; align-items: center; gap: 3px; }
+  .dl .word { white-space: nowrap; }
+  .sp-label { font-weight: 700; color: var(--red); margin-right: 3px; white-space: nowrap; }
+
+  /* gaps = small rounded fields; answers in italic */
+  input.gap { border: 1.5px solid #C9BFB9; background: #fff; color: var(--blue-dark); font-size: 18px; font-style: italic; font-weight: 600; padding: 1px 8px; border-radius: 9px; outline: none; transition: border-color .15s, background .15s, box-shadow .15s; text-align: center; vertical-align: middle; }
+  input.gap::placeholder { color: transparent; }
+  input.gap:focus { border-color: var(--red); background: var(--cream); box-shadow: 0 0 0 3px rgba(187,29,47,.12); }
+  input.gap.correct { border-color: var(--green); background: #fff; color: var(--green); }
+  input.gap.wrong   { border-color: var(--red); background: #fff; color: var(--red); text-decoration: line-through; }
+  input.gap:disabled { opacity: 1; cursor: default; }
+
+  .meta-line { margin-top: 2px; display: flex; align-items: center; flex-wrap: wrap; gap: 5px; font-size: 14.5px; }
+  .hint-base { color: var(--muted); font-style: italic; }
+  .hint-ru   { color: var(--muted2); font-style: italic; }
+  .correction { color: var(--red); font-weight: 700; font-size: 14.5px; display: none; }
+
+  .btn-check-card { flex-shrink: 0; font-size: 13px; font-weight: 700; padding: 5px 14px; border-radius: var(--r-ctl); border: 1.5px solid var(--red); background: #fff; color: var(--red); cursor: pointer; transition: all .15s; white-space: nowrap; margin-top: 3px; }
+  .btn-check-card:hover:not(:disabled) { background: var(--red); color: #fff; }
+  .btn-check-card:disabled { opacity: .35; cursor: default; }
+
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; padding-top: 14px; border-top: 2px solid var(--pink); }
+  button.btn-main { font-size: 15px; font-weight: 700; border-radius: 12px; padding: 10px 24px; cursor: pointer; border: none; transition: background .15s, transform .1s; }
+  button.btn-main:active { transform: scale(.97); }
+  .btn-check-all { background: var(--red); color: #fff; }
+  .btn-check-all:hover { background: var(--red-dark); }
+  .btn-next { background: #fff; color: var(--red); border: 2px solid var(--red) !important; }
+  .btn-next:hover { background: var(--pink); }
+  .btn-empty { background: #fff; color: var(--muted); border: 2px solid var(--border) !important; margin-left: auto; }
+  .btn-empty:hover { color: var(--red); border-color: var(--red) !important; background: var(--pink); }
+
+  .result-box { margin: 14px 0 8px; padding: 12px 16px; border-radius: 12px; font-size: 16px; font-weight: 600; display: none; border: 1px solid transparent; }
+  .result-box.show  { display: block; }
+  .result-box.great { background: var(--green-bg); border-color: var(--green-border); color: #1d6b40; }
+  .result-box.ok    { background: var(--cream); border-color: var(--cream-line); color: #6d5300; }
+  .result-box.poor  { background: var(--wrong-bg); border-color: var(--wrong-border); color: #8f1523; }
+  .empty-msg { text-align: center; padding: 44px 20px; color: var(--muted); font-size: 17px; line-height: 1.5; background: var(--card-bg); border: 1.5px dashed var(--card-line); border-radius: 12px; }
+  footer { text-align: center; padding: 22px; font-size: 13px; color: var(--muted); border-top: 3px solid var(--red); background: #fff; border-radius: 18px 18px 0 0; }
+
+  .sent-translation { font-size: 15px; color: var(--muted); margin-top: 2px; line-height: 1.5; font-style: italic; }
+  .sent-translation mark { background: none; color: var(--red); font-weight: 700; font-style: normal; }
+
+  .back-btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 18px; background: #fff; color: var(--red); border: 2px solid var(--red); border-radius: var(--r-ctl); cursor: pointer; font-size: 14px; font-weight: 700; text-decoration: none; transition: background .15s, color .15s; }
+  .back-btn:hover { background: var(--red); color: #fff; }
+
+  /* Reset button */
+  .reset-btn { font-size: 13px; font-weight: 700; padding: 4px 12px; border-radius: var(--r-ctl); border: 1.5px solid var(--border); background: #fff; color: var(--muted); cursor: pointer; transition: all .15s; white-space: nowrap; }
+  .reset-btn:hover { color: var(--red); border-color: var(--red); background: var(--pink); }
+  .footer-reset { margin-bottom: 12px; }
+  .footer-reset .reset-btn { font-size: 14px; padding: 7px 20px; }
+
+  @media (max-width: 760px) {
+    .topic-row { grid-template-columns: auto 1fr; }
+    .counter { justify-self: end; }
+    .topic-title { grid-column: 1 / -1; justify-self: start; }
+  }
+  @media (max-width: 640px) {
+    :root { --header-h: 58px; --r: 16px; }
+    header { padding: 0 14px; }
+    .logo { font-size: 16px; } .logo-sub { font-size: 10px; }
+    .header-right { margin-right: 0; gap: 8px; }
+    .mm-btn { font-size: 13px; padding: 6px 6px 6px 10px; }
+    .round-badge { display: none; }
+    .sent-line, .dialogue, input.gap { font-size: 17px; }
+    .exercises-card { padding: 14px 12px 10px; }
+    .sentence-card { flex-wrap: wrap; }
+    .btn-empty { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    Headway 5th edition — Elementary
+    <span class="logo-sub">Oleg’s Practice</span>
+  </div>
+  <div class="header-right">
+    <button class="mm-btn" id="btn-bank" onclick="toggleBank()">My mistakes <span class="mm-count">0</span></button>
+  </div>
+</header>
+
+<div class="control-strip-sticky"><div class="control-strip">
+  <div class="topic-card">
+    <div class="topic-row">
+      <a href="index.html" class="back-btn" onclick="backClick(event)">← Back</a>
+      <div class="counter">
+        <span class="round-badge">Round <strong id="round-num">1</strong></span>
+        <div class="score-chips">
+          <span class="chip chip-ok"  id="chip-ok">✓ 0</span>
+          <span class="chip chip-err" id="chip-err">✗ 0</span>
+        </div>
+        <button class="reset-btn" onclick="resetProgress()" title="Reset round, score and answers">↺ Reset</button>
+      </div>
+      <div class="topic-title">
+        <span class="filter-label">Prepositions of Place</span>
+        <button class="rtog" id="ht-prep" onclick="toggleHint('prep')">📖 Rule</button>
+      </div>
+    </div>
+
+    <div id="hb-prep" class="hint-body">
+      <div class="scheme">
+        <h3>Prepositions of place</h3>
+        <table class="stbl">
+          <tr style="background:#E4F0F9"><th style="color:#1D5A8C;border-color:#A9CBE4">Preposition</th><th style="color:#1D5A8C;border-color:#A9CBE4">Meaning</th><th style="color:#1D5A8C;border-color:#A9CBE4">Example</th></tr>
+          <tr><td><code>in</code></td><td>inside a space</td><td><code>She is <b>in</b> the office.</code></td></tr>
+          <tr><td><code>on</code></td><td>on a surface</td><td><code>The book is <b>on</b> the table.</code></td></tr>
+          <tr><td><code>at</code></td><td>at a specific point / place</td><td><code>He is <b>at</b> home. She is <b>at</b> work.</code></td></tr>
+          <tr><td><code>above</code></td><td>higher, not touching</td><td><code>The lamp is <b>above</b> the table.</code></td></tr>
+          <tr><td><code>under</code></td><td>below, lower than</td><td><code>The cat is <b>under</b> the chair.</code></td></tr>
+          <tr><td><code>behind</code></td><td>at the back of</td><td><code>The park is <b>behind</b> the school.</code></td></tr>
+          <tr><td><code>in front of</code></td><td>facing, at the front of</td><td><code>There is a bus stop <b>in front of</b> the hotel.</code></td></tr>
+          <tr><td><code>across</code></td><td>on the other side of</td><td><code>The shop is <b>across</b> the street.</code></td></tr>
+        </table>
+        <h3>Key differences: in / on / at</h3>
+        <table class="stbl">
+          <tr style="background:#E4F0F9"><th style="color:#1D5A8C;border-color:#A9CBE4">in</th><th style="color:#1D5A8C;border-color:#A9CBE4">on</th><th style="color:#1D5A8C;border-color:#A9CBE4">at</th></tr>
+          <tr><td><code>in</code> the room / the box</td><td><code>on</code> the table / the wall</td><td><code>at</code> home / work / school</td></tr>
+          <tr><td><code>in</code> the city / the village</td><td><code>on</code> the floor / the shelf</td><td><code>at</code> home / the bus stop</td></tr>
+          <tr><td><code>in</code> the garden / the park</td><td><code>on</code> the left / the right</td><td><code>at</code> the corner / the top</td></tr>
+        </table>
+      </div>
+      <div class="close-btn" onclick="closeHint('prep')">✕ Close</div>
+    </div>
+  </div>
+</div></div>
+
+<main>
+  <div class="exercises-card">
+    <div class="mist-note" id="mist-note" hidden></div>
+    <div class="progress-track"><div class="progress-fill" id="progress"></div></div>
+    <div id="container"></div>
+    <div class="actions">
+      <button class="btn-main btn-check-all" onclick="checkAll()">Check All</button>
+      <button class="btn-main btn-next"      onclick="newRound()">New Round ↻</button>
+      <button class="btn-main btn-empty" id="btn-empty" onclick="emptyBank()" hidden>Empty bank</button>
+    </div>
+    <div class="result-box" id="result"></div>
+  </div>
+</main>
+
+<footer><div class="footer-reset"><button class="reset-btn" onclick="resetProgress()">↺ Reset</button></div>Headway Elementary 5th edition · Grammar Practice · <a href="index.html" style="color:inherit;text-decoration:underline;">← Home</a></footer>
+
+<script>
+
+// ─── DATA ────────────────────────────────────────────────────────────────
+const DB = [];
+function t(v){return{k:'t',v};}
+function g(a,w){return{k:'g',a:Array.isArray(a)?a:[a],w};}
+function pp(parts,hint,tr,trMark){ DB.push({bank:'prep', parts, hint, tr, trMark}); }
+function dl(speakers, hint, bank, tr, trMark){
+  const lines = Object.entries(speakers).map(([sp,parts])=>({speaker:sp,parts}));
+  DB.push({bank, dialogue:true, lines, hint, tr, trMark});
+}
+
+// ══════════════════════════════════════════════════════════════
+
+// ── AFF (100) ──────────────────────────────────────────────
+pp([t(`The book is `),g(`on`,52),t(` the table.`)],'(on)','Книга на столе.','на');
+pp([t(`She works `),g(`in`,46),t(` the city centre.`)],'(in)','Она работает в центре города.','в');
+pp([t(`They meet `),g(`at`,46),t(` the café every Friday.`)],'(at)','Они встречаются в кафе каждую пятницу.','в');
+pp([t(`The lamp is `),g(`above`,68),t(` the dining table.`)],'(above)','Лампа над обеденным столом.','над');
+pp([t(`The cat sleeps `),g(`under`,68),t(` the bed every night.`)],'(under)','Кошка спит под кроватью каждую ночь.','под');
+pp([t(`The car park is `),g(`behind`,72),t(` the supermarket.`)],'(behind)','Автостоянка позади супермаркета.','позади');
+pp([t(`There is a bus stop `),g(`in front of`,108),t(` the hotel.`)],'(in front of)','Перед отелем есть автобусная остановка.','Перед');
+pp([t(`The pharmacy is `),g(`across`,74),t(` the street from the bank.`)],'(across)','Аптека напротив банка.','напротив');
+pp([t(`We always have tea `),g(`after`,68),t(` dinner.`)],'(after)','Мы всегда пьём чай после ужина.','после');
+pp([t(`My keys are `),g(`on`,52),t(` the bedside table.`)],'(on)','Мои ключи на тумбочке у кровати.','на');
+pp([t(`He lives `),g(`in`,46),t(` a small village near the mountains.`)],'(in)','Он живёт в небольшой деревне у гор.','в');
+pp([t(`She is `),g(`at`,46),t(` home all day today.`)],'(at)','Она дома весь сегодняшний день.','дома');
+pp([t(`The sign is `),g(`above`,68),t(` the entrance to the building.`)],'(above)','Вывеска над входом в здание.','над');
+pp([t(`There is a box `),g(`under`,68),t(` the stairs.`)],'(under)','Под лестницей стоит коробка.','Под');
+pp([t(`The garden is `),g(`behind`,72),t(` the house.`)],'(behind)','Сад позади дома.','позади');
+pp([t(`The children stand `),g(`in front of`,108),t(` the school every morning.`)],'(in front of)','Дети стоят перед школой каждое утро.','перед');
+pp([t(`There is a park `),g(`across`,74),t(` the road from our flat.`)],'(across)','Напротив нашей квартиры через дорогу есть парк.','Напротив');
+pp([t(`She always goes to the gym `),g(`after`,68),t(` work.`)],'(after)','Она всегда ходит в спортзал после работы.','после');
+pp([t(`The picture is `),g(`on`,52),t(` the wall above the sofa.`)],'(on)','Картина на стене над диваном.','на');
+pp([t(`We live `),g(`in`,46),t(` a flat on the third floor.`)],'(in)','Мы живём в квартире на третьем этаже.','в');
+pp([t(`He arrives `),g(`at`,46),t(` the office at nine every morning.`)],'(at)','Он приезжает в офис в девять каждое утро.','в');
+pp([t(`The shelf is `),g(`above`,68),t(` the desk.`)],'(above)','Полка над письменным столом.','над');
+pp([t(`My bag is `),g(`under`,68),t(` the chair.`)],'(under)','Моя сумка под стулом.','под');
+pp([t(`The school is `),g(`behind`,72),t(` the library.`)],'(behind)','Школа позади библиотеки.','позади');
+pp([t(`There is a fountain `),g(`in front of`,108),t(` the museum.`)],'(in front of)','Перед музеем есть фонтан.','Перед');
+pp([t(`The supermarket is `),g(`across`,74),t(` the road from the station.`)],'(across)','Супермаркет напротив станции через дорогу.','напротив');
+pp([t(`He calls his parents `),g(`after`,68),t(` lunch every Sunday.`)],'(after)','Он звонит родителям после обеда каждое воскресенье.','после');
+pp([t(`The remote control is `),g(`on`,52),t(` the sofa.`)],'(on)','Пульт на диване.','на');
+pp([t(`She studies `),g(`in`,46),t(` the library every evening.`)],'(in)','Она занимается в библиотеке каждый вечер.','в');
+pp([t(`We meet `),g(`at`,46),t(` the station and then walk together.`)],'(at)','Мы встречаемся на станции и потом идём вместе.','на');
+pp([t(`The clock is `),g(`above`,68),t(` the fireplace.`)],'(above)','Часы над камином.','над');
+pp([t(`The suitcase is `),g(`under`,68),t(` the bed.`)],'(under)','Чемодан под кроватью.','под');
+pp([t(`The post office is `),g(`behind`,72),t(` the town hall.`)],'(behind)','Почта позади ратуши.','позади');
+pp([t(`He parks `),g(`in front of`,108),t(` the office every day.`)],'(in front of)','Он паркуется перед офисом каждый день.','перед');
+pp([t(`The café is `),g(`across`,74),t(` the square from the theatre.`)],'(across)','Кафе напротив театра через площадь.','напротив');
+pp([t(`She reads a book `),g(`after`,68),t(` the children go to bed.`)],'(after)','Она читает книгу после того, как дети ложатся спать.','после');
+pp([t(`The newspaper is `),g(`on`,52),t(` the kitchen table.`)],'(on)','Газета на кухонном столе.','на');
+pp([t(`My parents live `),g(`in`,46),t(` the same street as us.`)],'(in)','Мои родители живут на той же улице, что и мы.','на');
+pp([t(`She is `),g(`at`,46),t(` work until six every evening.`)],'(at)','Она на работе до шести каждый вечер.','на');
+pp([t(`The painting is `),g(`above`,68),t(` the bookshelf.`)],'(above)','Картина над книжной полкой.','над');
+pp([t(`The spare key is `),g(`under`,68),t(` the mat by the front door.`)],'(under)','Запасной ключ под ковриком у входной двери.','под');
+pp([t(`The garage is `),g(`behind`,72),t(` the house.`)],'(behind)','Гараж позади дома.','позади');
+pp([t(`There is a small garden `),g(`in front of`,108),t(` the cottage.`)],'(in front of)','Перед коттеджем есть небольшой сад.','Перед');
+pp([t(`The bank is `),g(`across`,74),t(` the street from the post office.`)],'(across)','Банк напротив почты через улицу.','напротив');
+pp([t(`They always watch TV `),g(`after`,68),t(` dinner.`)],'(after)','Они всегда смотрят телевизор после ужина.','после');
+pp([t(`My phone is `),g(`on`,52),t(` the charger on the desk.`)],'(on)','Мой телефон заряжается на столе.','на');
+pp([t(`She works `),g(`in`,46),t(` a big open-plan office.`)],'(in)','Она работает в большом офисе открытой планировки.','в');
+pp([t(`He is always `),g(`at`,46),t(` his desk by eight thirty.`)],'(at)','Он всегда за рабочим столом к половине девятого.','за');
+pp([t(`The mirror is `),g(`above`,68),t(` the bathroom sink.`)],'(above)','Зеркало над раковиной в ванной.','над');
+pp([t(`The dog hides `),g(`under`,68),t(` the table during thunderstorms.`)],'(under)','Собака прячется под столом во время грозы.','под');
+pp([t(`The rubbish bins are `),g(`behind`,72),t(` the building.`)],'(behind)','Мусорные баки для раздельного сбора стоят позади здания.','позади');
+pp([t(`She waits `),g(`in front of`,108),t(` the cinema for her friends.`)],'(in front of)','Она ждёт друзей перед кинотеатром.','перед');
+pp([t(`There is a lovely bakery `),g(`across`,74),t(` the road from my flat.`)],'(across)','Напротив моей квартиры через дорогу есть замечательная пекарня.','Напротив');
+pp([t(`She goes for a run `),g(`after`,68),t(` breakfast every morning.`)],'(after)','Она бегает после завтрака каждое утро.','после');
+pp([t(`The laptop is `),g(`on`,52),t(` the coffee table in the living room.`)],'(on)','Ноутбук на журнальном столике в гостиной.','на');
+pp([t(`He is `),g(`in`,46),t(` a meeting until noon.`)],'(in)','Он на совещании до полудня.','на');
+pp([t(`They have breakfast `),g(`at`,46),t(` the hotel every morning.`)],'(at)','Они завтракают в отеле каждое утро.','в');
+pp([t(`The projector is mounted `),g(`above`,68),t(` the whiteboard.`)],'(above)','Проектор установлен над доской.','над');
+pp([t(`The wine is `),g(`under`,68),t(` the kitchen counter.`)],'(under)','Вино под кухонной стойкой.','под');
+pp([t(`Our neighbours park `),g(`behind`,72),t(` our car every night.`)],'(behind)','Наши соседи паркуются позади нашей машины каждую ночь.','позади');
+pp([t(`The teacher stands `),g(`in front of`,108),t(` the class.`)],'(in front of)','Учитель стоит перед классом.','перед');
+pp([t(`There is a chemist `),g(`across`,74),t(` the road.`)],'(across)','Напротив через дорогу есть аптека.','Напротив');
+pp([t(`He takes a shower `),g(`after`,68),t(` his morning run.`)],'(after)','Он принимает душ после утренней пробежки.','после');
+pp([t(`The instructions are `),g(`on`,52),t(` the back of the box.`)],'(on)','Инструкции на обратной стороне коробки.','на');
+pp([t(`She is `),g(`in`,46),t(` the kitchen making dinner.`)],'(in)','Она на кухне, готовит ужин.','на');
+pp([t(`The taxi is waiting `),g(`at`,46),t(` the front door.`)],'(at)','Такси ждёт у парадной двери.','у');
+pp([t(`The smoke detector is `),g(`above`,68),t(` the door.`)],'(above)','Пожарный датчик над дверью.','над');
+pp([t(`The heating pipes run `),g(`under`,68),t(` the floor.`)],'(under)','Трубы отопления проходят под полом.','под');
+pp([t(`The storage room is `),g(`behind`,72),t(` the kitchen.`)],'(behind)','Кладовка позади кухни.','позади');
+pp([t(`He always stretches `),g(`in front of`,108),t(` the TV after work.`)],'(in front of)','Он всегда делает растяжку перед телевизором после работы.','перед');
+pp([t(`The newsagent is `),g(`across`,74),t(` the road from the school.`)],'(across)','Газетный киоск напротив школы через дорогу.','напротив');
+pp([t(`They go for a walk `),g(`after`,68),t(` Sunday lunch.`)],'(after)','Они ходят на прогулку после воскресного обеда.','после');
+pp([t(`The schedule is `),g(`on`,52),t(` the notice board in the corridor.`)],'(on)','Расписание на доске объявлений в коридоре.','на');
+pp([t(`He is `),g(`in`,46),t(` his car — he should arrive soon.`)],'(in)','Он в машине — должен скоро приехать.','в');
+pp([t(`She is `),g(`at`,46),t(` school until three thirty.`)],'(at)','Она в школе до половины четвёртого.','в');
+pp([t(`The smoke is `),g(`above`,68),t(` the factory.`)],'(above)','Дым над заводом.','над');
+pp([t(`There is a car park `),g(`under`,68),t(` the shopping centre.`)],'(under)','Под торговым центром есть парковка.','Под');
+pp([t(`The children play `),g(`behind`,72),t(` the school during the break.`)],'(behind)','Дети играют позади школы во время перемены.','позади');
+pp([t(`There is a queue `),g(`in front of`,108),t(` the box office.`)],'(in front of)','Перед кассой стоит очередь.','Перед');
+pp([t(`The restaurant is `),g(`across`,74),t(` the square.`)],'(across)','Ресторан напротив через площадь.','напротив');
+pp([t(`She drinks herbal tea `),g(`after`,68),t(` every meal.`)],'(after)','Она пьёт травяной чай после каждого приёма пищи.','после');
+pp([t(`The address is `),g(`on`,52),t(` the envelope.`)],'(on)','Адрес на конверте.','на');
+pp([t(`We are `),g(`in`,46),t(` the same English class.`)],'(in)','Мы в одной группе по английскому.','в');
+pp([t(`He is `),g(`at`,46),t(` the gym at this time of day.`)],'(at)','В это время дня он в спортзале.','в');
+pp([t(`The stars are `),g(`above`,68),t(` us on a clear night.`)],'(above)','В ясную ночь звёзды над нами.','над');
+pp([t(`The cat is sleeping `),g(`under`,68),t(` the radiator.`)],'(under)','Кошка спит под батареей.','под');
+pp([t(`The main stage is `),g(`behind`,72),t(` the food stalls.`)],'(behind)','Главная сцена позади рядов с едой.','позади');
+pp([t(`She stops `),g(`in front of`,108),t(` the window display every morning.`)],'(in front of)','Каждое утро она останавливается перед витриной.','перед');
+pp([t(`The bookshop is `),g(`across`,74),t(` the lane from the café.`)],'(across)','Книжный магазин напротив кафе через переулок.','напротив');
+pp([t(`The children watch cartoons `),g(`after`,68),t(` school.`)],'(after)','Дети смотрят мультфильмы после школы.','после');
+pp([t(`Her phone is `),g(`on`,52),t(` the table next to the sofa.`)],'(on)','Её телефон на столике рядом с диваном.','на');
+pp([t(`I work `),g(`in`,46),t(` a small office above a bakery.`)],'(in)','Я работаю в небольшом офисе над пекарней.','в');
+pp([t(`She is `),g(`at`,46),t(` the dentist this afternoon.`)],'(at)','Сегодня днём она у стоматолога.','у');
+pp([t(`The helicopter is flying `),g(`above`,68),t(` the city.`)],'(above)','Вертолёт летит над городом.','над');
+pp([t(`The cables are hidden `),g(`under`,68),t(` the carpet.`)],'(under)','Кабели спрятаны под ковром.','под');
+pp([t(`The bin is `),g(`behind`,72),t(` the door.`)],'(behind)','Мусорное ведро за дверью.','за');
+pp([t(`He always stretches `),g(`in front of`,108),t(` the mirror before bed.`)],'(in front of)','Перед сном он всегда делает растяжку перед зеркалом.','перед');
+pp([t(`The gym is `),g(`across`,74),t(` the park.`)],'(across)','Спортзал напротив через парк.','напротив');
+pp([t(`He calls his sister `),g(`after`,68),t(` every English lesson.`)],'(after)','Он звонит сестре после каждого занятия по английскому.','после');
+
+// ── NEG (100) ─────────────────────────────────────────────────
+pp([t(`The book is not `),g(`on`,52),t(` the shelf — it is on the table.`)],'(on)','Книга не на полке — она на столе.','на');
+pp([t(`She doesn't work `),g(`in`,46),t(` an office — she works from home.`)],'(in)','Она работает не в офисе — она работает из дома.','в');
+pp([t(`He isn't `),g(`at`,46),t(` home — he's at work.`)],'(at)','Он не дома — он на работе.','дома');
+pp([t(`The light is not `),g(`above`,68),t(` the table — it's above the sofa.`)],'(above)','Свет не над столом — он над диваном.','над');
+pp([t(`The cat isn't `),g(`under`,68),t(` the bed — it's under the sofa.`)],'(under)','Кошка не под кроватью — она под диваном.','под');
+pp([t(`The garden isn't `),g(`behind`,72),t(` the house — it's in front.`)],'(behind)','Сад не позади дома — он спереди.','позади');
+pp([t(`There is no bus stop `),g(`in front of`,108),t(` the school.`)],'(in front of)','Перед школой нет автобусной остановки.','Перед');
+pp([t(`The bank is not `),g(`across`,74),t(` the road — it's further down.`)],'(across)','Банк не напротив через дорогу — он дальше.','напротив');
+pp([t(`We don't have coffee `),g(`after`,68),t(` dinner — we prefer tea.`)],'(after)','Мы не пьём кофе после ужина — мы предпочитаем чай.','после');
+pp([t(`My keys are not `),g(`on`,52),t(` the table — I can't find them anywhere.`)],'(on)','Моих ключей нет на столе — я нигде не могу их найти.','на');
+pp([t(`He doesn't live `),g(`in`,46),t(` the city — he lives in a village.`)],'(in)','Он живёт не в городе — он живёт в деревне.','в');
+pp([t(`She isn't `),g(`at`,46),t(` work today — she's on holiday.`)],'(at)','Она сегодня не на работе — она в отпуске.','на');
+pp([t(`The painting is not `),g(`above`,68),t(` the fireplace — it's beside it.`)],'(above)','Картина не над камином — она рядом с ним.','над');
+pp([t(`There's nothing `),g(`under`,68),t(` the bed — I already checked.`)],'(under)','Под кроватью ничего нет — я уже проверил.','Под');
+pp([t(`The post office isn't `),g(`behind`,72),t(` the supermarket — it's next to it.`)],'(behind)','Почта не позади супермаркета — она рядом с ним.','позади');
+pp([t(`There's no parking `),g(`in front of`,108),t(` the hospital.`)],'(in front of)','Перед больницей нет парковки.','Перед');
+pp([t(`The café isn't `),g(`across`,74),t(` the street — it's on this side.`)],'(across)','Кафе не напротив через улицу — оно на этой стороне.','напротив');
+pp([t(`She doesn't go to the gym `),g(`after`,68),t(` work — she goes in the morning.`)],'(after)','Она ходит в спортзал не после работы — она ходит утром.','после');
+pp([t(`The remote isn't `),g(`on`,52),t(` the sofa — did you check the table?`)],'(on)','Пульта нет на диване — ты проверял стол?','на');
+pp([t(`They don't live `),g(`in`,46),t(` a flat — they have a house.`)],'(in)','Они живут не в квартире — у них дом.','в');
+pp([t(`He doesn't arrive `),g(`at`,46),t(` the office before nine.`)],'(at)','Он приезжает в офис не раньше девяти.','в');
+pp([t(`The clock is not `),g(`above`,68),t(` the fireplace — it's on the mantelpiece.`)],'(above)','Часы не над камином — они на каминной полке.','над');
+pp([t(`The suitcase isn't `),g(`under`,68),t(` the bed — it's in the wardrobe.`)],'(under)','Чемодан не под кроватью — он в шкафу.','под');
+pp([t(`The school isn't `),g(`behind`,72),t(` the library — it's in front of it.`)],'(behind)','Школа не позади библиотеки — она перед ней.','позади');
+pp([t(`There's no fountain `),g(`in front of`,108),t(` the museum — it's inside.`)],'(in front of)','Перед музеем нет фонтана — он внутри.','Перед');
+pp([t(`The supermarket isn't `),g(`across`,74),t(` the road — it's on the same side.`)],'(across)','Супермаркет не напротив через дорогу — он на той же стороне.','напротив');
+pp([t(`He doesn't call his parents `),g(`after`,68),t(` lunch — he calls in the evening.`)],'(after)','Он звонит родителям не после обеда — он звонит вечером.','после');
+pp([t(`My phone isn't `),g(`on`,52),t(` the desk — I think I left it in the kitchen.`)],'(on)','Моего телефона нет на столе — кажется, я оставил его на кухне.','на');
+pp([t(`She isn't `),g(`in`,46),t(` the office today — she's working remotely.`)],'(in)','Сегодня она не в офисе — она работает удалённо.','в');
+pp([t(`They don't have breakfast `),g(`at`,46),t(` the hotel — they prefer the local café.`)],'(at)','Они завтракают не в отеле — они предпочитают местное кафе.','в');
+pp([t(`The projector isn't `),g(`above`,68),t(` the whiteboard — it's at the back of the room.`)],'(above)','Проектор не над доской — он в конце комнаты.','над');
+pp([t(`The wine isn't `),g(`under`,68),t(` the counter — we finished it last night.`)],'(under)','Вина нет под стойкой — мы его выпили вчера вечером.','под');
+pp([t(`The neighbours don't park `),g(`behind`,72),t(` our car anymore — we spoke to them.`)],'(behind)','Соседи больше не паркуются позади нашей машины — мы с ними поговорили.','позади');
+pp([t(`She doesn't wait `),g(`in front of`,108),t(` the cinema — she goes in and finds a seat.`)],'(in front of)','Она не ждёт перед кинотеатром — она заходит и занимает место.','перед');
+pp([t(`There isn't a bakery `),g(`across`,74),t(` the road — the nearest one is further away.`)],'(across)','Напротив через дорогу нет пекарни — ближайшая дальше.','Напротив');
+pp([t(`She doesn't go running `),g(`after`,68),t(` breakfast — she goes before.`)],'(after)','Она бегает не после завтрака — она бегает до завтрака.','после');
+pp([t(`The instructions aren't `),g(`on`,52),t(` the box — they're inside it.`)],'(on)','Инструкций нет на коробке — они внутри.','на');
+pp([t(`He isn't `),g(`in`,46),t(` a meeting — he finished early.`)],'(in)','Он не на совещании — он закончил раньше.','на');
+pp([t(`She isn't `),g(`at`,46),t(` school today — she's unwell.`)],'(at)','Сегодня она не в школе — она заболела.','в');
+pp([t(`There's no smoke `),g(`above`,68),t(` the factory today — it's closed.`)],'(above)','Над заводом сегодня нет дыма — он закрыт.','над');
+pp([t(`There's no car park `),g(`under`,68),t(` this building.`)],'(under)','Под этим зданием нет парковки.','Под');
+pp([t(`The children don't play `),g(`behind`,72),t(` the school — there's no space.`)],'(behind)','Дети не играют позади школы — там нет места.','позади');
+pp([t(`There's no queue `),g(`in front of`,108),t(` the box office today.`)],'(in front of)','Сегодня перед кассой нет очереди.','перед');
+pp([t(`The restaurant isn't `),g(`across`,74),t(` the square — it moved last year.`)],'(across)','Ресторан не напротив через площадь — он переехал в прошлом году.','напротив');
+pp([t(`She doesn't drink tea `),g(`after`,68),t(` every meal — only in the evening.`)],'(after)','Она пьёт чай не после каждого приёма пищи — только вечером.','после');
+pp([t(`The address isn't `),g(`on`,52),t(` this envelope — it's blank.`)],'(on)','Адреса нет на этом конверте — он пустой.','на');
+pp([t(`We aren't `),g(`in`,46),t(` the same class — she's in the advanced group.`)],'(in)','Мы не в одной группе — она в продвинутой.','в');
+pp([t(`He isn't `),g(`at`,46),t(` the gym — he cancelled his membership.`)],'(at)','Он не в спортзале — он отменил членство.','в');
+pp([t(`The mirror isn't `),g(`above`,68),t(` the sink — it's on the door.`)],'(above)','Зеркало не над раковиной — оно на двери.','над');
+pp([t(`The cat isn't `),g(`under`,68),t(` the radiator — try the sofa.`)],'(under)','Кошки нет под батареей — попробуй поискать на диване.','под');
+pp([t(`The main stage isn't `),g(`behind`,72),t(` the food stalls — it's to the left.`)],'(behind)','Главная сцена не позади рядов с едой — она слева.','позади');
+pp([t(`She doesn't stop `),g(`in front of`,108),t(` the window — she's always in a hurry.`)],'(in front of)','Она не останавливается перед витриной — она всегда торопится.','перед');
+pp([t(`The bookshop isn't `),g(`across`,74),t(` the lane — it's further along the street.`)],'(across)','Книжного магазина нет напротив через переулок — он дальше по улице.','напротив');
+pp([t(`The children don't watch TV `),g(`after`,68),t(` school — they go to clubs.`)],'(after)','Дети не смотрят телевизор после школы — они ходят на кружки.','после');
+pp([t(`Her phone isn't `),g(`on`,52),t(` the table — she took it with her.`)],'(on)','Её телефона нет на столе — она взяла его с собой.','на');
+pp([t(`I don't work `),g(`in`,46),t(` an office today — I work from home.`)],'(in)','Я работаю не в офисе — я работаю в коворкинге.','в');
+pp([t(`She isn't `),g(`at`,46),t(` the dentist — that's tomorrow.`)],'(at)','Она не у стоматолога — это завтра.','у');
+pp([t(`There's no helicopter `),g(`above`,68),t(` the city today.`)],'(above)','Сегодня над городом нет вертолёта.','над');
+pp([t(`The cables aren't `),g(`under`,68),t(` the carpet — they're in the wall.`)],'(under)','Кабели не под ковром — они в стене.','под');
+pp([t(`The bin isn't `),g(`behind`,72),t(` the door — I moved it to the kitchen.`)],'(behind)','Мусорного ведра нет за дверью — я перенёс его на кухню.','за');
+pp([t(`He doesn't stretch `),g(`in front of`,108),t(` the TV — he goes to the gym.`)],'(in front of)','Он не делает растяжку перед телевизором — он ходит в спортзал.','перед');
+pp([t(`The newsagent isn't `),g(`across`,74),t(` the road — it closed down.`)],'(across)','Газетного киоска нет напротив через дорогу — он закрылся.','напротив');
+pp([t(`They don't walk `),g(`after`,68),t(` lunch — they usually have a rest.`)],'(after)','Они не ходят на прогулку после обеда — обычно они отдыхают.','после');
+pp([t(`The schedule isn't `),g(`on`,52),t(` the board — someone took it down.`)],'(on)','Расписания нет на доске — кто-то его снял.','на');
+pp([t(`He isn't `),g(`in`,46),t(` his car — he came by bike today.`)],'(in)','Он не в машине — сегодня он приехал на велосипеде.','в');
+pp([t(`The children aren't `),g(`at`,46),t(` school today — it's a public holiday.`)],'(at)','Сегодня дети не в школе — праздничный день.','в');
+pp([t(`There's no smoke `),g(`above`,68),t(` the chimney — they don't use the fireplace.`)],'(above)','Над трубой нет дыма — они не пользуются камином.','над');
+pp([t(`There's no basement `),g(`under`,68),t(` this building.`)],'(under)','Под этим зданием нет подвала.','Под');
+pp([t(`The storage isn't `),g(`behind`,72),t(` the kitchen — it's upstairs.`)],'(behind)','Кладовка не позади кухни — она наверху.','позади');
+pp([t(`She doesn't stand `),g(`in front of`,108),t(` the mirror for very long.`)],'(in front of)','Она подолгу не стоит перед зеркалом.','перед');
+pp([t(`The hotel isn't `),g(`across`,74),t(` the river — it's on this side.`)],'(across)','Отель не напротив через реку — он на этой стороне.','напротив');
+pp([t(`We don't have meetings `),g(`after`,68),t(` lunch — only in the mornings.`)],'(after)','У нас нет совещаний после обеда — только утром.','после');
+pp([t(`The laptop isn't `),g(`on`,52),t(` the coffee table — he took it to his room.`)],'(on)','Ноутбука нет на журнальном столике — он унёс его в свою комнату.','на');
+pp([t(`He isn't `),g(`in`,46),t(` the meeting room — it was cancelled.`)],'(in)','Его нет в переговорной — встреча была отменена.','в');
+pp([t(`She isn't `),g(`at`,46),t(` the conference this year — she didn't register in time.`)],'(at)','В этом году её нет на конференции — она не успела зарегистрироваться.','на');
+pp([t(`The moon isn't `),g(`above`,68),t(` the horizon yet — it rises later.`)],'(above)','Луна ещё не над горизонтом — она поднимается позже.','над');
+pp([t(`There's nothing `),g(`under`,68),t(` the kitchen sink — we cleared it all out.`)],'(under)','Под кухонной раковиной ничего нет — мы всё убрали.','Под');
+pp([t(`The exit isn't `),g(`behind`,72),t(` the stage — it's on the left.`)],'(behind)','Выход не позади сцены — он слева.','позади');
+pp([t(`There's no space `),g(`in front of`,108),t(` the entrance — it's blocked.`)],'(in front of)','Перед входом нет места — он перекрыт.','Перед');
+pp([t(`The library isn't `),g(`across`,74),t(` the park — it's behind it.`)],'(across)','Библиотека не напротив через парк — она позади.','напротив');
+pp([t(`She doesn't exercise `),g(`after`,68),t(` dinner — she says it's too late.`)],'(after)','Она не занимается спортом после ужина — говорит, что уже поздно.','после');
+pp([t(`My glasses aren't `),g(`on`,52),t(` the table — I must have left them in the bathroom.`)],'(on)','Очков нет на столе — наверное, я оставил их в ванной.','на');
+pp([t(`We aren't `),g(`in`,46),t(` the country this weekend — we're staying in town.`)],'(in)','На эти выходные мы не за городом — мы остаёмся в городе.','за');
+pp([t(`He isn't `),g(`at`,46),t(` the station yet — his train is delayed.`)],'(at)','Его ещё нет на вокзале — его поезд задерживается.','на');
+pp([t(`The flag isn't `),g(`above`,68),t(` the building — it was taken down.`)],'(above)','Флага нет над зданием — его сняли.','над');
+pp([t(`The car park isn't `),g(`under`,68),t(` this building — you need the one next door.`)],'(under)','Парковка не под этим зданием — вам нужна та, что рядом.','под');
+pp([t(`The bike shed isn't `),g(`behind`,72),t(` the office — it's at the side.`)],'(behind)','Велосипедный навес не позади офиса — он сбоку.','позади');
+pp([t(`There's no sign `),g(`in front of`,108),t(` the building — they're repainting it.`)],'(in front of)','Перед зданием нет вывески — её перекрашивают.','Перед');
+pp([t(`The gym isn't `),g(`across`,74),t(` the road — it's about ten minutes by car.`)],'(across)','Спортзал не напротив через дорогу — туда около десяти минут на машине.','напротив');
+pp([t(`They don't relax `),g(`after`,68),t(` work — they always have something to do.`)],'(after)','Они не отдыхают после работы — у них всегда что-то есть.','после');
+pp([t(`My bag isn't `),g(`on`,52),t(` the chair — I put it in the cupboard.`)],'(on)','Моей сумки нет на стуле — я убрала её в шкаф.','на');
+pp([t(`I'm not `),g(`in`,46),t(` the mood for a big dinner — something light, please.`)],'(in)','Я не в настроении для большого ужина — что-нибудь лёгкое, пожалуйста.','в');
+pp([t(`She isn't `),g(`at`,46),t(` the meeting — she's on a call.`)],'(at)','Её нет на совещании — она на звонке.','на');
+pp([t(`The notice is not `),g(`above`,68),t(` the photocopier — someone moved it.`)],'(above)','Объявления нет над ксероксом — кто-то его перенёс.','над');
+pp([t(`The spare umbrella isn't `),g(`under`,68),t(` the stairs — maybe it's in the car.`)],'(under)','Запасного зонта нет под лестницей — может, он в машине.','под');
+pp([t(`The toilet isn't `),g(`behind`,72),t(` the bar — it's to the left of it.`)],'(behind)','Туалет не позади бара — он слева от него.','позади');
+pp([t(`There's no one `),g(`in front of`,108),t(` us in the queue.`)],'(in front of)','Перед нами в очереди никого нет.','Перед');
+pp([t(`There's no Italian restaurant `),g(`across`,74),t(` the road.`)],'(across)','Напротив через дорогу нет итальянского ресторана.','Напротив');
+pp([t(`I don't check my phone `),g(`after`,68),t(` ten at night.`)],'(after)','Я не проверяю телефон после десяти вечера.','после');
+
+// ── INT/DIALOGUE (100) ────────────────────────────────────────
+dl({A:[t(`Where are my keys?`)], B:[t(`They are `),g(`on`,52),t(` the bedside table.`)]},'(on)','prep','A: Где мои ключи?\nB: Они на тумбочке у кровати.','на');
+dl({A:[t(`Where does she work?`)], B:[t(`She works `),g(`in`,46),t(` a hospital in the city centre.`)]},'(in)','prep','A: Где она работает?\nB: Она работает в больнице в центре города.','в');
+dl({A:[t(`Where is Tom?`)], B:[t(`He is `),g(`at`,46),t(` the supermarket.`)]},'(at)','prep','A: Где Том?\nB: Он в супермаркете.','в');
+dl({A:[t(`Where is the lamp?`)], B:[t(`It's `),g(`above`,68),t(` the dining table.`)]},'(above)','prep','A: Где лампа?\nB: Она над обеденным столом.','над');
+dl({A:[t(`Where is the cat?`)], B:[t(`It's `),g(`under`,68),t(` the sofa.`)]},'(under)','prep','A: Где кошка?\nB: Она под диваном.','под');
+dl({A:[t(`Where is the bike shed?`)], B:[t(`It's `),g(`behind`,72),t(` the main building.`)]},'(behind)','prep','A: Где велосипедный навес?\nB: Он позади главного здания.','позади');
+dl({A:[t(`Where is the taxi?`)], B:[t(`It's waiting `),g(`in front of`,108),t(` the hotel.`)]},'(in front of)','prep','A: Где такси?\nB: Оно ждёт перед отелем.','перед');
+dl({A:[t(`Where is the pharmacy?`)], B:[t(`It's `),g(`across`,74),t(` the road from the clinic.`)]},'(across)','prep','A: Где аптека?\nB: Она напротив клиники через дорогу.','напротив');
+dl({A:[t(`What do you do after work?`)], B:[t(`I usually go for a walk `),g(`after`,68),t(` work.`)]},'(after)','prep','A: Что ты делаешь после работы?\nB: Обычно я хожу на прогулку после работы.','после');
+dl({A:[t(`Where is the remote?`)], B:[t(`It's `),g(`on`,52),t(` the coffee table.`)]},'(on)','prep','A: Где пульт?\nB: Он на журнальном столике.','на');
+dl({A:[t(`Where does he live?`)], B:[t(`He lives `),g(`in`,46),t(` a village about thirty minutes from here.`)]},'(in)','prep','A: Где он живёт?\nB: Он живёт в деревне примерно в тридцати минутах отсюда.','в');
+dl({A:[t(`Where is Anna?`)], B:[t(`She's `),g(`at`,46),t(` her friend's place.`)]},'(at)','prep','A: Где Анна?\nB: Она у подруги.','у');
+dl({A:[t(`Where is the painting?`)], B:[t(`It's `),g(`above`,68),t(` the fireplace.`)]},'(above)','prep','A: Где картина?\nB: Она над камином.','над');
+dl({A:[t(`Where are my shoes?`)], B:[t(`They're `),g(`under`,68),t(` the bed.`)]},'(under)','prep','A: Где мои туфли?\nB: Они под кроватью.','под');
+dl({A:[t(`Where is the post office?`)], B:[t(`It's `),g(`behind`,72),t(` the town hall.`)]},'(behind)','prep','A: Где почта?\nB: Она позади ратуши.','позади');
+dl({A:[t(`Where should I wait?`)], B:[t(`Wait `),g(`in front of`,108),t(` the main entrance.`)]},'(in front of)','prep','A: Где мне ждать?\nB: Жди перед главным входом.','перед');
+dl({A:[t(`Where is the café?`)], B:[t(`It's `),g(`across`,74),t(` the square.`)]},'(across)','prep','A: Где кафе?\nB: Оно напротив через площадь.','напротив');
+dl({A:[t(`When do you have English class?`)], B:[t(`I have it `),g(`after`,68),t(` lunch on Tuesdays.`)]},'(after)','prep','A: Когда у тебя занятие по английскому?\nB: У меня оно после обеда по вторникам.','после');
+dl({A:[t(`Where is the menu?`)], B:[t(`It's `),g(`on`,52),t(` the table in front of you.`)]},'(on)','prep','A: Где меню?\nB: Оно на столе перед тобой.','на');
+dl({A:[t(`Is she at home?`)], B:[t(`No, she's `),g(`in`,46),t(` the garden.`)]},'(in)','prep','A: Она дома?\nB: Нет, она в саду.','в');
+dl({A:[t(`Where can I find the manager?`)], B:[t(`He's `),g(`at`,46),t(` his desk on the second floor.`)]},'(at)','prep','A: Где найти менеджера?\nB: Он за рабочим столом на втором этаже.','за');
+dl({A:[t(`Where is the clock?`)], B:[t(`It's `),g(`above`,68),t(` the door.`)]},'(above)','prep','A: Где часы?\nB: Они над дверью.','над');
+dl({A:[t(`Where is the dog?`)], B:[t(`He's `),g(`under`,68),t(` the kitchen table.`)]},'(under)','prep','A: Где собака?\nB: Она под кухонным столом.','под');
+dl({A:[t(`Where is the car park?`)], B:[t(`It's `),g(`behind`,72),t(` the shopping centre.`)]},'(behind)','prep','A: Где автостоянка?\nB: Она позади торгового центра.','позади');
+dl({A:[t(`Where do you usually meet?`)], B:[t(`We meet `),g(`in front of`,108),t(` the library.`)]},'(in front of)','prep','A: Где вы обычно встречаетесь?\nB: Мы встречаемся перед библиотекой.','перед');
+dl({A:[t(`Where is the hotel?`)], B:[t(`It's `),g(`across`,74),t(` the river.`)]},'(across)','prep','A: Где отель?\nB: Он напротив через реку.','напротив');
+dl({A:[t(`When does he exercise?`)], B:[t(`He exercises `),g(`after`,68),t(` work, around seven.`)]},'(after)','prep','A: Когда он занимается спортом?\nB: Он занимается после работы, около семи.','после');
+dl({A:[t(`Where is my jacket?`)], B:[t(`It's `),g(`on`,52),t(` the chair by the door.`)]},'(on)','prep','A: Где моя куртка?\nB: Она на стуле у двери.','на');
+dl({A:[t(`Is he in the office?`)], B:[t(`No, he's `),g(`in`,46),t(` a meeting room downstairs.`)]},'(in)','prep','A: Он в офисе?\nB: Нет, он в переговорной внизу.','в');
+dl({A:[t(`Where are they?`)], B:[t(`They're `),g(`at`,46),t(` the airport — their flight is at noon.`)]},'(at)','prep','A: Где они?\nB: Они в аэропорту — их рейс в полдень.','в');
+dl({A:[t(`Where is the mirror?`)], B:[t(`It's `),g(`above`,68),t(` the bathroom sink.`)]},'(above)','prep','A: Где зеркало?\nB: Оно над раковиной в ванной.','над');
+dl({A:[t(`Where did you find it?`)], B:[t(`It was `),g(`under`,68),t(` the sofa the whole time!`)]},'(under)','prep','A: Где ты его нашёл?\nB: Оно всё время было под диваном!','под');
+dl({A:[t(`Where is the recycling bin?`)], B:[t(`It's `),g(`behind`,72),t(` the building.`)]},'(behind)','prep','A: Где контейнер для раздельного сбора мусора?\nB: Он позади здания.','позади');
+dl({A:[t(`Where shall I stand?`)], B:[t(`Stand `),g(`in front of`,108),t(` the camera, please.`)]},'(in front of)','prep','A: Где мне встать?\nB: Встань перед камерой, пожалуйста.','перед');
+dl({A:[t(`Is there a bank nearby?`)], B:[t(`Yes, there's one `),g(`across`,74),t(` the road.`)]},'(across)','prep','A: Здесь есть банк поблизости?\nB: Да, есть напротив через дорогу.','напротив');
+dl({A:[t(`When do you usually eat?`)], B:[t(`I have lunch `),g(`after`,68),t(` my morning meetings.`)]},'(after)','prep','A: Когда ты обычно ешь?\nB: Я обедаю после утренних совещаний.','после');
+dl({A:[t(`Where are my glasses?`)], B:[t(`They're `),g(`on`,52),t(` the bookshelf.`)]},'(on)','prep','A: Где мои очки?\nB: Они на книжной полке.','на');
+dl({A:[t(`Does she live far?`)], B:[t(`No, she lives `),g(`in`,46),t(` the next street.`)]},'(in)','prep','A: Она живёт далеко?\nB: Нет, она живёт на соседней улице.','в');
+dl({A:[t(`Is the dentist open?`)], B:[t(`Yes, she's `),g(`at`,46),t(` the clinic until six.`)]},'(at)','prep','A: Стоматолог принимает?\nB: Да, она в клинике до шести.','в');
+dl({A:[t(`Is there a shelf up there?`)], B:[t(`Yes, it's `),g(`above`,68),t(` the door.`)]},'(above)','prep','A: Там наверху есть полка?\nB: Да, она над дверью.','над');
+dl({A:[t(`Where did the cat go?`)], B:[t(`It's hiding `),g(`under`,68),t(` the stairs.`)]},'(under)','prep','A: Куда делась кошка?\nB: Она прячется под лестницей.','под');
+dl({A:[t(`Is there a garden?`)], B:[t(`Yes, it's `),g(`behind`,72),t(` the house.`)]},'(behind)','prep','A: Есть ли сад?\nB: Да, он позади дома.','позади');
+dl({A:[t(`Where is the reception?`)], B:[t(`It's `),g(`in front of`,108),t(` you as you walk in.`)]},'(in front of)','prep','A: Где стойка регистрации?\nB: Она перед вами, как только вы войдёте.','перед');
+dl({A:[t(`Is there a supermarket?`)], B:[t(`Yes, `),g(`across`,74),t(` the road, next to the park.`)]},'(across)','prep','A: Есть ли здесь супермаркет?\nB: Да, напротив через дорогу, рядом с парком.','напротив');
+dl({A:[t(`When does the film start?`)], B:[g(`After`,68),t(` the adverts, so about eight fifteen.`)]},'(after)','prep','A: Когда начинается фильм?\nB: После рекламы, примерно в четверть девятого.','После');
+dl({A:[t(`Where is the charger?`)], B:[t(`It's `),g(`on`,52),t(` the desk next to the laptop.`)]},'(on)','prep','A: Где зарядка?\nB: Она на столе рядом с ноутбуком.','на');
+dl({A:[t(`Is she working today?`)], B:[t(`Yes, she's `),g(`in`,46),t(` the office all day.`)]},'(in)','prep','A: Она работает сегодня?\nB: Да, она в офисе весь день.','в');
+dl({A:[t(`Where is the match?`)], B:[t(`It's `),g(`at`,46),t(` the stadium on Saturday.`)]},'(at)','prep','A: Где матч?\nB: Он на стадионе в субботу.','на');
+dl({A:[t(`Where is the projector?`)], B:[t(`It's mounted `),g(`above`,68),t(` the screen.`)]},'(above)','prep','A: Где проектор?\nB: Он установлен над экраном.','над');
+dl({A:[t(`Where is the spare key?`)], B:[t(`It's `),g(`under`,68),t(` the mat.`)]},'(under)','prep','A: Где запасной ключ?\nB: Он под ковриком.','под');
+dl({A:[t(`Where is the exit?`)], B:[t(`It's `),g(`behind`,72),t(` the stage.`)]},'(behind)','prep','A: Где выход?\nB: Он позади сцены.','позади');
+dl({A:[t(`Where should we take the photo?`)], B:[t(`Let's stand `),g(`in front of`,108),t(` the fountain.`)]},'(in front of)','prep','A: Где нам сделать фото?\nB: Давайте встанем перед фонтаном.','перед');
+dl({A:[t(`Is there a gym nearby?`)], B:[t(`Yes, `),g(`across`,74),t(` the park.`)]},'(across)','prep','A: Здесь есть спортзал поблизости?\nB: Да, напротив через парк.','напротив');
+dl({A:[t(`When do you call your parents?`)], B:[t(`I call them `),g(`after`,68),t(` work, usually around seven.`)]},'(after)','prep','A: Когда ты звонишь родителям?\nB: Я звоню им после работы, обычно около семи.','после');
+dl({A:[t(`Where is the newspaper?`)], B:[t(`It's `),g(`on`,52),t(` the kitchen table.`)]},'(on)','prep','A: Где газета?\nB: Она на кухонном столе.','на');
+dl({A:[t(`Where is she now?`)], B:[t(`She's `),g(`in`,46),t(` a meeting — she'll be free at noon.`)]},'(in)','prep','A: Где она сейчас?\nB: Она на совещании — освободится в полдень.','на');
+dl({A:[t(`Where is the interview?`)], B:[t(`It's `),g(`at`,46),t(` their head office on Baker Street.`)]},'(at)','prep','A: Где проходит собеседование?\nB: В их главном офисе на Бейкер-стрит.','В');
+dl({A:[t(`Where is the bird?`)], B:[t(`It's `),g(`above`,68),t(` us — in the tree.`)]},'(above)','prep','A: Где птица?\nB: Она над нами — на дереве.','над');
+dl({A:[t(`What is under here?`)], B:[t(`There's a box `),g(`under`,68),t(` the desk.`)]},'(under)','prep','A: Что здесь под низом?\nB: Под столом стоит коробка.','Под');
+dl({A:[t(`Where is the pool?`)], B:[t(`It's `),g(`behind`,72),t(` the hotel.`)]},'(behind)','prep','A: Где бассейн?\nB: Он позади отеля.','позади');
+dl({A:[t(`Where is the stage?`)], B:[t(`It's `),g(`in front of`,108),t(` the seating area.`)]},'(in front of)','prep','A: Где сцена?\nB: Она перед зоной сидений.','перед');
+dl({A:[t(`Is there a bus stop?`)], B:[t(`Yes, `),g(`across`,74),t(` the road from the park.`)]},'(across)','prep','A: Есть ли автобусная остановка?\nB: Да, напротив через дорогу от парка.','напротив');
+dl({A:[t(`Do you see him on weekdays?`)], B:[t(`Only `),g(`after`,68),t(` work on Fridays.`)]},'(after)','prep','A: Ты видишь его по будням?\nB: Только после работы по пятницам.','после');
+dl({A:[t(`Where is the fire extinguisher?`)], B:[t(`It's `),g(`on`,52),t(` the wall next to the door.`)]},'(on)','prep','A: Где огнетушитель?\nB: Он на стене рядом с дверью.','на');
+dl({A:[t(`Where do they study?`)], B:[t(`They study `),g(`in`,46),t(` the main library on campus.`)]},'(in)','prep','A: Где они учатся?\nB: Они учатся в главной библиотеке кампуса.','в');
+dl({A:[t(`Where can I find her?`)], B:[t(`She's usually `),g(`at`,46),t(` her desk between nine and twelve.`)]},'(at)','prep','A: Где её найти?\nB: Обычно она за рабочим столом с девяти до двенадцати.','за');
+dl({A:[t(`Where is the sign?`)], B:[t(`It's `),g(`above`,68),t(` the entrance.`)]},'(above)','prep','A: Где вывеска?\nB: Она над входом.','над');
+dl({A:[t(`Are there any bags here?`)], B:[t(`Yes, there are two `),g(`under`,68),t(` the table.`)]},'(under)','prep','A: Здесь есть сумки?\nB: Да, их две под столом.','под');
+dl({A:[t(`Is the garage attached?`)], B:[t(`No, it's `),g(`behind`,72),t(` the house.`)]},'(behind)','prep','A: Гараж пристроен?\nB: Нет, он позади дома.','позади');
+dl({A:[t(`Where is the stage door?`)], B:[t(`It's `),g(`in front of`,108),t(` you on the left.`)]},'(in front of)','prep','A: Где служебный вход?\nB: Он перед вами слева.','перед');
+dl({A:[t(`Is there a good restaurant?`)], B:[t(`Yes, there's a great one `),g(`across`,74),t(` the road.`)]},'(across)','prep','A: Есть ли хороший ресторан?\nB: Да, напротив через дорогу есть отличный.','напротив');
+dl({A:[t(`When does the class finish?`)], B:[t(`At five, but we usually chat `),g(`after`,68),t(`.`)]},'(after)','prep','A: Когда заканчивается занятие?\nB: В пять, но мы обычно общаемся после.','после');
+dl({A:[t(`Where is the price?`)], B:[t(`It's `),g(`on`,52),t(` the sticker at the back.`)]},'(on)','prep','A: Где цена?\nB: Она на наклейке на обратной стороне.','на');
+dl({A:[t(`Is he home?`)], B:[t(`No, he's `),g(`in`,46),t(` town running errands.`)]},'(in)','prep','A: Он дома?\nB: Нет, он в городе по делам.','в');
+dl({A:[t(`Where is the check-in desk?`)], B:[t(`It's `),g(`at`,46),t(` the end of the hall on the right.`)]},'(at)','prep','A: Где стойка регистрации?\nB: Она в конце зала справа.','в');
+dl({A:[t(`Is there a clock?`)], B:[t(`Yes, there's one `),g(`above`,68),t(` the whiteboard.`)]},'(above)','prep','A: Есть ли здесь часы?\nB: Да, над доской.','над');
+dl({A:[t(`Are there any bags under the table?`)], B:[t(`Yes, your bag is `),g(`under`,68),t(` it.`)]},'(under)','prep','A: Есть ли сумки под столом?\nB: Да, твоя сумка под ним.','под');
+dl({A:[t(`Is there storage?`)], B:[t(`Yes, there's a storeroom `),g(`behind`,72),t(` reception.`)]},'(behind)','prep','A: Есть ли место для хранения?\nB: Да, есть кладовка позади стойки регистрации.','позади');
+dl({A:[t(`Where shall we take the group photo?`)], B:[t(`Let's all stand `),g(`in front of`,108),t(` the building.`)]},'(in front of)','prep','A: Где нам сделать групповое фото?\nB: Давайте все встанем перед зданием.','перед');
+dl({A:[t(`Is there a newsagent?`)], B:[t(`Yes, `),g(`across`,74),t(` from the school.`)]},'(across)','prep','A: Есть ли здесь газетный киоск?\nB: Да, напротив школы.','напротив');
+dl({A:[t(`When is your next lesson?`)], B:[g(`After`,68),t(` the lunch break.`)]},'(after)','prep','A: Когда твой следующий урок?\nB: После обеденного перерыва.','После');
+dl({A:[t(`Where is the bill?`)], B:[t(`It's `),g(`on`,52),t(` the table under your glass.`)]},'(on)','prep','A: Где счёт?\nB: Он на столе под твоим стаканом.','на');
+dl({A:[t(`Does he work from home?`)], B:[t(`Sometimes — but today he's `),g(`in`,46),t(` the office.`)]},'(in)','prep','A: Он работает из дома?\nB: Иногда — но сегодня он в офисе.','в');
+dl({A:[t(`Where is the presentation?`)], B:[t(`It's `),g(`at`,46),t(` the conference centre, room 4B.`)]},'(at)','prep','A: Где презентация?\nB: В конференц-центре, зал 4В.','В');
+dl({A:[t(`What is that above the door?`)], B:[t(`It's a security camera `),g(`above`,68),t(` the entrance.`)]},'(above)','prep','A: Что это над дверью?\nB: Это камера наблюдения над входом.','над');
+dl({A:[t(`Is there anything under the table?`)], B:[t(`Yes, your bag is `),g(`under`,68),t(` it.`)]},'(under)','prep','A: Есть ли что-нибудь под столом?\nB: Да, твоя сумка под ним.','под');
+dl({A:[t(`Where is the reception area?`)], B:[t(`It's `),g(`behind`,72),t(` the lift on the ground floor.`)]},'(behind)','prep','A: Где зона ресепшн?\nB: Она позади лифта на первом этаже.','позади');
+dl({A:[t(`Where do you want to sit?`)], B:[g(`In front of`,108),t(` the stage — I want a good view.`)]},'(in front of)','prep','A: Где ты хочешь сесть?\nB: Перед сценой — хочу хорошо видеть.','Перед');
+dl({A:[t(`Is there a post office?`)], B:[t(`Yes, `),g(`across`,74),t(` the park on Oak Street.`)]},'(across)','prep','A: Здесь есть почта?\nB: Да, напротив через парк на Оук-стрит.','напротив');
+dl({A:[t(`When do you usually go home?`)], B:[g(`After`,68),t(` five, usually around half past.`)]},'(after)','prep','A: Когда ты обычно идёшь домой?\nB: После пяти, обычно около половины шестого.','После');
+dl({A:[t(`Where is the lift?`)], B:[t(`It's `),g(`behind`,72),t(` the reception desk on the right.`)]},'(behind)','prep','A: Где лифт?\nB: Он позади стойки регистрации справа.','позади');
+dl({A:[t(`Is there a cash machine here?`)], B:[t(`Yes, `),g(`across`,74),t(` from the entrance.`)]},'(across)','prep','A: Здесь есть банкомат?\nB: Да, напротив входа.','напротив');
+dl({A:[t(`Where do the kids play?`)], B:[t(`They play `),g(`behind`,72),t(` the house in the garden.`)]},'(behind)','prep','A: Где дети играют?\nB: Они играют позади дома в саду.','позади');
+dl({A:[t(`Do you work in the morning?`)], B:[t(`No, I start `),g(`after`,68),t(` noon.`)]},'(after)','prep','A: Ты работаешь утром?\nB: Нет, я начинаю после полудня.','после');
+dl({A:[t(`Where is the password written?`)], B:[t(`It's `),g(`on`,52),t(` the sticky note on the monitor.`)]},'(on)','prep','A: Где записан пароль?\nB: Он на стикере на мониторе.','на');
+dl({A:[t(`Where do you park?`)], B:[t(`I park `),g(`in`,46),t(` the underground car park.`)]},'(in)','prep','A: Где ты паркуешься?\nB: Я паркуюсь на подземной стоянке.','на');
+dl({A:[t(`Where is the coat hook?`)], B:[t(`It's `),g(`behind`,72),t(` the door.`)]},'(behind)','prep','A: Где вешалка для пальто?\nB: Она за дверью.','за');
+dl({A:[t(`Where is the art gallery?`)], B:[t(`It's `),g(`across`,74),t(` the street from the museum.`)]},'(across)','prep','A: Где художественная галерея?\nB: Она напротив музея через улицу.','напротив');
+dl({A:[t(`When do you read?`)], B:[t(`I always read `),g(`after`,68),t(` I get into bed.`)]},'(after)','prep','A: Когда ты читаешь?\nB: Я всегда читаю после того, как ложусь в кровать.','после');
+
+dl({A:[t(`Where is the whiteboard?`)], B:[t(`It is `),g(`in front of`,108),t(` the desk.`)]},'(in front of)','prep','A: Где доска?\nB: Она перед столом.','перед');
+dl({A:[t(`Where is the village?`)], B:[t(`It is `),g(`across`,74),t(` the valley.`)]},'(across)','prep','A: Где деревня?\nB: Она напротив через долину.','напротив');
+dl({A:[t(`When do you meditate?`)], B:[t(`I meditate `),g(`after`,68),t(` waking up.`)]},'(after)','prep','A: Когда ты медитируешь?\nB: После пробуждения.','После');
+
+
+
+// ─── HINT ACCORDION ──────────────────────────────────────────
+let openHint = null;
+function toggleHint(id){
+  if(openHint && openHint !== id) closeHint(openHint);
+  if(openHint === id){ closeHint(id); return; }
+  openHint = id;
+  document.getElementById('hb-'+id).classList.add('open');
+  document.getElementById('ht-'+id).classList.add('open');
+}
+function closeHint(id){
+  document.getElementById('hb-'+id).classList.remove('open');
+  document.getElementById('ht-'+id).classList.remove('open');
+  if(openHint===id) openHint=null;
+}
+
+// ─── HELPERS ──────────────────────────────────────────────────
+function norm(s){ return s.trim().toLowerCase().replace(/[\u2018\u2019]/g,"'").replace(/\s+/g,' '); }
+function shuffle(a){ const b=[...a]; for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];} return b; }
+
+let current=[], roundNum=1, roundCorrect=0, roundWrong=0;
+
+function classify(s){
+  const src = s.dialogue ? s.lines.flatMap(l=>l.parts) : s.parts;
+  const first = src.find(p=>p.k==='g');
+  if(!first) return 'aff';
+  const a0 = first.a[0];
+  if(["don't","doesn't","isn't","aren't","am not","'m not"].some(x=>a0.startsWith(x))||
+     ["do not","does not","is not","are not"].some(x=>a0.startsWith(x))) return 'neg';
+  if(["Do","Does","Is","Are","Am"].includes(a0)) return 'int';
+  return 'aff';
+}
+
+function pickRound(){
+  const pool = DB;
+  return shuffle(pool).slice(0,25);
+}
+
+// ─── RENDER / CHECK / SAVED PROGRESS (shared engine) ───────────
+// Every sentence gets a stable id (hash of its content). The page state — current
+// round, typed answers, checked cards, score and the "My mistakes" bank — is kept
+// in localStorage, separately for every page (key = file name).
+const PAGE = (location.pathname.split('/').pop() || 'index').replace(/\.html?$/i, '') || 'index';
+const SKEY = 'hw-oleg-practice:' + PAGE;
+
+function hashItem(s){
+  const str = JSON.stringify(s.dialogue ? s.lines : s.parts) + '|' + (s.tr || '');
+  let h = 5381;
+  for (let i = 0; i < str.length; i++) h = ((h << 5) + h + str.charCodeAt(i)) | 0;
+  return (h >>> 0).toString(36);
+}
+const BYID = {};
+DB.forEach(s => { s._id = hashItem(s); if (!BYID[s._id]) BYID[s._id] = s; });
+
+// S.main = ordinary round, S.mist = round made of saved mistakes, S.mistakes = the bank (ids)
+function freshSession(){ return { round: 1, ids: [], vals: {}, done: {}, ok: 0, bad: 0 }; }
+function cleanSession(x){
+  const f = freshSession();
+  if (!x || typeof x !== 'object') return f;
+  return {
+    round: Number.isInteger(x.round) && x.round > 0 ? x.round : 1,
+    ids: Array.isArray(x.ids) ? x.ids.filter(id => BYID[id]) : [],
+    vals: x.vals && typeof x.vals === 'object' ? x.vals : {},
+    done: x.done && typeof x.done === 'object' ? x.done : {},
+    ok: Number.isInteger(x.ok) ? x.ok : 0,
+    bad: Number.isInteger(x.bad) ? x.bad : 0
+  };
+}
+let S = { mode: 'main', mistakes: [], main: freshSession(), mist: freshSession() };
+
+function loadState(){
+  try {
+    const raw = localStorage.getItem(SKEY);
+    if (!raw) return;
+    const o = JSON.parse(raw);
+    S.mode = o.mode === 'mist' ? 'mist' : 'main';
+    S.mistakes = Array.isArray(o.mistakes) ? [...new Set(o.mistakes.filter(id => BYID[id]))] : [];
+    S.main = cleanSession(o.main);
+    S.mist = cleanSession(o.mist);
+    // a saved session whose sentences changed (ids dropped) is not restored half-way
+    [['main', o.main], ['mist', o.mist]].forEach(([k, raw]) => {
+      if (raw && Array.isArray(raw.ids) && raw.ids.length !== S[k].ids.length) S[k] = freshSession();
+    });
+  } catch (e) { /* storage unavailable — the page still works, just without saving */ }
+}
+function saveState(){ try { localStorage.setItem(SKEY, JSON.stringify(S)); } catch (e) {} }
+
+function startRound(mode, bump){
+  const ss = S[mode];
+  if (bump) ss.round++;
+  ss.vals = {}; ss.done = {}; ss.ok = 0; ss.bad = 0;
+  ss.ids = mode === 'main' ? pickRound().map(s => s._id) : shuffle(S.mistakes).slice(0, 25);
+}
+
+// ─── RENDER ───────────────────────────────────────────────────
+function makeInputEl(p, idx, gapN){
+  const inp = document.createElement('input');
+  inp.type = 'text'; inp.className = 'gap'; inp.placeholder = '_____';
+  inp.style.width = (p.w || 100) + 'px';
+  inp.dataset.idx = idx; inp.dataset.gap = gapN;
+  inp.dataset.ans = JSON.stringify(p.a);
+  inp.autocomplete = 'off'; inp.autocorrect = 'off'; inp.autocapitalize = 'none'; inp.spellcheck = false;
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter') checkCard(idx, false); });
+  inp.addEventListener('input', () => rememberInputs(idx));
+  return inp;
+}
+
+function buildLine(parts, idx, gapCounter){
+  const line = document.createElement('div');
+  line.className = 'dl';
+  parts.forEach(p => {
+    if (p.k === 't') {
+      if (!p.v) return;
+      const sp = document.createElement('span'); sp.className = 'word'; sp.textContent = p.v;
+      line.appendChild(sp);
+    } else {
+      line.appendChild(makeInputEl(p, idx, gapCounter.n++));
+    }
+  });
+  return line;
+}
+
+function render(){
+  const ss = S[S.mode];
+  const c = document.getElementById('container');
+  c.innerHTML = '';
+  current = ss.ids.map(id => BYID[id]);
+  updateModeUI();
+
+  if (current.length === 0) {
+    c.innerHTML = '<div class="empty-msg">' + (S.mode === 'mist'
+      ? 'Your mistakes bank is empty. 🎉<br>Sentences you answer incorrectly will appear here.'
+      : 'No sentences found.') + '</div>';
+    document.getElementById('progress').style.width = '0%';
+    hideResult(); updateChips();
+    return;
+  }
+
+  current.forEach((s, idx) => {
+    const card = document.createElement('div');
+    card.className = 'sentence-card'; card.id = `card-${idx}`;
+
+    const numEl = document.createElement('span');
+    numEl.className = 'num'; numEl.textContent = idx + 1;
+    card.appendChild(numEl);
+
+    const body = document.createElement('div');
+    body.className = 'card-body';
+
+    const gc = { n: 0 }; // shared gap counter
+
+    if (s.dialogue) {
+      const dlWrap = document.createElement('div');
+      dlWrap.className = 'dialogue';
+      s.lines.forEach(line => {
+        const row = buildLine(line.parts, idx, gc);
+        if (line.speaker) {
+          const lbl = document.createElement('span');
+          lbl.className = 'sp-label'; lbl.textContent = line.speaker + ': ';
+          row.insertBefore(lbl, row.firstChild);
+        }
+        dlWrap.appendChild(row);
+      });
+      body.appendChild(dlWrap);
+    } else {
+      const line = document.createElement('div');
+      line.className = 'sent-line';
+      const gc2 = { n: 0 };
+      s.parts.forEach(p => {
+        if (p.k === 't') {
+          if (!p.v) return;
+          const sp = document.createElement('span'); sp.className = 'word'; sp.textContent = p.v;
+          line.appendChild(sp);
+        } else {
+          line.appendChild(makeInputEl(p, idx, gc2.n++));
+        }
+      });
+      body.appendChild(line);
+    }
+
+    // hint
+    const meta = document.createElement('div');
+    meta.className = 'meta-line';
+    if (s.bank !== 'prep') {
+      s.hint.split(' — ').forEach((part, pi) => {
+        if (pi > 0) { const sep = document.createElement('span'); sep.className = 'hint-base'; sep.textContent = ' — '; meta.appendChild(sep); }
+        const m2 = part.match(/^(\([^)]+\))\s*(\[[^\]]+\])$/);
+        const m1 = part.match(/^(\([^)]+\))$/);
+        if (m2) {
+          const b = document.createElement('span'); b.className = 'hint-base'; b.textContent = m2[1]; meta.appendChild(b);
+          const r = document.createElement('span'); r.className = 'hint-ru'; r.textContent = ' ' + m2[2]; meta.appendChild(r);
+        } else if (m1) {
+          const b = document.createElement('span'); b.className = 'hint-base'; b.textContent = m1[1]; meta.appendChild(b);
+        } else {
+          const r = document.createElement('span'); r.className = 'hint-ru'; r.textContent = part; meta.appendChild(r);
+        }
+      });
+    }
+    // correction spans — one per gap
+    const allParts = s.dialogue ? s.lines.flatMap(l => l.parts) : s.parts;
+    allParts.forEach((p, ci) => { if (p.k === 'g') { const cor = document.createElement('span'); cor.className = 'correction'; cor.id = `cor-${idx}-${ci}`; meta.appendChild(cor); } });
+    body.appendChild(meta);
+
+    // Translation line for prep sentences
+    if (s.bank === 'prep' && s.tr) {
+      const trLine = document.createElement('div');
+      trLine.className = 'sent-translation';
+      const tlines = s.tr.split('\n');
+      tlines.forEach((tl, ti) => {
+        if (ti > 0) { trLine.appendChild(document.createElement('br')); }
+        if (s.trMark && tl.length) {
+          // If trMark starts with "не " → only the preposition after it is highlighted
+          let findStr = s.trMark;
+          let markStr = s.trMark;
+          if (s.trMark.startsWith('не ')) { markStr = s.trMark.slice(3); }
+          const isCyrLetter = ch => ch && /[а-яёА-ЯЁ]/u.test(ch);
+          const findWholeWord = (str, word) => {
+            let pos = 0;
+            while (pos <= str.length - word.length) {
+              const i = str.indexOf(word, pos);
+              if (i === -1) return -1;
+              const before = str[i - 1]; const after = str[i + word.length];
+              if (!isCyrLetter(before) && !isCyrLetter(after)) return i;
+              pos = i + 1;
+            }
+            return -1;
+          };
+          const fi = findWholeWord(tl, findStr);
+          if (fi !== -1) {
+            const markStart = fi + (findStr.length - markStr.length);
+            trLine.appendChild(document.createTextNode(tl.slice(0, markStart)));
+            const mk = document.createElement('mark'); mk.textContent = markStr; trLine.appendChild(mk);
+            trLine.appendChild(document.createTextNode(tl.slice(markStart + markStr.length)));
+          } else {
+            const fi2 = findWholeWord(tl, markStr);
+            if (fi2 !== -1) {
+              trLine.appendChild(document.createTextNode(tl.slice(0, fi2)));
+              const mk = document.createElement('mark'); mk.textContent = markStr; trLine.appendChild(mk);
+              trLine.appendChild(document.createTextNode(tl.slice(fi2 + markStr.length)));
+            } else {
+              trLine.appendChild(document.createTextNode(tl));
+            }
+          }
+        } else {
+          trLine.appendChild(document.createTextNode(tl));
+        }
+      });
+      body.appendChild(trLine);
+    }
+
+    card.appendChild(body);
+
+    const btn = document.createElement('button');
+    btn.className = 'btn-check-card'; btn.textContent = 'Check';
+    btn.id = `btn-${idx}`; btn.onclick = () => checkCard(idx, true);
+    card.appendChild(btn);
+
+    c.appendChild(card);
+  });
+
+  // restore typed answers and already-checked cards (saved progress)
+  current.forEach((s, idx) => {
+    const card = document.getElementById(`card-${idx}`);
+    const inputs = card.querySelectorAll('input.gap');
+    const v = ss.vals[idx];
+    if (Array.isArray(v)) inputs.forEach((inp, i) => { inp.value = typeof v[i] === 'string' ? v[i] : ''; });
+    if (ss.done[idx]) applyGrade(idx);
+  });
+
+  updateChips(); updateProgress();
+  if (Object.keys(ss.done).length === current.length) showResult(); else hideResult();
+}
+
+// ─── CHECK ────────────────────────────────────────────────────
+// Visual grading of one card. Does not touch the score.
+function applyGrade(idx){
+  const s = current[idx]; const card = document.getElementById(`card-${idx}`);
+  const btn = document.getElementById(`btn-${idx}`);
+  const inputs = card.querySelectorAll('input.gap');
+  btn.disabled = true;
+  const allParts = s.dialogue ? s.lines.flatMap(l => l.parts) : s.parts;
+  let cardOk = true, inputIdx = 0;
+  allParts.forEach((p, ci) => {
+    if (p.k !== 'g') return;
+    const inp = inputs[inputIdx++];
+    const answers = JSON.parse(inp.dataset.ans);
+    // an EMPTY field is wrong, unless "no preposition" ('' is one of the answers)
+    const ok = answers.some(a => norm(a) === norm(inp.value));
+    inp.disabled = true; inp.classList.remove('correct', 'wrong');
+    if (ok) { inp.classList.add('correct'); }
+    else {
+      inp.classList.add('wrong'); cardOk = false;
+      const cor = document.getElementById(`cor-${idx}-${ci}`);
+      if (cor) { cor.textContent = '→ ' + answers[0]; cor.style.display = 'inline'; }
+    }
+  });
+  card.classList.remove('checked-ok', 'checked-err');
+  card.classList.add(cardOk ? 'checked-ok' : 'checked-err');
+  return cardOk;
+}
+
+// force=true  → "Check" button / "Check All": empty fields are counted as mistakes
+// force=false → Enter key: waits until every field that needs an answer is filled
+function checkCard(idx, force){
+  const ss = S[S.mode];
+  if (ss.done[idx]) return;
+  const card = document.getElementById(`card-${idx}`);
+  if (!card) return;
+  const inputs = card.querySelectorAll('input.gap');
+  if (!force) {
+    let allFilled = true;
+    inputs.forEach(i => { const ans = JSON.parse(i.dataset.ans); if (!i.value.trim() && !ans.includes('')) allFilled = false; });
+    if (!allFilled) return;
+  }
+  ss.vals[idx] = Array.from(inputs).map(i => i.value);
+  const ok = applyGrade(idx);
+  ss.done[idx] = ok ? 'ok' : 'err';
+  if (ok) ss.ok++;
+  else { ss.bad++; addMistake(current[idx]._id); }
+  updateChips(); updateProgress(); saveState();
+}
+
+function checkAll(){
+  current.forEach((_, idx) => checkCard(idx, true));
+  showResult(); saveState();
+}
+
+function hideResult(){ const res = document.getElementById('result'); res.className = 'result-box'; res.textContent = ''; }
+function showResult(){
+  const ss = S[S.mode];
+  const total = ss.ok + ss.bad;
+  if (!total) { hideResult(); return; }
+  const pct = Math.round(ss.ok / total * 100);
+  const res = document.getElementById('result');
+  if (pct >= 80) { res.className = 'result-box show great'; res.textContent = `Excellent! ${ss.ok} out of ${total} correct (${pct}%). Press "New Round" to continue.`; }
+  else if (pct >= 50) { res.className = 'result-box show ok'; res.textContent = `Good job! ${ss.ok} out of ${total} correct (${pct}%). Check the red answers.`; }
+  else { res.className = 'result-box show poor'; res.textContent = `${ss.ok} out of ${total} correct (${pct}%). Review the material and try a new round!`; }
+}
+
+function rememberInputs(idx){
+  const ss = S[S.mode];
+  const card = document.getElementById(`card-${idx}`);
+  if (!card || ss.done[idx]) return;
+  ss.vals[idx] = Array.from(card.querySelectorAll('input.gap')).map(i => i.value);
+  saveState();
+}
+
+// ─── "MY MISTAKES" BANK ───────────────────────────────────────
+function addMistake(id){
+  if (!S.mistakes.includes(id)) S.mistakes.push(id);
+  updateModeUI();
+}
+function toggleBank(){
+  S.mode = S.mode === 'main' ? 'mist' : 'main';
+  if (S.mode === 'mist') {
+    // a bank round that was not started yet is rebuilt from the latest mistakes
+    const ss = S.mist;
+    const touched = Object.keys(ss.done).length > 0 || Object.values(ss.vals).some(v => v.some(x => x && x.trim()));
+    if (!touched) startRound('mist', false);
+  }
+  render(); saveState(); window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function emptyBank(){
+  const n = S.mistakes.length;
+  if (!n) return;
+  if (!confirm(`Empty the bank? All ${n} saved mistake${n === 1 ? '' : 's'} will be removed.`)) return;
+  S.mistakes = [];
+  S.mist = freshSession();
+  render(); saveState();
+}
+// Reset: round → 1, score → 0, answers cleared, a fresh set of sentences.
+// Works on the screen you are on; the "My mistakes" bank itself is kept (use "Empty bank" for that).
+function resetProgress(){
+  const where = S.mode === 'mist' ? 'My mistakes' : 'this page';
+  if (!confirm(`Reset ${where}? The round goes back to 1, the score and all answers are cleared.` + (S.mode === 'main' ? ' Your mistakes bank is kept.' : ''))) return;
+  S[S.mode] = freshSession();
+  startRound(S.mode, false);
+  render(); saveState(); window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+// "← Back" inside the mistakes bank returns to the tasks, not to the title page
+function backClick(ev){
+  if (S.mode === 'mist') { ev.preventDefault(); toggleBank(); }
+}
+
+function updateModeUI(){
+  const m = S.mode === 'mist';
+  document.body.classList.toggle('mist-mode', m);
+  const b = document.getElementById('btn-bank');
+  b.innerHTML = m ? '← Tasks' : 'My mistakes <span class="mm-count">' + S.mistakes.length + '</span>';
+  const note = document.getElementById('mist-note');
+  note.hidden = !m;
+  if (m) note.innerHTML = '<strong>My mistakes</strong> · ' + S.mistakes.length + ' sentence' + (S.mistakes.length === 1 ? '' : 's') + ' saved';
+  document.getElementById('btn-empty').hidden = !m;
+}
+
+function updateChips(){
+  const ss = S[S.mode];
+  document.getElementById('chip-ok').textContent = '✓ ' + ss.ok;
+  document.getElementById('chip-err').textContent = '✗ ' + ss.bad;
+  document.getElementById('round-num').textContent = ss.round;
+}
+function updateProgress(){
+  const ss = S[S.mode];
+  const n = current.length;
+  document.getElementById('progress').style.width = n ? Math.round(Object.keys(ss.done).length / n * 100) + '%' : '0%';
+}
+function newRound(){
+  startRound(S.mode, true);
+  render(); saveState(); window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── START ────────────────────────────────────────────────────
+loadState();
+if (!S.main.ids.length) startRound('main', false);
+if (S.mode === 'mist' && !S.mist.ids.length) startRound('mist', false);
+render(); saveState();
+</script>
+</body>
+</html>
