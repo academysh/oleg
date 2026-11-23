@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Present Simple — Headway Elementary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap">
+  <style>
+  /* ═══ Headway 5th edition — Elementary · design inspired by the Student's Book ═══ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  [hidden] { display: none !important; }
+  :root {
+    --red: #BB1D2F;  --red-dark: #8F1523;  --red-chev: #C95A55;
+    --pink: #FBE3E4; --pink-2: #F6CDD0;
+    --cream: #FFF2D1; --cream-line: #E9D69B;
+    --blue: #2B7BB9; --blue-dark: #1D5A8C; --blue-lt: #E4F0F9; --blue-line: #A9CBE4;
+    --green: #2E8B57; --green-bg: #E7F5EC; --green-border: #9FD1B3;
+    --wrong-bg: #FCE8EA; --wrong-border: #EDA9B1;
+    --text: #1F2A33; --muted: #5E6A73; --muted2: #8C97A0;
+    --border: #DCD5D1; --bg: #F6F3F0; --surface: #fff;
+    --card-bg: #FAF6F3; --card-line: #E3DAD5;
+    --r: 18px;          /* big radius: header bars */
+    --r-card: 14px;     /* cards */
+    --r-ctl: 10px;      /* buttons, inputs */
+    --header-h: 64px;
+    --shadow-card: 0 2px 10px rgba(60,30,20,.08);
+  }
+  body { font-family: 'Source Sans 3', 'Frutiger', 'Myriad Pro', 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 16px; }
+  button, input { font-family: inherit; }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--red); color: #fff; padding: 0 32px; height: var(--header-h);
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 30; overflow: hidden;
+    border-radius: 0 0 var(--r) var(--r);
+    box-shadow: 0 3px 12px rgba(0,0,0,.25);
+  }
+  header::before, header::after {
+    content: ''; position: absolute; top: 0; bottom: 0; width: 70px; pointer-events: none;
+    clip-path: polygon(0 0, 45% 0, 100% 50%, 45% 100%, 0 100%, 55% 50%);
+  }
+  header::before { right: 90px; background: rgba(255,255,255,.07); }
+  header::after  { right: 30px; background: rgba(255,255,255,.13); }
+  header > * { position: relative; z-index: 1; }
+  .logo { font-size: 21px; font-weight: 800; color: #fff; line-height: 1.15; letter-spacing: -.2px; }
+  .logo-sub { display: block; margin-top: 3px; font-size: 12px; font-weight: 600; color: rgba(255,255,255,.85); letter-spacing: .9px; text-transform: uppercase; }
+  .header-right { display: flex; align-items: center; gap: 12px; margin-right: 110px; }
+
+  /* "My mistakes" button in the header */
+  .mm-btn { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: var(--red); font-size: 14px; font-weight: 700; border: none; border-radius: var(--r-ctl); padding: 7px 8px 7px 14px; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,.25); transition: background .15s; white-space: nowrap; }
+  .mm-btn:hover { background: var(--pink); }
+  .mm-count { background: var(--red); color: #fff; border-radius: 8px; padding: 1px 8px; font-size: 13px; min-width: 24px; text-align: center; }
+  body.mist-mode .mm-btn { background: var(--cream); padding: 7px 14px; }
+
+  /* ── CONTROL STRIP ── */
+  .control-strip-sticky { position: sticky; top: var(--header-h); z-index: 9; background: var(--bg); padding-bottom: 6px; border-radius: 0 0 16px 16px; box-shadow: 0 4px 8px rgba(60,30,20,.06); }
+  .control-strip { max-width: 880px; margin: 0 auto; padding: 14px 18px 0; }
+  .topic-card { background: var(--surface); border: 1px solid var(--border); border-left: 6px solid var(--red); border-radius: var(--r-card); box-shadow: var(--shadow-card); overflow: hidden; }
+  .topic-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; padding: 10px 14px; }
+  .topic-row .back-btn { justify-self: start; }
+  .counter { display: flex; align-items: center; gap: 10px; justify-self: center; }
+  .topic-title { display: flex; align-items: center; gap: 12px; justify-self: end; }
+  .filter-label { font-size: 20px; font-weight: 700; color: var(--blue); white-space: nowrap; letter-spacing: -.2px; }
+  .round-badge { font-size: 14px; color: var(--muted); font-weight: 600; white-space: nowrap; }
+  .score-chips { display: flex; gap: 6px; }
+  .chip { font-size: 15px; font-weight: 700; padding: 3px 12px; border-radius: var(--r-ctl); white-space: nowrap; }
+  .chip-ok  { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+  .chip-err { background: var(--wrong-bg); color: var(--red); border: 1px solid var(--wrong-border); }
+
+  /* "Grammar Spot" button */
+  .rtog { font-size: 14px; font-weight: 700; padding: 6px 16px; border-radius: var(--r-ctl); cursor: pointer; border: 2px solid var(--blue); background: #fff; color: var(--blue); transition: all .15s; user-select: none; }
+  .rtog:hover { background: var(--blue-lt); }
+  .rtog.open  { background: var(--blue); color: #fff; }
+
+  .hint-body { display: none; margin: 0 14px 14px; padding: 0 16px 14px; border: 2px solid var(--blue); border-radius: 14px; background: #fff; animation: fadeIn .2s ease; max-height: 58vh; overflow-y: auto; }
+  .hint-body.open { display: block; }
+  .hint-body::before { content: 'Grammar Spot'; display: block; background: var(--blue); color: #fff; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; padding: 6px 16px; margin: 0 -16px 14px; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+
+  .scheme { font-size: 15px; line-height: 1.55; }
+  .scheme h3 { font-size: 12.5px; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: .7px; margin: 16px 0 6px; padding-bottom: 4px; border-bottom: 2px solid var(--pink-2); }
+  .scheme h3:first-child { margin-top: 0; }
+  /* rounded tables */
+  .stbl { border-collapse: separate; border-spacing: 0; width: 100%; margin-bottom: 4px; border: 1px solid var(--blue-line); border-radius: 12px; overflow: hidden; }
+  .stbl th { background: var(--blue-lt); color: var(--blue-dark); font-size: 12.5px; font-weight: 700; text-align: left; padding: 7px 10px; text-transform: uppercase; letter-spacing: .4px; }
+  .stbl td { padding: 7px 10px; color: var(--text); vertical-align: top; font-size: 15px; background: #fff; }
+  .stbl th, .stbl td { border: none; border-right: 1px solid var(--blue-line); border-bottom: 1px solid var(--blue-line); }
+  .stbl tr > *:last-child { border-right: none; }
+  .stbl tr:last-child > * { border-bottom: none; }
+  .stbl td code { background: none; color: var(--blue-dark); padding: 0; font-family: inherit; font-size: 15px; font-style: italic; font-weight: 600; }
+  .stbl tr:nth-child(even) td { background: #F7FBFE; }
+  .formula { display: inline-block; background: var(--cream); border: 1px solid var(--cream-line); border-radius: 10px; padding: 7px 14px; font-size: 15px; margin: 4px 0 10px; color: var(--text); }
+  .formula code { color: var(--red); font-family: inherit; font-weight: 700; font-style: italic; }
+  .close-btn { margin-top: 14px; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: var(--muted); cursor: pointer; border: 1px solid var(--border); background: #fff; padding: 5px 14px; border-radius: var(--r-ctl); transition: all .15s; }
+  .close-btn:hover { color: var(--red); border-color: var(--red); }
+
+  /* ── EXERCISES ── */
+  main { max-width: 880px; margin: 0 auto; padding: 20px 18px 60px; }
+  .exercises-card { background: var(--surface); border: 1px solid var(--border); border-top: 5px solid var(--red); border-radius: var(--r-card); box-shadow: var(--shadow-card); padding: 20px 20px 14px; margin-bottom: 16px; }
+  body.mist-mode .exercises-card { border-top-color: var(--blue); }
+  .mist-note { display: flex; align-items: center; gap: 8px; background: var(--cream); border: 1px solid var(--cream-line); border-radius: 12px; padding: 10px 14px; margin-bottom: 14px; font-size: 15px; }
+  .progress-track { height: 6px; background: var(--pink); border-radius: 4px; margin-bottom: 16px; overflow: hidden; }
+  .progress-fill  { height: 100%; background: var(--red); border-radius: 4px; transition: width .4s ease; width: 0%; }
+
+  /* every sentence is its own rounded card */
+  .sentence-card { border: 1.5px solid var(--card-line); border-radius: 12px; padding: 12px 14px 12px 12px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 12px; transition: background .2s, border-color .2s; background: var(--card-bg); }
+  .sentence-card:last-child { margin-bottom: 0; }
+  .sentence-card.checked-ok  { border-color: var(--green-border); background: var(--green-bg); }
+  .sentence-card.checked-err { border-color: var(--wrong-border); background: var(--wrong-bg); }
+  .num { font-size: 17px; font-weight: 700; color: var(--red); min-width: 26px; text-align: right; padding-top: 4px; flex-shrink: 0; }
+  .card-body { flex: 1; min-width: 0; }
+
+  .sent-line { font-size: 18px; line-height: 2.0; display: flex; flex-wrap: wrap; align-items: center; gap: 3px; }
+  .sent-line .word { white-space: nowrap; }
+  .dialogue { font-size: 18px; line-height: 2.0; display: flex; flex-direction: column; }
+  .dl { display: flex; flex-wrap: wrap; align-items: center; gap: 3px; }
+  .dl .word { white-space: nowrap; }
+  .sp-label { font-weight: 700; color: var(--red); margin-right: 3px; white-space: nowrap; }
+
+  /* gaps = small rounded fields; answers in italic */
+  input.gap { border: 1.5px solid #C9BFB9; background: #fff; color: var(--blue-dark); font-size: 18px; font-style: italic; font-weight: 600; padding: 1px 8px; border-radius: 9px; outline: none; transition: border-color .15s, background .15s, box-shadow .15s; text-align: center; vertical-align: middle; }
+  input.gap::placeholder { color: transparent; }
+  input.gap:focus { border-color: var(--red); background: var(--cream); box-shadow: 0 0 0 3px rgba(187,29,47,.12); }
+  input.gap.correct { border-color: var(--green); background: #fff; color: var(--green); }
+  input.gap.wrong   { border-color: var(--red); background: #fff; color: var(--red); text-decoration: line-through; }
+  input.gap:disabled { opacity: 1; cursor: default; }
+
+  .meta-line { margin-top: 2px; display: flex; align-items: center; flex-wrap: wrap; gap: 5px; font-size: 14.5px; }
+  .hint-base { color: var(--muted); font-style: italic; }
+  .hint-ru   { color: var(--muted2); font-style: italic; }
+  .correction { color: var(--red); font-weight: 700; font-size: 14.5px; display: none; }
+
+  .btn-check-card { flex-shrink: 0; font-size: 13px; font-weight: 700; padding: 5px 14px; border-radius: var(--r-ctl); border: 1.5px solid var(--red); background: #fff; color: var(--red); cursor: pointer; transition: all .15s; white-space: nowrap; margin-top: 3px; }
+  .btn-check-card:hover:not(:disabled) { background: var(--red); color: #fff; }
+  .btn-check-card:disabled { opacity: .35; cursor: default; }
+
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; padding-top: 14px; border-top: 2px solid var(--pink); }
+  button.btn-main { font-size: 15px; font-weight: 700; border-radius: 12px; padding: 10px 24px; cursor: pointer; border: none; transition: background .15s, transform .1s; }
+  button.btn-main:active { transform: scale(.97); }
+  .btn-check-all { background: var(--red); color: #fff; }
+  .btn-check-all:hover { background: var(--red-dark); }
+  .btn-next { background: #fff; color: var(--red); border: 2px solid var(--red) !important; }
+  .btn-next:hover { background: var(--pink); }
+  .btn-empty { background: #fff; color: var(--muted); border: 2px solid var(--border) !important; margin-left: auto; }
+  .btn-empty:hover { color: var(--red); border-color: var(--red) !important; background: var(--pink); }
+
+  .result-box { margin: 14px 0 8px; padding: 12px 16px; border-radius: 12px; font-size: 16px; font-weight: 600; display: none; border: 1px solid transparent; }
+  .result-box.show  { display: block; }
+  .result-box.great { background: var(--green-bg); border-color: var(--green-border); color: #1d6b40; }
+  .result-box.ok    { background: var(--cream); border-color: var(--cream-line); color: #6d5300; }
+  .result-box.poor  { background: var(--wrong-bg); border-color: var(--wrong-border); color: #8f1523; }
+  .empty-msg { text-align: center; padding: 44px 20px; color: var(--muted); font-size: 17px; line-height: 1.5; background: var(--card-bg); border: 1.5px dashed var(--card-line); border-radius: 12px; }
+  footer { text-align: center; padding: 22px; font-size: 13px; color: var(--muted); border-top: 3px solid var(--red); background: #fff; border-radius: 18px 18px 0 0; }
+
+  .sent-translation { font-size: 15px; color: var(--muted); margin-top: 2px; line-height: 1.5; font-style: italic; }
+  .sent-translation mark { background: none; color: var(--red); font-weight: 700; font-style: normal; }
+
+  .back-btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 18px; background: #fff; color: var(--red); border: 2px solid var(--red); border-radius: var(--r-ctl); cursor: pointer; font-size: 14px; font-weight: 700; text-decoration: none; transition: background .15s, color .15s; }
+  .back-btn:hover { background: var(--red); color: #fff; }
+
+  /* Reset button */
+  .reset-btn { font-size: 13px; font-weight: 700; padding: 4px 12px; border-radius: var(--r-ctl); border: 1.5px solid var(--border); background: #fff; color: var(--muted); cursor: pointer; transition: all .15s; white-space: nowrap; }
+  .reset-btn:hover { color: var(--red); border-color: var(--red); background: var(--pink); }
+  .footer-reset { margin-bottom: 12px; }
+  .footer-reset .reset-btn { font-size: 14px; padding: 7px 20px; }
+
+  @media (max-width: 760px) {
+    .topic-row { grid-template-columns: auto 1fr; }
+    .counter { justify-self: end; }
+    .topic-title { grid-column: 1 / -1; justify-self: start; }
+  }
+  @media (max-width: 640px) {
+    :root { --header-h: 58px; --r: 16px; }
+    header { padding: 0 14px; }
+    .logo { font-size: 16px; } .logo-sub { font-size: 10px; }
+    .header-right { margin-right: 0; gap: 8px; }
+    .mm-btn { font-size: 13px; padding: 6px 6px 6px 10px; }
+    .round-badge { display: none; }
+    .sent-line, .dialogue, input.gap { font-size: 17px; }
+    .exercises-card { padding: 14px 12px 10px; }
+    .sentence-card { flex-wrap: wrap; }
+    .btn-empty { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    Headway 5th edition — Elementary
+    <span class="logo-sub">Oleg’s Practice</span>
+  </div>
+  <div class="header-right">
+    <button class="mm-btn" id="btn-bank" onclick="toggleBank()">My mistakes <span class="mm-count">0</span></button>
+  </div>
+</header>
+
+<div class="control-strip-sticky"><div class="control-strip">
+  <div class="topic-card">
+    <div class="topic-row">
+      <a href="index.html" class="back-btn" onclick="backClick(event)">← Back</a>
+      <div class="counter">
+        <span class="round-badge">Round <strong id="round-num">1</strong></span>
+        <div class="score-chips">
+          <span class="chip chip-ok"  id="chip-ok">✓ 0</span>
+          <span class="chip chip-err" id="chip-err">✗ 0</span>
+        </div>
+        <button class="reset-btn" onclick="resetProgress()" title="Reset round, score and answers">↺ Reset</button>
+      </div>
+      <div class="topic-title">
+        <span class="filter-label">Present Simple</span>
+        <button class="rtog" id="ht-ps" onclick="toggleHint('ps')">📖 Rule</button>
+      </div>
+    </div>
+
+    <div id="hb-ps" class="hint-body">
+      <div class="scheme">
+        <h3>Positive</h3>
+        <div class="formula"><code>I / You / We / They</code> + base verb &nbsp;|&nbsp; <code>He / She / It</code> + verb <code>-s / -es</code></div>
+        <table class="stbl">
+          <tr><th>Subject</th><th>Verb form</th><th>Example</th></tr>
+          <tr><td>I / You / We / They</td><td>base form</td><td><code>I work. They play.</code></td></tr>
+          <tr><td>He / She / It</td><td>+ s / es / ies</td><td><code>She works. He watches. She studies.</code></td></tr>
+        </table>
+        <h3>Negative</h3>
+        <div class="formula"><code>I / You / We / They + don't</code> + verb &nbsp;|&nbsp; <code>He / She / It + doesn't</code> + verb</div>
+        <table class="stbl">
+          <tr><th>Subject</th><th>Auxiliary</th><th>Example</th></tr>
+          <tr><td>I / You / We / They</td><td><code>don't</code></td><td><code>I don't work.</code></td></tr>
+          <tr><td>He / She / It</td><td><code>doesn't</code></td><td><code>She doesn't work.</code></td></tr>
+        </table>
+        <h3>Question</h3>
+        <div class="formula"><code>Do</code> + I / you / we / they + verb? &nbsp;|&nbsp; <code>Does</code> + he / she / it + verb?</div>
+        <table class="stbl">
+          <tr><th>Auxiliary</th><th>Subject</th><th>Example</th></tr>
+          <tr><td><code>Do</code></td><td>I / you / we / they</td><td><code>Do you work?</code></td></tr>
+          <tr><td><code>Does</code></td><td>he / she / it</td><td><code>Does she work?</code></td></tr>
+        </table>
+      </div>
+      <div class="close-btn" onclick="closeHint('ps')">✕ Close</div>
+    </div>
+  </div>
+</div></div>
+
+<main>
+  <div class="exercises-card">
+    <div class="mist-note" id="mist-note" hidden></div>
+    <div class="progress-track"><div class="progress-fill" id="progress"></div></div>
+    <div id="container"></div>
+    <div class="actions">
+      <button class="btn-main btn-check-all" onclick="checkAll()">Check All</button>
+      <button class="btn-main btn-next"      onclick="newRound()">New Round ↻</button>
+      <button class="btn-main btn-empty" id="btn-empty" onclick="emptyBank()" hidden>Empty bank</button>
+    </div>
+    <div class="result-box" id="result"></div>
+  </div>
+</main>
+
+<footer><div class="footer-reset"><button class="reset-btn" onclick="resetProgress()">↺ Reset</button></div>Headway Elementary 5th edition · Grammar Practice · <a href="index.html" style="color:inherit;text-decoration:underline;">← Home</a></footer>
+
+<script>
+
+// ─── DATA ────────────────────────────────────────────────────
+// parts: {k:'t',v:'text'} | {k:'g',a:[answers],w:px}
+// dialogue: true + lines:[{speaker:'A'|'B'|'', parts:[...]}]
+const DB = [];
+function t(v){return{k:'t',v};}
+function g(a,w){return{k:'g',a:Array.isArray(a)?a:[a],w};}
+function ps(parts,hint,extra)  { DB.push({bank:'ps',   parts, hint, ...extra}); }
+function tb(parts,hint,extra)  { DB.push({bank:'tobe', parts, hint, ...extra}); }
+function pr(parts,hint,extra)  { DB.push({bank:'pron', parts, hint, ...extra}); }
+function pp(parts,hint,tr,trMark){ DB.push({bank:'prep', parts, hint, tr, trMark}); }
+// dialogue helper: dl({A:[parts], B:[parts]}, hint)
+function dl(speakers, hint, bank, tr, trMark){
+  const lines = Object.entries(speakers).map(([sp,parts])=>({speaker:sp,parts}));
+  DB.push({bank, dialogue:true, lines, hint, tr, trMark});
+}
+
+
+// ══ BANK 1 — PRESENT SIMPLE ══════════════════════════════════
+
+// AFF (35)
+ps([t(`I `),g('work',90),t(` at a big company in the city centre.`)],'(work) [работать]');
+ps([t(`She `),g('lives',82),t(` in a small flat near the park.`)],'(live) [жить]');
+ps([t(`He `),g('studies',92),t(` English every evening after dinner.`)],'(study) [учиться]');
+ps([t(`They `),g('eat',68),t(` lunch at one o'clock every day.`)],'(eat) [есть]');
+ps([t(`My mother `),g('cooks',82),t(` dinner for the whole family.`)],'(cook) [готовить]');
+ps([t(`Tom `),g('drives',84),t(` to work every morning.`)],'(drive) [ехать на машине]');
+ps([t(`We `),g('play',72),t(` tennis on Saturday afternoon.`)],'(play) [играть]');
+ps([t(`Anna `),g('reads',78),t(` a book before she goes to bed.`)],'(read) [читать]');
+ps([t(`My brother `),g('works',84),t(` in a hospital as a doctor.`)],'(work) [работать]');
+ps([t(`They `),g('watch',80),t(` TV in the evening.`)],'(watch) [смотреть]');
+ps([t(`She `),g('drinks',84),t(` coffee every morning.`)],'(drink) [пить]');
+ps([t(`He `),g('teaches',92),t(` Maths at a secondary school.`)],'(teach) [преподавать]');
+ps([t(`I `),g('start',76),t(` work at nine o'clock.`)],'(start) [начинать]');
+ps([t(`My parents `),g('travel',84),t(` to different countries in summer.`)],'(travel) [путешествовать]');
+ps([t(`Lisa `),g('helps',78),t(` her mother with the housework.`)],'(help) [помогать]');
+ps([t(`David `),g('listens',88),t(` to music on the way to work.`)],'(listen) [слушать]');
+ps([t(`We `),g('speak',78),t(` English in class.`)],'(speak) [говорить]');
+ps([t(`My sister `),g('runs',68),t(` five kilometres every morning.`)],'(run) [бегать]');
+ps([t(`He `),g('finishes',96),t(` work at six in the evening.`)],'(finish) [заканчивать]');
+ps([t(`They `),g('live',70),t(` in a house in the suburbs.`)],'(live) [жить]');
+ps([t(`I `),g('walk',72),t(` to the office — it's only ten minutes.`)],'(walk) [ходить пешком]');
+ps([t(`She `),g('loves',78),t(` her job at the travel agency.`)],'(love) [любить]');
+ps([t(`My friend `),g('writes',84),t(` emails in English every day.`)],'(write) [писать]');
+ps([t(`He `),g('plays',76),t(` football with his friends on Fridays.`)],'(play) [играть]');
+ps([t(`We `),g('have',70),t(` a big family — three brothers and two sisters.`)],'(have) [иметь]');
+ps([t(`The train `),g('leaves',84),t(` at half past eight every morning.`)],'(leave) [уезжать]');
+ps([t(`Sarah `),g('works',82),t(` part-time in a coffee shop.`)],'(work) [работать]');
+ps([t(`My neighbour `),g('walks',80),t(` his dog twice a day.`)],'(walk) [гулять]');
+ps([t(`He `),g('uses',72),t(` a computer all day at work.`)],'(use) [использовать]');
+ps([t(`I `),g('meet',72),t(` my friends at the weekend.`)],'(meet) [встречаться]');
+ps([t(`She `),g('sends',78),t(` a lot of messages every day.`)],'(send) [отправлять]');
+ps([t(`My dad `),g('wakes up',108),t(` at six every morning.`)],'(wake up) [просыпаться]');
+ps([t(`We `),g('go',58),t(` to the gym on Tuesdays and Thursdays.`)],'(go) [ходить]');
+ps([t(`The shop `),g('opens',80),t(` at nine and closes at nine.`)],'(open) [открываться]');
+ps([t(`He `),g('buys',72),t(` fresh bread every morning.`)],'(buy) [покупать]');
+
+// NEG (35)
+ps([t(`I `),g(["don't work","do not work"],144),t(` at weekends — I relax at home.`)],"(not work) [не работать]");
+ps([t(`She `),g(["doesn't like","does not like"],152),t(` cold weather at all.`)],"(not like) [не любить]");
+ps([t(`My cat `),g(["doesn't eat","does not eat"],152),t(` dry food — she only `),g('eats',70),t(` fresh fish.`)],"(not eat) [не есть] — (eat) [есть]");
+ps([t(`He `),g(["doesn't drive","does not drive"],158),t(` — he always takes the bus.`)],"(not drive) [не ездить на машине]");
+ps([t(`We `),g(["don't watch","do not watch"],148),t(` much television in our family.`)],"(not watch) [не смотреть]");
+ps([t(`My brother `),g(["doesn't study","does not study"],158),t(` — he works full-time.`)],"(not study) [не учиться]");
+ps([t(`I `),g(["don't drink","do not drink"],140),t(` coffee — I prefer tea.`)],"(not drink) [не пить]");
+ps([t(`She `),g(["doesn't speak","does not speak"],158),t(` French, but she speaks Spanish very well.`)],"(not speak) [не говорить]");
+ps([t(`He `),g(["doesn't play","does not play"],152),t(` any sports — he prefers reading books.`)],"(not play) [не играть]");
+ps([t(`They `),g(["don't live","do not live"],140),t(` in the city — they have a house in the countryside.`)],"(not live) [не жить]");
+ps([t(`My mother `),g(["doesn't work","does not work"],158),t(` — she stays at home with the children.`)],"(not work) [не работать]");
+ps([t(`I `),g(["don't understand","do not understand"],176),t(` this grammar rule — can you explain it?`)],"(not understand) [не понимать]");
+ps([t(`She `),g(["doesn't cook","does not cook"],152),t(` — her husband always makes dinner.`)],"(not cook) [не готовить]");
+ps([t(`We `),g(["don't go","do not go"],124),t(` to the cinema very often.`)],"(not go) [не ходить]");
+ps([t(`He `),g(["doesn't finish","does not finish"],158),t(` work until seven o'clock.`)],"(not finish) [не заканчивать]");
+ps([t(`They `),g(["don't travel","do not travel"],148),t(` by plane — they prefer trains.`)],"(not travel) [не путешествовать]");
+ps([t(`My sister `),g(["doesn't read","does not read"],152),t(` newspapers — she gets the news online.`)],"(not read) [не читать]");
+ps([t(`I `),g(["don't walk","do not walk"],140),t(` to work — it's too far.`)],"(not walk) [не ходить пешком]");
+ps([t(`She `),g(["doesn't use","does not use"],152),t(` social media at all.`)],"(not use) [не использовать]");
+ps([t(`He `),g(["doesn't remember","does not remember"],176),t(` her phone number.`)],"(not remember) [не помнить]");
+ps([t(`My parents `),g(["don't need","do not need"],140),t(` a new car — theirs is fine.`)],"(not need) [не нуждаться]");
+ps([t(`We `),g(["don't have","do not have"],140),t(` a garden — we live in a flat.`)],"(not have) [не иметь]");
+ps([t(`Tom `),g(["doesn't know","does not know"],152),t(` anybody in his new neighbourhood.`)],"(not know) [не знать]");
+ps([t(`I `),g(["don't like","do not like"],134),t(` getting up early in the morning.`)],"(not like) [не любить]");
+ps([t(`She `),g(["doesn't want","does not want"],152),t(` to change her job right now.`)],"(not want) [не хотеть]");
+ps([t(`He `),g(["doesn't earn","does not earn"],152),t(` a lot of money, but he enjoys his work.`)],"(not earn) [не зарабатывать]");
+ps([t(`They `),g(["don't start","do not start"],140),t(` school until September.`)],"(not start) [не начинать]");
+ps([t(`My friend `),g(["doesn't listen","does not listen"],164),t(` to music — he never listens to the radio.`)],"(not listen) [не слушать]");
+ps([t(`I `),g(["don't see","do not see"],124),t(` my grandparents very often — they live far away.`)],"(not see) [не видеть]");
+ps([t(`She `),g(["doesn't send","does not send"],152),t(` letters — she always calls or texts.`)],"(not send) [не отправлять]");
+ps([t(`We `),g(["don't teach","do not teach"],148),t(` grammar directly — we learn it in context.`)],"(not teach) [не преподавать]");
+ps([t(`He `),g(["doesn't buy","does not buy"],152),t(` clothes very often.`)],"(not buy) [не покупать]");
+ps([t(`I `),g(["don't help","do not help"],140),t(` much at home, and I feel bad about it.`)],"(not help) [не помогать]");
+ps([t(`She `),g(["doesn't meet","does not meet"],152),t(` her colleagues after work.`)],"(not meet) [не встречаться]");
+ps([t(`My dog `),g(["doesn't eat","does not eat"],152),t(` vegetables — he only eats meat.`)],"(not eat) [не есть]");
+
+// INT (30)
+ps([g('Do',52),t(` you `),g('work',88),t(` in an office or at home?`)],'(work) [работать]');
+ps([g('Does',64),t(` she `),g('speak',84),t(` any foreign languages?`)],'(speak) [говорить]');
+ps([g('Do',52),t(` they `),g('live',72),t(` near the city centre?`)],'(live) [жить]');
+ps([g('Does',64),t(` he `),g('drive',78),t(` to work every day?`)],'(drive) [ехать на машине]');
+ps([g('Do',52),t(` you `),g('like',68),t(` studying English?`)],'(like) [любить]');
+ps([g('Does',64),t(` your mother `),g('cook',72),t(` every evening?`)],'(cook) [готовить]');
+ps([g('Do',52),t(` they `),g('have',70),t(` any children?`)],'(have) [иметь]');
+ps([g('Does',64),t(` she `),g('work',78),t(` on Saturdays?`)],'(work) [работать]');
+ps([g('Do',52),t(` you `),g('go',55),t(` to the gym regularly?`)],'(go) [ходить]');
+ps([g('Does',64),t(` he `),g('study',78),t(` at university or does he work?`)],'(study) [учиться]');
+ps([g('Do',52),t(` you `),g('know',72),t(` the answer to this question?`)],'(know) [знать]');
+ps([g('Does',64),t(` she `),g('live',68),t(` alone or with her family?`)],'(live) [жить]');
+ps([g('Do',52),t(` they `),g('eat',60),t(` out at restaurants very often?`)],'(eat) [есть]');
+ps([g('Does',64),t(` he `),g('play',72),t(` any musical instruments?`)],'(play) [играть]');
+ps([g('Do',52),t(` you `),g('understand',116),t(` everything the teacher says?`)],'(understand) [понимать]');
+ps([g('Does',64),t(` your friend `),g('travel',84),t(` a lot for work?`)],'(travel) [путешествовать]');
+ps([g('Do',52),t(` they `),g('watch',80),t(` English films without subtitles?`)],'(watch) [смотреть]');
+ps([g('Does',64),t(` he `),g('finish',80),t(` work late on Fridays?`)],'(finish) [заканчивать]');
+ps([g('Do',52),t(` you `),g('read',72),t(` the news in English?`)],'(read) [читать]');
+ps([g('Does',64),t(` she `),g('help',72),t(` her parents at the weekend?`)],'(help) [помогать]');
+ps([g('Do',52),t(` your colleagues `),g('speak',82),t(` English at meetings?`)],'(speak) [говорить]');
+ps([g('Does',64),t(` he `),g('walk',76),t(` to school or take the bus?`)],'(walk) [ходить пешком]');
+ps([g('Do',52),t(` you `),g('remember',104),t(` her name?`)],'(remember) [помнить]');
+ps([g('Does',64),t(` she `),g('need',72),t(` any help with the project?`)],'(need) [нуждаться]');
+ps([g('Do',52),t(` they `),g('start',76),t(` classes at eight or nine?`)],'(start) [начинать]');
+ps([g('Does',64),t(` your boss `),g('work',78),t(` from home on Fridays?`)],'(work) [работать]');
+ps([g('Do',52),t(` you `),g('use',68),t(` a dictionary when you read in English?`)],'(use) [использовать]');
+ps([g('Does',64),t(` he `),g('listen',82),t(` to podcasts in English?`)],'(listen) [слушать]');
+ps([g('Do',52),t(` they `),g('earn',76),t(` a good salary at that company?`)],'(earn) [зарабатывать]');
+ps([g('Does',64),t(` she `),g('send',74),t(` reports to her manager every week?`)],'(send) [отправлять]');
+
+
+
+// ─── HINT ACCORDION ──────────────────────────────────────────
+let openHint = null;
+function toggleHint(id){
+  if(openHint && openHint !== id) closeHint(openHint);
+  if(openHint === id){ closeHint(id); return; }
+  openHint = id;
+  document.getElementById('hb-'+id).classList.add('open');
+  document.getElementById('ht-'+id).classList.add('open');
+}
+function closeHint(id){
+  document.getElementById('hb-'+id).classList.remove('open');
+  document.getElementById('ht-'+id).classList.remove('open');
+  if(openHint===id) openHint=null;
+}
+
+// ══ ADDITIONS — PRESENT SIMPLE (200 more, total 300) ══
+ps([t(`She `),g('takes',82),t(` the bus to work every day.`)],'(take) [брать, ехать]');
+ps([t(`I `),g('check',82),t(` my emails first thing in the morning.`)],'(check) [проверять]');
+ps([t(`He `),g('wears',82),t(` a suit to the office every day.`)],'(wear) [носить]');
+ps([t(`We `),g('rent',70),t(` a flat in the city centre.`)],'(rent) [снимать]');
+ps([t(`She `),g('teaches',106),t(` young children at a big school.`)],'(teach) [преподавать]');
+ps([t(`They `),g('own',58),t(` a small business in the town.`)],'(own) [владеть]');
+ps([t(`My cat `),g('sleeps',94),t(` on my bed every night.`)],'(sleep) [спать]');
+ps([t(`He `),g('earns',82),t(` a lot of money at his new job.`)],'(earn) [зарабатывать]');
+ps([t(`I `),g('take',70),t(` a shower every morning before breakfast.`)],'(take) [принимать]');
+ps([t(`She `),g('practises',130),t(` the piano for an hour every day.`)],'(practise) [заниматься (музыкой)]');
+ps([t(`We `),g('wash',70),t(` our car every Saturday morning.`)],'(wash) [мыть]');
+ps([t(`He `),g('travels',106),t(` to the city by train every day.`)],'(travel) [путешествовать / ездить]');
+ps([t(`My sister `),g('helps',82),t(` old people in our street at weekends.`)],'(help) [помогать]');
+ps([t(`They `),g('spend',82),t(` their holidays in the mountains every year.`)],'(spend) [проводить]');
+ps([t(`I `),g('prefer',94),t(` tea to coffee in the afternoon.`)],'(prefer) [предпочитать]');
+ps([t(`She `),g('calls',82),t(` her parents every Sunday evening.`)],'(call) [звонить]');
+ps([t(`He `),g('leaves',94),t(` home at seven thirty every morning.`)],'(leave) [выходить]');
+ps([t(`We `),g('order',82),t(` pizza on Friday evenings.`)],'(order) [заказывать]');
+ps([t(`My neighbour `),g('grows',82),t(` vegetables in his garden.`)],'(grow) [выращивать]');
+ps([t(`She `),g('plans',82),t(` the work for a team of ten people.`)],'(plan) [планировать]');
+ps([t(`I `),g('exercise',118),t(` at the gym three times a week.`)],'(exercise) [тренироваться]');
+ps([t(`He `),g('repairs',106),t(` computers and phones in his free time.`)],'(repair) [ремонтировать]');
+ps([t(`They `),g('celebrate',130),t(` their birthdays with a big family dinner.`)],'(celebrate) [отмечать]');
+ps([t(`My boss `),g('expects',106),t(` us to be on time for every meeting.`)],'(expect) [ожидать]');
+ps([t(`She `),g('enjoys',94),t(` reading books in the evenings.`)],'(enjoy) [наслаждаться]');
+ps([t(`We `),g('share',82),t(` all the housework in our family.`)],'(share) [делить]');
+ps([t(`He `),g('attends',106),t(` evening classes twice a week.`)],'(attend) [посещать]');
+ps([t(`I `),g('save',70),t(` a little money every month.`)],'(save) [копить]');
+ps([t(`She `),g('visits',94),t(` her grandmother every weekend.`)],'(visit) [навещать]');
+ps([t(`They `),g('play',70),t(` chess online in the evenings.`)],'(play) [играть]');
+ps([t(`My dad `),g('cleans',94),t(` the house at weekends.`)],'(clean) [убирать]');
+ps([t(`He `),g('works out',130),t(` every morning before going to work.`)],'(work out) [тренироваться]');
+ps([t(`We `),g('take',70),t(` a lot of photos when we travel.`)],'(take) [делать (фото)]');
+ps([t(`She `),g('designs',106),t(` websites for small shops.`)],'(design) [проектировать]');
+ps([t(`I `),g('drive',82),t(` to work for about an hour every morning.`)],'(drive) [ехать на машине]');
+ps([t(`He `),g('reads',82),t(` the news on his phone during breakfast.`)],'(read) [читать]');
+ps([t(`They `),g('keep',70),t(` a dog and two cats at home.`)],'(keep) [держать]');
+ps([t(`My mother `),g('paints',94),t(` pictures in winter.`)],'(paint) [рисовать]');
+ps([t(`She `),g('runs',70),t(` a small coffee shop near the station.`)],'(run) [вести (бизнес)]');
+ps([t(`We `),g('walk',70),t(` to the park every Sunday morning.`)],'(walk) [ходить]');
+ps([t(`He `),g('knows',82),t(` five languages — it's amazing!`)],'(know) [знать]');
+ps([t(`I always `),g('carry',82),t(` an umbrella when it's cloudy.`)],'(carry) [носить с собой]');
+ps([t(`She `),g('picks up',118),t(` her children from school every afternoon.`)],'(pick up) [забирать]');
+ps([t(`They `),g('rent',70),t(` a house outside the city.`)],'(rent) [снимать]');
+ps([t(`My brother `),g('cycles',94),t(` to university every day.`)],'(cycle) [ездить на велосипеде]');
+ps([t(`He `),g('answers',106),t(` all customer emails on the same day.`)],'(answer) [отвечать]');
+ps([t(`We `),g('try',58),t(` to eat healthy food most of the time.`)],'(try) [стараться]');
+ps([t(`She `),g('writes',94),t(` a blog about travel and food.`)],'(write) [писать]');
+ps([t(`I `),g('enjoy',82),t(` long walks in the countryside.`)],'(enjoy) [наслаждаться]');
+ps([t(`He `),g('plays',82),t(` chess with his grandfather every Saturday.`)],'(play) [играть]');
+ps([t(`They `),g('give',70),t(` money to charity every month.`)],'(give) [давать]');
+ps([t(`My teacher `),g('gives',82),t(` us homework after every lesson.`)],'(give) [давать]');
+ps([t(`She `),g('speaks',94),t(` to her team every morning at nine.`)],'(speak) [говорить]');
+ps([t(`I `),g('turn off',118),t(` my phone before I go to sleep.`)],'(turn off) [выключать]');
+ps([t(`He `),g('catches',106),t(` the seven-fifteen train every morning.`)],'(catch) [садиться (на транспорт)]');
+ps([t(`We `),g('pay',58),t(` our rent on the first of each month.`)],'(pay) [платить]');
+ps([t(`She `),g('checks',94),t(` the weather forecast every morning.`)],'(check) [проверять]');
+ps([t(`They `),g('talk',70),t(` about football every weekend.`)],'(talk) [разговаривать]');
+ps([t(`My flatmate `),g('cooks',82),t(` breakfast for both of us on Sundays.`)],'(cook) [готовить]');
+ps([t(`He `),g('returns',106),t(` home at around seven in the evening.`)],'(return) [возвращаться]');
+ps([t(`I `),g('write',82),t(` emails in English at work.`)],'(write) [писать]');
+ps([t(`She `),g('logs in',106),t(` to the system every morning at eight.`)],'(log in) [входить в систему]');
+ps([t(`We `),g('invite',94),t(` friends for dinner once a month.`)],'(invite) [приглашать]');
+ps([t(`He `),g('collects',118),t(` stamps from different countries.`)],'(collect) [коллекционировать]');
+ps([t(`They `),g('wake up',106),t(` at six every weekday to get to work on time.`)],'(wake up) [просыпаться]');
+ps([t(`I `),g(['don\'t take','do not take'],154),t(` the bus — I always walk to work.`)],'(not take) [не брать]');
+ps([t(`She `),g(['doesn\'t check','does not check'],190),t(` her phone after ten o'clock at night.`)],'(not check) [не проверять]');
+ps([t(`He `),g(['doesn\'t wear','does not wear'],178),t(` a tie to work — it's a casual office.`)],'(not wear) [не носить]');
+ps([t(`We `),g(['don\'t rent','do not rent'],154),t(` our flat — we own it.`)],'(not rent) [не снимать]');
+ps([t(`They `),g(['don\'t own','do not own'],142),t(` a car — they use public transport.`)],'(not own) [не владеть]');
+ps([t(`My cat `),g(['doesn\'t like','does not like'],178),t(` loud noises at all.`)],'(not like) [не любить]');
+ps([t(`She `),g(['doesn\'t practise','does not practise'],226),t(` the piano every day — only at weekends.`)],'(not practise) [не заниматься]');
+ps([t(`He `),g(['doesn\'t drive','does not drive'],190),t(` to work — he works from home full-time.`)],'(not drive) [не ехать на машине]');
+ps([t(`I `),g(['don\'t prefer','do not prefer'],178),t(` coffee to tea — I like them both.`)],'(not prefer) [не предпочитать]');
+ps([t(`She `),g(['doesn\'t call','does not call'],178),t(` — she always sends a message instead.`)],'(not call) [не звонить]');
+ps([t(`We `),g(['don\'t order','do not order'],166),t(` takeaway very often — we usually cook.`)],'(not order) [не заказывать]');
+ps([t(`My neighbour `),g(['doesn\'t grow','does not grow'],178),t(` flowers — only vegetables.`)],'(not grow) [не выращивать]');
+ps([t(`I `),g(['don\'t exercise','do not exercise'],202),t(` every day — only three times a week.`)],'(not exercise) [не тренироваться]');
+ps([t(`He `),g(['doesn\'t repair','does not repair'],202),t(` cars — only computers.`)],'(not repair) [не ремонтировать]');
+ps([t(`She `),g(['doesn\'t plan','does not plan'],178),t(` the work for the whole team — just for her department.`)],'(not plan) [не планировать]');
+ps([t(`They `),g(['don\'t celebrate','do not celebrate'],214),t(` Christmas — they celebrate New Year instead.`)],'(not celebrate) [не отмечать]');
+ps([t(`My boss `),g(['doesn\'t expect','does not expect'],202),t(` us to work at the weekend.`)],'(not expect) [не ожидать]');
+ps([t(`We `),g(['don\'t share','do not share'],166),t(` our biscuits with anyone!`)],'(not share) [не делить/не делиться]');
+ps([t(`He `),g(['doesn\'t attend','does not attend'],202),t(` evening classes — he studies online.`)],'(not attend) [не посещать]');
+ps([t(`I `),g(['don\'t save','do not save'],154),t(` enough money — I spend too much!`)],'(not save) [не копить]');
+ps([t(`She `),g(['doesn\'t visit','does not visit'],190),t(` her parents very often — they live abroad.`)],'(not visit) [не навещать]');
+ps([t(`They `),g(['don\'t play','do not play'],154),t(` any sports — they prefer watching films.`)],'(not play) [не играть]');
+ps([t(`My dad `),g(['doesn\'t clean','does not clean'],190),t(` the house — my mum does it.`)],'(not clean) [не убирать]');
+ps([t(`I `),g(['don\'t work out','do not work out'],202),t(` in the morning — I prefer evenings.`)],'(not work out) [не тренироваться]');
+ps([t(`We `),g(['don\'t take','do not take'],154),t(` many photos — we just enjoy the moment.`)],'(not take) [не делать]');
+ps([t(`She `),g(['doesn\'t design','does not design'],202),t(` websites anymore — she designs apps now.`)],'(not design) [не проектировать]');
+ps([t(`He `),g(['doesn\'t read','does not read'],178),t(` the news — he says it stresses him out.`)],'(not read) [не читать]');
+ps([t(`They `),g(['don\'t keep','do not keep'],154),t(` any pets — their flat is too small.`)],'(not keep) [не держать]');
+ps([t(`My mother `),g(['doesn\'t paint','does not paint'],190),t(` anymore — she has no time.`)],'(not paint) [не рисовать]');
+ps([t(`She `),g(['doesn\'t run','does not run'],166),t(` the whole company — just one department.`)],'(not run) [не вести]');
+ps([t(`He `),g(['doesn\'t know','does not know'],178),t(` how to drive — he never learned.`)],'(not know) [не знать]');
+ps([t(`I `),g(['don\'t carry','do not carry'],166),t(` money — I only use my phone to pay.`)],'(not carry) [не носить с собой]');
+ps([t(`She `),g(['doesn\'t pick up','does not pick up'],214),t(` her children — her husband does it.`)],'(not pick up) [не забирать]');
+ps([t(`They `),g(['don\'t rent','do not rent'],154),t(` — they bought their house five years ago.`)],'(not rent) [не снимать]');
+ps([t(`My brother `),g(['doesn\'t cycle','does not cycle'],190),t(` to work in winter — it's too cold.`)],'(not cycle) [не ездить на велосипеде]');
+ps([t(`He `),g(['doesn\'t answer','does not answer'],202),t(` calls during meetings.`)],'(not answer) [не отвечать]');
+ps([t(`We `),g(['don\'t try','do not try'],142),t(` to cook complicated dishes — we keep it simple.`)],'(not try) [не стараться]');
+ps([t(`She `),g(['doesn\'t write','does not write'],190),t(` a diary — she says she has no time.`)],'(not write) [не писать]');
+ps([t(`I `),g(['don\'t enjoy','do not enjoy'],166),t(` shopping — I find it very boring.`)],'(not enjoy) [не любить/не наслаждаться]');
+ps([t(`He `),g(['doesn\'t play','does not play'],178),t(` chess — he prefers card games.`)],'(not play) [не играть]');
+ps([t(`They `),g(['don\'t give','do not give'],154),t(` much money to charity — they can't afford it.`)],'(not give) [не давать]');
+ps([t(`My teacher `),g(['doesn\'t give','does not give'],178),t(` homework every lesson — only sometimes.`)],'(not give) [не давать]');
+ps([t(`She `),g(['doesn\'t speak','does not speak'],190),t(` to the whole team every day — only on Mondays.`)],'(not speak) [не говорить]');
+ps([t(`I `),g(['don\'t turn off','do not turn off'],202),t(` my computer at night — I just lock the screen.`)],'(not turn off) [не выключать]');
+ps([t(`He `),g(['doesn\'t catch','does not catch'],190),t(` the early train — he prefers the later one.`)],'(not catch) [не садиться]');
+ps([t(`We `),g(['don\'t pay','do not pay'],142),t(` rent — we own our flat.`)],'(not pay) [не платить]');
+ps([t(`She `),g(['doesn\'t check','does not check'],190),t(` the weather — she just looks out of the window!`)],'(not check) [не проверять]');
+ps([t(`They `),g(['don\'t talk','do not talk'],154),t(` about money — they agree on everything.`)],'(not talk) [не разговаривать]');
+ps([t(`My flatmate `),g(['doesn\'t cook','does not cook'],178),t(` — I do all the cooking.`)],'(not cook) [не готовить]');
+ps([t(`He `),g(['doesn\'t return','does not return'],202),t(` home before nine in the evening.`)],'(not return) [не возвращаться]');
+ps([t(`I `),g(['don\'t write','do not write'],166),t(` emails in Russian — only in English.`)],'(not write) [не писать]');
+ps([t(`She `),g(['doesn\'t log in','does not log in'],202),t(` to the system on weekends.`)],'(not log in) [не входить в систему]');
+ps([t(`We `),g(['don\'t invite','do not invite'],178),t(` many people — we prefer small parties.`)],'(not invite) [не приглашать]');
+ps([t(`He `),g(['doesn\'t collect','does not collect'],214),t(` anything — he likes an empty room.`)],'(not collect) [не коллекционировать]');
+ps([t(`They `),g(['don\'t wake up','do not wake up'],190),t(` early at the weekend — they sleep until twelve o'clock.`)],'(not wake up) [не просыпаться]');
+ps([t(`I `),g(['don\'t pay','do not pay'],142),t(` for a gym — I exercise outside.`)],'(not pay) [не платить]');
+ps([t(`She `),g(['doesn\'t enjoy','does not enjoy'],190),t(` cooking — she orders food online most evenings.`)],'(not enjoy) [не любить]');
+ps([t(`He `),g(['doesn\'t take','does not take'],178),t(` sugar in his coffee.`)],'(not take) [не класть]');
+ps([t(`We `),g(['don\'t wash','do not wash'],154),t(` the car in winter — it's too cold.`)],'(not wash) [не мыть]');
+ps([t(`They `),g(['don\'t spend','do not spend'],166),t(` much time watching TV.`)],'(not spend) [не проводить]');
+ps([t(`My boss `),g(['doesn\'t like','does not like'],178),t(` phones in meetings.`)],'(not like) [не любить]');
+ps([t(`She `),g(['doesn\'t save','does not save'],178),t(` her work regularly — and then she loses it!`)],'(not save) [не сохранять]');
+ps([t(`I `),g(['don\'t travel','do not travel'],178),t(` to the office anymore — I work from home.`)],'(not travel) [не ездить]');
+ps([t(`He `),g(['doesn\'t wear','does not wear'],178),t(` glasses — he can see very well.`)],'(not wear) [не носить]');
+ps([t(`We `),g(['don\'t celebrate','do not celebrate'],214),t(` Valentine's Day — it's not our tradition.`)],'(not celebrate) [не отмечать]');
+ps([g('Do',52),t(` you `),g('take',70),t(` the bus to work every day?`)],'(take) [брать, ехать]');
+ps([g('Does',70),t(` she `),g('check',82),t(` her emails before breakfast?`)],'(check) [проверять]');
+ps([g('Does',70),t(` he `),g('wear',70),t(` a suit to work every day?`)],'(wear) [носить]');
+ps([g('Do',52),t(` they `),g('own',58),t(` a car or do they use public transport?`)],'(own) [владеть]');
+ps([g('Does',70),t(` she `),g('practise',118),t(` the piano every day?`)],'(practise) [заниматься (музыкой)]');
+ps([g('Does',70),t(` she `),g('travel',94),t(` to work every day?`)],'(travel) [ездить на работу]');
+ps([g('Do',52),t(` you `),g('prefer',94),t(` working in the morning or evening?`)],'(prefer) [предпочитать]');
+ps([g('Does',70),t(` she `),g('call',70),t(` her parents every week?`)],'(call) [звонить]');
+ps([g('Do',52),t(` they `),g('order',82),t(` takeaway every Friday?`)],'(order) [заказывать]');
+ps([g('Does',70),t(` your neighbour `),g('grow',70),t(` vegetables in the garden?`)],'(grow) [выращивать]');
+ps([g('Do',52),t(` you `),g('exercise',118),t(` at the gym or at home?`)],'(exercise) [тренироваться]');
+ps([g('Does',70),t(` he `),g('repair',94),t(` computers in his free time?`)],'(repair) [ремонтировать]');
+ps([g('Does',70),t(` she `),g('plan',70),t(` the work for a big team at her company?`)],'(plan) [планировать]');
+ps([g('Do',52),t(` they `),g('celebrate',130),t(` Christmas or New Year?`)],'(celebrate) [отмечать]');
+ps([g('Does',70),t(` your boss `),g('expect',94),t(` you to work late?`)],'(expect) [ожидать]');
+ps([g('Do',52),t(` you `),g('save',70),t(` money every month?`)],'(save) [копить]');
+ps([g('Does',70),t(` she `),g('visit',82),t(` her parents at weekends?`)],'(visit) [навещать]');
+ps([g('Do',52),t(` they `),g('play',70),t(` any sports in their free time?`)],'(play) [играть]');
+ps([g('Does',70),t(` your dad `),g('clean',82),t(` the house at weekends?`)],'(clean) [убирать]');
+ps([g('Do',52),t(` you `),g('work out',118),t(` every morning?`)],'(work out) [тренироваться]');
+ps([g('Does',70),t(` she `),g('design',94),t(` websites or mobile apps?`)],'(design) [проектировать]');
+ps([g('Do',52),t(` they `),g('keep',70),t(` any pets at home?`)],'(keep) [держать]');
+ps([g('Does',70),t(` your mother `),g('paint',82),t(` in her free time?`)],'(paint) [рисовать]');
+ps([g('Does',70),t(` she `),g('run',58),t(` her own business?`)],'(run) [вести (бизнес)]');
+ps([g('Do',52),t(` you `),g('know',70),t(` how to drive?`)],'(know) [знать]');
+ps([g('Does',70),t(` he `),g('answer',94),t(` messages quickly?`)],'(answer) [отвечать]');
+ps([g('Do',52),t(` you `),g('try',58),t(` to eat healthy food?`)],'(try) [стараться]');
+ps([g('Does',70),t(` she `),g('write',82),t(` a blog about her travels?`)],'(write) [писать]');
+ps([g('Do',52),t(` you `),g('enjoy',82),t(` cooking at home?`)],'(enjoy) [наслаждаться]');
+ps([g('Does',70),t(` he `),g('give',70),t(` money to charity?`)],'(give) [давать]');
+ps([g('Does',70),t(` your teacher `),g('give',70),t(` you a lot of homework?`)],'(give) [давать]');
+ps([g('Do',52),t(` you `),g('turn off',118),t(` your phone at night?`)],'(turn off) [выключать]');
+ps([g('Does',70),t(` he `),g('catch',82),t(` the early train every morning?`)],'(catch) [садиться]');
+ps([g('Do',52),t(` you `),g('pay',58),t(` your bills online?`)],'(pay) [платить]');
+ps([g('Does',70),t(` she `),g('check',82),t(` the weather forecast every morning?`)],'(check) [проверять]');
+ps([g('Do',52),t(` they `),g('talk',70),t(` a lot about money?`)],'(talk) [разговаривать]');
+ps([g('Does',70),t(` your flatmate `),g('cook',70),t(` every night?`)],'(cook) [готовить]');
+ps([g('Does',70),t(` he `),g('return',94),t(` home before seven?`)],'(return) [возвращаться]');
+ps([g('Do',52),t(` you `),g('write',82),t(` emails at work every day?`)],'(write) [писать]');
+ps([g('Do',52),t(` they `),g('wake up',106),t(` early at the weekend?`)],'(wake up) [просыпаться]');
+ps([g('Does',70),t(` she `),g('take',70),t(` sugar in her tea?`)],'(take) [класть]');
+ps([g('Do',52),t(` you `),g('wash',70),t(` your car at home?`)],'(wash) [мыть]');
+ps([g('Do',52),t(` they `),g('spend',82),t(` a lot of time watching TV?`)],'(spend) [проводить]');
+ps([g('Does',70),t(` your boss `),g('like',70),t(` phones in meetings?`)],'(like) [любить]');
+ps([g('Do',52),t(` you `),g('save',70),t(` your work regularly?`)],'(save) [сохранять]');
+ps([g('Does',70),t(` he `),g('wear',70),t(` glasses?`)],'(wear) [носить]');
+ps([g('Do',52),t(` you `),g('collect',106),t(` anything as a hobby?`)],'(collect) [коллекционировать]');
+ps([g('Does',70),t(` she `),g('enjoy',82),t(` her new job?`)],'(enjoy) [наслаждаться]');
+ps([g('Do',52),t(` your parents `),g('live',70),t(` in the city or in the countryside?`)],'(live) [жить]');
+ps([g('Does',70),t(` he `),g('cycle',82),t(` to work every day?`)],'(cycle) [ездить на велосипеде]');
+ps([g('Do',52),t(` you `),g('share',82),t(` a flat with anyone?`)],'(share) [делить]');
+ps([g('Does',70),t(` she `),g('prefer',94),t(` coffee or tea?`)],'(prefer) [предпочитать]');
+ps([g('Do',52),t(` they `),g('rent',70),t(` or own their home?`)],'(rent) [снимать]');
+ps([g('Does',70),t(` he `),g('log in',94),t(` to the system every morning?`)],'(log in) [входить в систему]');
+ps([g('Do',52),t(` you `),g('invite',94),t(` friends over very often?`)],'(invite) [приглашать]');
+ps([g('Does',70),t(` she `),g('pick up',106),t(` her children from school?`)],'(pick up) [забирать]');
+ps([g('Do',52),t(` you `),g('carry',82),t(` an umbrella when it rains?`)],'(carry) [носить с собой]');
+ps([g('Does',70),t(` he `),g('eat',58),t(` breakfast before work?`)],'(eat) [есть]');
+ps([g('Do',52),t(` they `),g('work',70),t(` from home or in an office?`)],'(work) [работать]');
+ps([g('Does',70),t(` he `),g('walk',70),t(` to the office or take the bus?`)],'(walk) [ходить пешком]');
+ps([g('Do',52),t(` you `),g('help',70),t(` old people at weekends?`)],'(help) [помогать]');
+ps([g('Does',70),t(` he `),g('plan',70),t(` his day well?`)],'(plan) [планировать]');
+ps([g('Do',52),t(` you `),g('pay',58),t(` for a gym?`)],'(pay) [платить]');
+ps([g('Does',70),t(` she `),g('call',70),t(` you every day?`)],'(call) [звонить]');
+ps([g('Do',52),t(` they `),g('celebrate',130),t(` their wedding anniversary every year?`)],'(celebrate) [отмечать]');
+ps([g('Does',70),t(` your company `),g('start',82),t(` work at eight?`)],'(start) [начинать]');
+ps([g('Do',52),t(` you `),g('exercise',118),t(` regularly?`)],'(exercise) [тренироваться]');
+ps([g('Does',70),t(` he `),g('work out',118),t(` before or after work?`)],'(work out) [тренироваться]');
+ps([g('Do',52),t(` they `),g('give',70),t(` blood regularly?`)],'(give) [давать]');
+ps([g('Does',70),t(` she `),g('wear',70),t(` a uniform at work?`)],'(wear) [носить]');
+
+// ─── HELPERS ──────────────────────────────────────────────────
+function norm(s){ return s.trim().toLowerCase().replace(/[\u2018\u2019]/g,"'").replace(/\s+/g,' '); }
+function shuffle(a){ const b=[...a]; for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];} return b; }
+
+let current=[], roundNum=1, roundCorrect=0, roundWrong=0;
+
+function classify(s){
+  const src = s.dialogue ? s.lines.flatMap(l=>l.parts) : s.parts;
+  const first = src.find(p=>p.k==='g');
+  if(!first) return 'aff';
+  const a0 = first.a[0];
+  if(["don't","doesn't","isn't","aren't","am not","'m not"].some(x=>a0.startsWith(x))||
+     ["do not","does not","is not","are not"].some(x=>a0.startsWith(x))) return 'neg';
+  if(["Do","Does","Is","Are","Am"].includes(a0)) return 'int';
+  return 'aff';
+}
+
+function pickRound(){
+  const pool = DB;
+  const aff = shuffle(pool.filter(s=>classify(s)==='aff'));
+  const neg = shuffle(pool.filter(s=>classify(s)==='neg'));
+  const int = shuffle(pool.filter(s=>classify(s)==='int'));
+  const pick=(arr,n)=>arr.slice(0,Math.min(n,arr.length));
+  return shuffle([...pick(aff,9),...pick(neg,8),...pick(int,8)]);
+}
+
+// ─── RENDER / CHECK / SAVED PROGRESS (shared engine) ───────────
+// Every sentence gets a stable id (hash of its content). The page state — current
+// round, typed answers, checked cards, score and the "My mistakes" bank — is kept
+// in localStorage, separately for every page (key = file name).
+const PAGE = (location.pathname.split('/').pop() || 'index').replace(/\.html?$/i, '') || 'index';
+const SKEY = 'hw-oleg-practice:' + PAGE;
+
+function hashItem(s){
+  const str = JSON.stringify(s.dialogue ? s.lines : s.parts) + '|' + (s.tr || '');
+  let h = 5381;
+  for (let i = 0; i < str.length; i++) h = ((h << 5) + h + str.charCodeAt(i)) | 0;
+  return (h >>> 0).toString(36);
+}
+const BYID = {};
+DB.forEach(s => { s._id = hashItem(s); if (!BYID[s._id]) BYID[s._id] = s; });
+
+// S.main = ordinary round, S.mist = round made of saved mistakes, S.mistakes = the bank (ids)
+function freshSession(){ return { round: 1, ids: [], vals: {}, done: {}, ok: 0, bad: 0 }; }
+function cleanSession(x){
+  const f = freshSession();
+  if (!x || typeof x !== 'object') return f;
+  return {
+    round: Number.isInteger(x.round) && x.round > 0 ? x.round : 1,
+    ids: Array.isArray(x.ids) ? x.ids.filter(id => BYID[id]) : [],
+    vals: x.vals && typeof x.vals === 'object' ? x.vals : {},
+    done: x.done && typeof x.done === 'object' ? x.done : {},
+    ok: Number.isInteger(x.ok) ? x.ok : 0,
+    bad: Number.isInteger(x.bad) ? x.bad : 0
+  };
+}
+let S = { mode: 'main', mistakes: [], main: freshSession(), mist: freshSession() };
+
+function loadState(){
+  try {
+    const raw = localStorage.getItem(SKEY);
+    if (!raw) return;
+    const o = JSON.parse(raw);
+    S.mode = o.mode === 'mist' ? 'mist' : 'main';
+    S.mistakes = Array.isArray(o.mistakes) ? [...new Set(o.mistakes.filter(id => BYID[id]))] : [];
+    S.main = cleanSession(o.main);
+    S.mist = cleanSession(o.mist);
+    // a saved session whose sentences changed (ids dropped) is not restored half-way
+    [['main', o.main], ['mist', o.mist]].forEach(([k, raw]) => {
+      if (raw && Array.isArray(raw.ids) && raw.ids.length !== S[k].ids.length) S[k] = freshSession();
+    });
+  } catch (e) { /* storage unavailable — the page still works, just without saving */ }
+}
+function saveState(){ try { localStorage.setItem(SKEY, JSON.stringify(S)); } catch (e) {} }
+
+function startRound(mode, bump){
+  const ss = S[mode];
+  if (bump) ss.round++;
+  ss.vals = {}; ss.done = {}; ss.ok = 0; ss.bad = 0;
+  ss.ids = mode === 'main' ? pickRound().map(s => s._id) : shuffle(S.mistakes).slice(0, 25);
+}
+
+// ─── RENDER ───────────────────────────────────────────────────
+function makeInputEl(p, idx, gapN){
+  const inp = document.createElement('input');
+  inp.type = 'text'; inp.className = 'gap'; inp.placeholder = '_____';
+  inp.style.width = (p.w || 100) + 'px';
+  inp.dataset.idx = idx; inp.dataset.gap = gapN;
+  inp.dataset.ans = JSON.stringify(p.a);
+  inp.autocomplete = 'off'; inp.autocorrect = 'off'; inp.autocapitalize = 'none'; inp.spellcheck = false;
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter') checkCard(idx, false); });
+  inp.addEventListener('input', () => rememberInputs(idx));
+  return inp;
+}
+
+function buildLine(parts, idx, gapCounter){
+  const line = document.createElement('div');
+  line.className = 'dl';
+  parts.forEach(p => {
+    if (p.k === 't') {
+      if (!p.v) return;
+      const sp = document.createElement('span'); sp.className = 'word'; sp.textContent = p.v;
+      line.appendChild(sp);
+    } else {
+      line.appendChild(makeInputEl(p, idx, gapCounter.n++));
+    }
+  });
+  return line;
+}
+
+function render(){
+  const ss = S[S.mode];
+  const c = document.getElementById('container');
+  c.innerHTML = '';
+  current = ss.ids.map(id => BYID[id]);
+  updateModeUI();
+
+  if (current.length === 0) {
+    c.innerHTML = '<div class="empty-msg">' + (S.mode === 'mist'
+      ? 'Your mistakes bank is empty. 🎉<br>Sentences you answer incorrectly will appear here.'
+      : 'No sentences found.') + '</div>';
+    document.getElementById('progress').style.width = '0%';
+    hideResult(); updateChips();
+    return;
+  }
+
+  current.forEach((s, idx) => {
+    const card = document.createElement('div');
+    card.className = 'sentence-card'; card.id = `card-${idx}`;
+
+    const numEl = document.createElement('span');
+    numEl.className = 'num'; numEl.textContent = idx + 1;
+    card.appendChild(numEl);
+
+    const body = document.createElement('div');
+    body.className = 'card-body';
+
+    const gc = { n: 0 }; // shared gap counter
+
+    if (s.dialogue) {
+      const dlWrap = document.createElement('div');
+      dlWrap.className = 'dialogue';
+      s.lines.forEach(line => {
+        const row = buildLine(line.parts, idx, gc);
+        if (line.speaker) {
+          const lbl = document.createElement('span');
+          lbl.className = 'sp-label'; lbl.textContent = line.speaker + ': ';
+          row.insertBefore(lbl, row.firstChild);
+        }
+        dlWrap.appendChild(row);
+      });
+      body.appendChild(dlWrap);
+    } else {
+      const line = document.createElement('div');
+      line.className = 'sent-line';
+      const gc2 = { n: 0 };
+      s.parts.forEach(p => {
+        if (p.k === 't') {
+          if (!p.v) return;
+          const sp = document.createElement('span'); sp.className = 'word'; sp.textContent = p.v;
+          line.appendChild(sp);
+        } else {
+          line.appendChild(makeInputEl(p, idx, gc2.n++));
+        }
+      });
+      body.appendChild(line);
+    }
+
+    // hint
+    const meta = document.createElement('div');
+    meta.className = 'meta-line';
+    if (s.bank !== 'prep') {
+      s.hint.split(' — ').forEach((part, pi) => {
+        if (pi > 0) { const sep = document.createElement('span'); sep.className = 'hint-base'; sep.textContent = ' — '; meta.appendChild(sep); }
+        const m2 = part.match(/^(\([^)]+\))\s*(\[[^\]]+\])$/);
+        const m1 = part.match(/^(\([^)]+\))$/);
+        if (m2) {
+          const b = document.createElement('span'); b.className = 'hint-base'; b.textContent = m2[1]; meta.appendChild(b);
+          const r = document.createElement('span'); r.className = 'hint-ru'; r.textContent = ' ' + m2[2]; meta.appendChild(r);
+        } else if (m1) {
+          const b = document.createElement('span'); b.className = 'hint-base'; b.textContent = m1[1]; meta.appendChild(b);
+        } else {
+          const r = document.createElement('span'); r.className = 'hint-ru'; r.textContent = part; meta.appendChild(r);
+        }
+      });
+    }
+    // correction spans — one per gap
+    const allParts = s.dialogue ? s.lines.flatMap(l => l.parts) : s.parts;
+    allParts.forEach((p, ci) => { if (p.k === 'g') { const cor = document.createElement('span'); cor.className = 'correction'; cor.id = `cor-${idx}-${ci}`; meta.appendChild(cor); } });
+    body.appendChild(meta);
+
+    // Translation line for prep sentences
+    if (s.bank === 'prep' && s.tr) {
+      const trLine = document.createElement('div');
+      trLine.className = 'sent-translation';
+      const tlines = s.tr.split('\n');
+      tlines.forEach((tl, ti) => {
+        if (ti > 0) { trLine.appendChild(document.createElement('br')); }
+        if (s.trMark && tl.length) {
+          // If trMark starts with "не " → only the preposition after it is highlighted
+          let findStr = s.trMark;
+          let markStr = s.trMark;
+          if (s.trMark.startsWith('не ')) { markStr = s.trMark.slice(3); }
+          const isCyrLetter = ch => ch && /[а-яёА-ЯЁ]/u.test(ch);
+          const findWholeWord = (str, word) => {
+            let pos = 0;
+            while (pos <= str.length - word.length) {
+              const i = str.indexOf(word, pos);
+              if (i === -1) return -1;
+              const before = str[i - 1]; const after = str[i + word.length];
+              if (!isCyrLetter(before) && !isCyrLetter(after)) return i;
+              pos = i + 1;
+            }
+            return -1;
+          };
+          const fi = findWholeWord(tl, findStr);
+          if (fi !== -1) {
+            const markStart = fi + (findStr.length - markStr.length);
+            trLine.appendChild(document.createTextNode(tl.slice(0, markStart)));
+            const mk = document.createElement('mark'); mk.textContent = markStr; trLine.appendChild(mk);
+            trLine.appendChild(document.createTextNode(tl.slice(markStart + markStr.length)));
+          } else {
+            const fi2 = findWholeWord(tl, markStr);
+            if (fi2 !== -1) {
+              trLine.appendChild(document.createTextNode(tl.slice(0, fi2)));
+              const mk = document.createElement('mark'); mk.textContent = markStr; trLine.appendChild(mk);
+              trLine.appendChild(document.createTextNode(tl.slice(fi2 + markStr.length)));
+            } else {
+              trLine.appendChild(document.createTextNode(tl));
+            }
+          }
+        } else {
+          trLine.appendChild(document.createTextNode(tl));
+        }
+      });
+      body.appendChild(trLine);
+    }
+
+    card.appendChild(body);
+
+    const btn = document.createElement('button');
+    btn.className = 'btn-check-card'; btn.textContent = 'Check';
+    btn.id = `btn-${idx}`; btn.onclick = () => checkCard(idx, true);
+    card.appendChild(btn);
+
+    c.appendChild(card);
+  });
+
+  // restore typed answers and already-checked cards (saved progress)
+  current.forEach((s, idx) => {
+    const card = document.getElementById(`card-${idx}`);
+    const inputs = card.querySelectorAll('input.gap');
+    const v = ss.vals[idx];
+    if (Array.isArray(v)) inputs.forEach((inp, i) => { inp.value = typeof v[i] === 'string' ? v[i] : ''; });
+    if (ss.done[idx]) applyGrade(idx);
+  });
+
+  updateChips(); updateProgress();
+  if (Object.keys(ss.done).length === current.length) showResult(); else hideResult();
+}
+
+// ─── CHECK ────────────────────────────────────────────────────
+// Visual grading of one card. Does not touch the score.
+function applyGrade(idx){
+  const s = current[idx]; const card = document.getElementById(`card-${idx}`);
+  const btn = document.getElementById(`btn-${idx}`);
+  const inputs = card.querySelectorAll('input.gap');
+  btn.disabled = true;
+  const allParts = s.dialogue ? s.lines.flatMap(l => l.parts) : s.parts;
+  let cardOk = true, inputIdx = 0;
+  allParts.forEach((p, ci) => {
+    if (p.k !== 'g') return;
+    const inp = inputs[inputIdx++];
+    const answers = JSON.parse(inp.dataset.ans);
+    // an EMPTY field is wrong, unless "no preposition" ('' is one of the answers)
+    const ok = answers.some(a => norm(a) === norm(inp.value));
+    inp.disabled = true; inp.classList.remove('correct', 'wrong');
+    if (ok) { inp.classList.add('correct'); }
+    else {
+      inp.classList.add('wrong'); cardOk = false;
+      const cor = document.getElementById(`cor-${idx}-${ci}`);
+      if (cor) { cor.textContent = '→ ' + answers[0]; cor.style.display = 'inline'; }
+    }
+  });
+  card.classList.remove('checked-ok', 'checked-err');
+  card.classList.add(cardOk ? 'checked-ok' : 'checked-err');
+  return cardOk;
+}
+
+// force=true  → "Check" button / "Check All": empty fields are counted as mistakes
+// force=false → Enter key: waits until every field that needs an answer is filled
+function checkCard(idx, force){
+  const ss = S[S.mode];
+  if (ss.done[idx]) return;
+  const card = document.getElementById(`card-${idx}`);
+  if (!card) return;
+  const inputs = card.querySelectorAll('input.gap');
+  if (!force) {
+    let allFilled = true;
+    inputs.forEach(i => { const ans = JSON.parse(i.dataset.ans); if (!i.value.trim() && !ans.includes('')) allFilled = false; });
+    if (!allFilled) return;
+  }
+  ss.vals[idx] = Array.from(inputs).map(i => i.value);
+  const ok = applyGrade(idx);
+  ss.done[idx] = ok ? 'ok' : 'err';
+  if (ok) ss.ok++;
+  else { ss.bad++; addMistake(current[idx]._id); }
+  updateChips(); updateProgress(); saveState();
+}
+
+function checkAll(){
+  current.forEach((_, idx) => checkCard(idx, true));
+  showResult(); saveState();
+}
+
+function hideResult(){ const res = document.getElementById('result'); res.className = 'result-box'; res.textContent = ''; }
+function showResult(){
+  const ss = S[S.mode];
+  const total = ss.ok + ss.bad;
+  if (!total) { hideResult(); return; }
+  const pct = Math.round(ss.ok / total * 100);
+  const res = document.getElementById('result');
+  if (pct >= 80) { res.className = 'result-box show great'; res.textContent = `Excellent! ${ss.ok} out of ${total} correct (${pct}%). Press "New Round" to continue.`; }
+  else if (pct >= 50) { res.className = 'result-box show ok'; res.textContent = `Good job! ${ss.ok} out of ${total} correct (${pct}%). Check the red answers.`; }
+  else { res.className = 'result-box show poor'; res.textContent = `${ss.ok} out of ${total} correct (${pct}%). Review the material and try a new round!`; }
+}
+
+function rememberInputs(idx){
+  const ss = S[S.mode];
+  const card = document.getElementById(`card-${idx}`);
+  if (!card || ss.done[idx]) return;
+  ss.vals[idx] = Array.from(card.querySelectorAll('input.gap')).map(i => i.value);
+  saveState();
+}
+
+// ─── "MY MISTAKES" BANK ───────────────────────────────────────
+function addMistake(id){
+  if (!S.mistakes.includes(id)) S.mistakes.push(id);
+  updateModeUI();
+}
+function toggleBank(){
+  S.mode = S.mode === 'main' ? 'mist' : 'main';
+  if (S.mode === 'mist') {
+    // a bank round that was not started yet is rebuilt from the latest mistakes
+    const ss = S.mist;
+    const touched = Object.keys(ss.done).length > 0 || Object.values(ss.vals).some(v => v.some(x => x && x.trim()));
+    if (!touched) startRound('mist', false);
+  }
+  render(); saveState(); window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function emptyBank(){
+  const n = S.mistakes.length;
+  if (!n) return;
+  if (!confirm(`Empty the bank? All ${n} saved mistake${n === 1 ? '' : 's'} will be removed.`)) return;
+  S.mistakes = [];
+  S.mist = freshSession();
+  render(); saveState();
+}
+// Reset: round → 1, score → 0, answers cleared, a fresh set of sentences.
+// Works on the screen you are on; the "My mistakes" bank itself is kept (use "Empty bank" for that).
+function resetProgress(){
+  const where = S.mode === 'mist' ? 'My mistakes' : 'this page';
+  if (!confirm(`Reset ${where}? The round goes back to 1, the score and all answers are cleared.` + (S.mode === 'main' ? ' Your mistakes bank is kept.' : ''))) return;
+  S[S.mode] = freshSession();
+  startRound(S.mode, false);
+  render(); saveState(); window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+// "← Back" inside the mistakes bank returns to the tasks, not to the title page
+function backClick(ev){
+  if (S.mode === 'mist') { ev.preventDefault(); toggleBank(); }
+}
+
+function updateModeUI(){
+  const m = S.mode === 'mist';
+  document.body.classList.toggle('mist-mode', m);
+  const b = document.getElementById('btn-bank');
+  b.innerHTML = m ? '← Tasks' : 'My mistakes <span class="mm-count">' + S.mistakes.length + '</span>';
+  const note = document.getElementById('mist-note');
+  note.hidden = !m;
+  if (m) note.innerHTML = '<strong>My mistakes</strong> · ' + S.mistakes.length + ' sentence' + (S.mistakes.length === 1 ? '' : 's') + ' saved';
+  document.getElementById('btn-empty').hidden = !m;
+}
+
+function updateChips(){
+  const ss = S[S.mode];
+  document.getElementById('chip-ok').textContent = '✓ ' + ss.ok;
+  document.getElementById('chip-err').textContent = '✗ ' + ss.bad;
+  document.getElementById('round-num').textContent = ss.round;
+}
+function updateProgress(){
+  const ss = S[S.mode];
+  const n = current.length;
+  document.getElementById('progress').style.width = n ? Math.round(Object.keys(ss.done).length / n * 100) + '%' : '0%';
+}
+function newRound(){
+  startRound(S.mode, true);
+  render(); saveState(); window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── START ────────────────────────────────────────────────────
+loadState();
+if (!S.main.ids.length) startRound('main', false);
+if (S.mode === 'mist' && !S.mist.ids.length) startRound('mist', false);
+render(); saveState();
+</script>
+</body>
+</html>

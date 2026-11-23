@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>To Be (Present) — Headway Elementary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap">
+  <style>
+  /* ═══ Headway 5th edition — Elementary · design inspired by the Student's Book ═══ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  [hidden] { display: none !important; }
+  :root {
+    --red: #BB1D2F;  --red-dark: #8F1523;  --red-chev: #C95A55;
+    --pink: #FBE3E4; --pink-2: #F6CDD0;
+    --cream: #FFF2D1; --cream-line: #E9D69B;
+    --blue: #2B7BB9; --blue-dark: #1D5A8C; --blue-lt: #E4F0F9; --blue-line: #A9CBE4;
+    --green: #2E8B57; --green-bg: #E7F5EC; --green-border: #9FD1B3;
+    --wrong-bg: #FCE8EA; --wrong-border: #EDA9B1;
+    --text: #1F2A33; --muted: #5E6A73; --muted2: #8C97A0;
+    --border: #DCD5D1; --bg: #F6F3F0; --surface: #fff;
+    --card-bg: #FAF6F3; --card-line: #E3DAD5;
+    --r: 18px;          /* big radius: header bars */
+    --r-card: 14px;     /* cards */
+    --r-ctl: 10px;      /* buttons, inputs */
+    --header-h: 64px;
+    --shadow-card: 0 2px 10px rgba(60,30,20,.08);
+  }
+  body { font-family: 'Source Sans 3', 'Frutiger', 'Myriad Pro', 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 16px; }
+  button, input { font-family: inherit; }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--red); color: #fff; padding: 0 32px; height: var(--header-h);
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 30; overflow: hidden;
+    border-radius: 0 0 var(--r) var(--r);
+    box-shadow: 0 3px 12px rgba(0,0,0,.25);
+  }
+  header::before, header::after {
+    content: ''; position: absolute; top: 0; bottom: 0; width: 70px; pointer-events: none;
+    clip-path: polygon(0 0, 45% 0, 100% 50%, 45% 100%, 0 100%, 55% 50%);
+  }
+  header::before { right: 90px; background: rgba(255,255,255,.07); }
+  header::after  { right: 30px; background: rgba(255,255,255,.13); }
+  header > * { position: relative; z-index: 1; }
+  .logo { font-size: 21px; font-weight: 800; color: #fff; line-height: 1.15; letter-spacing: -.2px; }
+  .logo-sub { display: block; margin-top: 3px; font-size: 12px; font-weight: 600; color: rgba(255,255,255,.85); letter-spacing: .9px; text-transform: uppercase; }
+  .header-right { display: flex; align-items: center; gap: 12px; margin-right: 110px; }
+
+  /* "My mistakes" button in the header */
+  .mm-btn { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: var(--red); font-size: 14px; font-weight: 700; border: none; border-radius: var(--r-ctl); padding: 7px 8px 7px 14px; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,.25); transition: background .15s; white-space: nowrap; }
+  .mm-btn:hover { background: var(--pink); }
+  .mm-count { background: var(--red); color: #fff; border-radius: 8px; padding: 1px 8px; font-size: 13px; min-width: 24px; text-align: center; }
+  body.mist-mode .mm-btn { background: var(--cream); padding: 7px 14px; }
+
+  /* ── CONTROL STRIP ── */
+  .control-strip-sticky { position: sticky; top: var(--header-h); z-index: 9; background: var(--bg); padding-bottom: 6px; border-radius: 0 0 16px 16px; box-shadow: 0 4px 8px rgba(60,30,20,.06); }
+  .control-strip { max-width: 880px; margin: 0 auto; padding: 14px 18px 0; }
+  .topic-card { background: var(--surface); border: 1px solid var(--border); border-left: 6px solid var(--red); border-radius: var(--r-card); box-shadow: var(--shadow-card); overflow: hidden; }
+  .topic-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; padding: 10px 14px; }
+  .topic-row .back-btn { justify-self: start; }
+  .counter { display: flex; align-items: center; gap: 10px; justify-self: center; }
+  .topic-title { display: flex; align-items: center; gap: 12px; justify-self: end; }
+  .filter-label { font-size: 20px; font-weight: 700; color: var(--blue); white-space: nowrap; letter-spacing: -.2px; }
+  .round-badge { font-size: 14px; color: var(--muted); font-weight: 600; white-space: nowrap; }
+  .score-chips { display: flex; gap: 6px; }
+  .chip { font-size: 15px; font-weight: 700; padding: 3px 12px; border-radius: var(--r-ctl); white-space: nowrap; }
+  .chip-ok  { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+  .chip-err { background: var(--wrong-bg); color: var(--red); border: 1px solid var(--wrong-border); }
+
+  /* "Grammar Spot" button */
+  .rtog { font-size: 14px; font-weight: 700; padding: 6px 16px; border-radius: var(--r-ctl); cursor: pointer; border: 2px solid var(--blue); background: #fff; color: var(--blue); transition: all .15s; user-select: none; }
+  .rtog:hover { background: var(--blue-lt); }
+  .rtog.open  { background: var(--blue); color: #fff; }
+
+  .hint-body { display: none; margin: 0 14px 14px; padding: 0 16px 14px; border: 2px solid var(--blue); border-radius: 14px; background: #fff; animation: fadeIn .2s ease; max-height: 58vh; overflow-y: auto; }
+  .hint-body.open { display: block; }
+  .hint-body::before { content: 'Grammar Spot'; display: block; background: var(--blue); color: #fff; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; padding: 6px 16px; margin: 0 -16px 14px; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+
+  .scheme { font-size: 15px; line-height: 1.55; }
+  .scheme h3 { font-size: 12.5px; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: .7px; margin: 16px 0 6px; padding-bottom: 4px; border-bottom: 2px solid var(--pink-2); }
+  .scheme h3:first-child { margin-top: 0; }
+  /* rounded tables */
+  .stbl { border-collapse: separate; border-spacing: 0; width: 100%; margin-bottom: 4px; border: 1px solid var(--blue-line); border-radius: 12px; overflow: hidden; }
+  .stbl th { background: var(--blue-lt); color: var(--blue-dark); font-size: 12.5px; font-weight: 700; text-align: left; padding: 7px 10px; text-transform: uppercase; letter-spacing: .4px; }
+  .stbl td { padding: 7px 10px; color: var(--text); vertical-align: top; font-size: 15px; background: #fff; }
+  .stbl th, .stbl td { border: none; border-right: 1px solid var(--blue-line); border-bottom: 1px solid var(--blue-line); }
+  .stbl tr > *:last-child { border-right: none; }
+  .stbl tr:last-child > * { border-bottom: none; }
+  .stbl td code { background: none; color: var(--blue-dark); padding: 0; font-family: inherit; font-size: 15px; font-style: italic; font-weight: 600; }
+  .stbl tr:nth-child(even) td { background: #F7FBFE; }
+  .formula { display: inline-block; background: var(--cream); border: 1px solid var(--cream-line); border-radius: 10px; padding: 7px 14px; font-size: 15px; margin: 4px 0 10px; color: var(--text); }
+  .formula code { color: var(--red); font-family: inherit; font-weight: 700; font-style: italic; }
+  .close-btn { margin-top: 14px; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: var(--muted); cursor: pointer; border: 1px solid var(--border); background: #fff; padding: 5px 14px; border-radius: var(--r-ctl); transition: all .15s; }
+  .close-btn:hover { color: var(--red); border-color: var(--red); }
+
+  /* ── EXERCISES ── */
+  main { max-width: 880px; margin: 0 auto; padding: 20px 18px 60px; }
+  .exercises-card { background: var(--surface); border: 1px solid var(--border); border-top: 5px solid var(--red); border-radius: var(--r-card); box-shadow: var(--shadow-card); padding: 20px 20px 14px; margin-bottom: 16px; }
+  body.mist-mode .exercises-card { border-top-color: var(--blue); }
+  .mist-note { display: flex; align-items: center; gap: 8px; background: var(--cream); border: 1px solid var(--cream-line); border-radius: 12px; padding: 10px 14px; margin-bottom: 14px; font-size: 15px; }
+  .progress-track { height: 6px; background: var(--pink); border-radius: 4px; margin-bottom: 16px; overflow: hidden; }
+  .progress-fill  { height: 100%; background: var(--red); border-radius: 4px; transition: width .4s ease; width: 0%; }
+
+  /* every sentence is its own rounded card */
+  .sentence-card { border: 1.5px solid var(--card-line); border-radius: 12px; padding: 12px 14px 12px 12px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 12px; transition: background .2s, border-color .2s; background: var(--card-bg); }
+  .sentence-card:last-child { margin-bottom: 0; }
+  .sentence-card.checked-ok  { border-color: var(--green-border); background: var(--green-bg); }
+  .sentence-card.checked-err { border-color: var(--wrong-border); background: var(--wrong-bg); }
+  .num { font-size: 17px; font-weight: 700; color: var(--red); min-width: 26px; text-align: right; padding-top: 4px; flex-shrink: 0; }
+  .card-body { flex: 1; min-width: 0; }
+
+  .sent-line { font-size: 18px; line-height: 2.0; display: flex; flex-wrap: wrap; align-items: center; gap: 3px; }
+  .sent-line .word { white-space: nowrap; }
+  .dialogue { font-size: 18px; line-height: 2.0; display: flex; flex-direction: column; }
+  .dl { display: flex; flex-wrap: wrap; align-items: center; gap: 3px; }
+  .dl .word { white-space: nowrap; }
+  .sp-label { font-weight: 700; color: var(--red); margin-right: 3px; white-space: nowrap; }
+
+  /* gaps = small rounded fields; answers in italic */
+  input.gap { border: 1.5px solid #C9BFB9; background: #fff; color: var(--blue-dark); font-size: 18px; font-style: italic; font-weight: 600; padding: 1px 8px; border-radius: 9px; outline: none; transition: border-color .15s, background .15s, box-shadow .15s; text-align: center; vertical-align: middle; }
+  input.gap::placeholder { color: transparent; }
+  input.gap:focus { border-color: var(--red); background: var(--cream); box-shadow: 0 0 0 3px rgba(187,29,47,.12); }
+  input.gap.correct { border-color: var(--green); background: #fff; color: var(--green); }
+  input.gap.wrong   { border-color: var(--red); background: #fff; color: var(--red); text-decoration: line-through; }
+  input.gap:disabled { opacity: 1; cursor: default; }
+
+  .meta-line { margin-top: 2px; display: flex; align-items: center; flex-wrap: wrap; gap: 5px; font-size: 14.5px; }
+  .hint-base { color: var(--muted); font-style: italic; }
+  .hint-ru   { color: var(--muted2); font-style: italic; }
+  .correction { color: var(--red); font-weight: 700; font-size: 14.5px; display: none; }
+
+  .btn-check-card { flex-shrink: 0; font-size: 13px; font-weight: 700; padding: 5px 14px; border-radius: var(--r-ctl); border: 1.5px solid var(--red); background: #fff; color: var(--red); cursor: pointer; transition: all .15s; white-space: nowrap; margin-top: 3px; }
+  .btn-check-card:hover:not(:disabled) { background: var(--red); color: #fff; }
+  .btn-check-card:disabled { opacity: .35; cursor: default; }
+
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; padding-top: 14px; border-top: 2px solid var(--pink); }
+  button.btn-main { font-size: 15px; font-weight: 700; border-radius: 12px; padding: 10px 24px; cursor: pointer; border: none; transition: background .15s, transform .1s; }
+  button.btn-main:active { transform: scale(.97); }
+  .btn-check-all { background: var(--red); color: #fff; }
+  .btn-check-all:hover { background: var(--red-dark); }
+  .btn-next { background: #fff; color: var(--red); border: 2px solid var(--red) !important; }
+  .btn-next:hover { background: var(--pink); }
+  .btn-empty { background: #fff; color: var(--muted); border: 2px solid var(--border) !important; margin-left: auto; }
+  .btn-empty:hover { color: var(--red); border-color: var(--red) !important; background: var(--pink); }
+
+  .result-box { margin: 14px 0 8px; padding: 12px 16px; border-radius: 12px; font-size: 16px; font-weight: 600; display: none; border: 1px solid transparent; }
+  .result-box.show  { display: block; }
+  .result-box.great { background: var(--green-bg); border-color: var(--green-border); color: #1d6b40; }
+  .result-box.ok    { background: var(--cream); border-color: var(--cream-line); color: #6d5300; }
+  .result-box.poor  { background: var(--wrong-bg); border-color: var(--wrong-border); color: #8f1523; }
+  .empty-msg { text-align: center; padding: 44px 20px; color: var(--muted); font-size: 17px; line-height: 1.5; background: var(--card-bg); border: 1.5px dashed var(--card-line); border-radius: 12px; }
+  footer { text-align: center; padding: 22px; font-size: 13px; color: var(--muted); border-top: 3px solid var(--red); background: #fff; border-radius: 18px 18px 0 0; }
+
+  .sent-translation { font-size: 15px; color: var(--muted); margin-top: 2px; line-height: 1.5; font-style: italic; }
+  .sent-translation mark { background: none; color: var(--red); font-weight: 700; font-style: normal; }
+
+  .back-btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 18px; background: #fff; color: var(--red); border: 2px solid var(--red); border-radius: var(--r-ctl); cursor: pointer; font-size: 14px; font-weight: 700; text-decoration: none; transition: background .15s, color .15s; }
+  .back-btn:hover { background: var(--red); color: #fff; }
+
+  /* Reset button */
+  .reset-btn { font-size: 13px; font-weight: 700; padding: 4px 12px; border-radius: var(--r-ctl); border: 1.5px solid var(--border); background: #fff; color: var(--muted); cursor: pointer; transition: all .15s; white-space: nowrap; }
+  .reset-btn:hover { color: var(--red); border-color: var(--red); background: var(--pink); }
+  .footer-reset { margin-bottom: 12px; }
+  .footer-reset .reset-btn { font-size: 14px; padding: 7px 20px; }
+
+  @media (max-width: 760px) {
+    .topic-row { grid-template-columns: auto 1fr; }
+    .counter { justify-self: end; }
+    .topic-title { grid-column: 1 / -1; justify-self: start; }
+  }
+  @media (max-width: 640px) {
+    :root { --header-h: 58px; --r: 16px; }
+    header { padding: 0 14px; }
+    .logo { font-size: 16px; } .logo-sub { font-size: 10px; }
+    .header-right { margin-right: 0; gap: 8px; }
+    .mm-btn { font-size: 13px; padding: 6px 6px 6px 10px; }
+    .round-badge { display: none; }
+    .sent-line, .dialogue, input.gap { font-size: 17px; }
+    .exercises-card { padding: 14px 12px 10px; }
+    .sentence-card { flex-wrap: wrap; }
+    .btn-empty { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    Headway 5th edition — Elementary
+    <span class="logo-sub">Oleg’s Practice</span>
+  </div>
+  <div class="header-right">
+    <button class="mm-btn" id="btn-bank" onclick="toggleBank()">My mistakes <span class="mm-count">0</span></button>
+  </div>
+</header>
+
+<div class="control-strip-sticky"><div class="control-strip">
+  <div class="topic-card">
+    <div class="topic-row">
+      <a href="index.html" class="back-btn" onclick="backClick(event)">← Back</a>
+      <div class="counter">
+        <span class="round-badge">Round <strong id="round-num">1</strong></span>
+        <div class="score-chips">
+          <span class="chip chip-ok"  id="chip-ok">✓ 0</span>
+          <span class="chip chip-err" id="chip-err">✗ 0</span>
+        </div>
+        <button class="reset-btn" onclick="resetProgress()" title="Reset round, score and answers">↺ Reset</button>
+      </div>
+      <div class="topic-title">
+        <span class="filter-label">To Be — Present Tense</span>
+        <button class="rtog" id="ht-tobe" onclick="toggleHint('tobe')">📖 Rule</button>
+      </div>
+    </div>
+
+    <div id="hb-tobe" class="hint-body">
+      <div class="scheme">
+        <h3>Positive</h3>
+        <table class="stbl tobe-tbl">
+          <tr><th>Subject</th><th>To be</th><th>Short form</th><th>Example</th></tr>
+          <tr><td>I</td><td><code>am</code></td><td><code>'m</code></td><td><code>I am tired. / I'm tired.</code></td></tr>
+          <tr><td>He / She / It</td><td><code>is</code></td><td><code>'s</code></td><td><code>She is a doctor. / She's a doctor.</code></td></tr>
+          <tr><td>You / We / They</td><td><code>are</code></td><td><code>'re</code></td><td><code>They are students. / They're students.</code></td></tr>
+        </table>
+        <h3>Negative</h3>
+        <table class="stbl tobe-tbl">
+          <tr><th>Subject</th><th>Negative</th><th>Short form</th><th>Example</th></tr>
+          <tr><td>I</td><td><code>am not</code></td><td><code>'m not</code></td><td><code>I am not tired.</code></td></tr>
+          <tr><td>He / She / It</td><td><code>is not</code></td><td><code>isn't</code></td><td><code>She isn't a doctor.</code></td></tr>
+          <tr><td>You / We / They</td><td><code>are not</code></td><td><code>aren't</code></td><td><code>They aren't students.</code></td></tr>
+        </table>
+        <h3>Question</h3>
+        <div class="formula"><code>Am / Is / Are</code> + subject + ...?</div>
+        <table class="stbl tobe-tbl">
+          <tr><th>Form</th><th>Subject</th><th>Example</th></tr>
+          <tr><td><code>Am</code></td><td>I</td><td><code>Am I late?</code></td></tr>
+          <tr><td><code>Is</code></td><td>he / she / it</td><td><code>Is she a doctor?</code></td></tr>
+          <tr><td><code>Are</code></td><td>you / we / they</td><td><code>Are they students?</code></td></tr>
+        </table>
+      </div>
+      <div class="close-btn" onclick="closeHint('tobe')">✕ Close</div>
+    </div>
+  </div>
+</div></div>
+
+<main>
+  <div class="exercises-card">
+    <div class="mist-note" id="mist-note" hidden></div>
+    <div class="progress-track"><div class="progress-fill" id="progress"></div></div>
+    <div id="container"></div>
+    <div class="actions">
+      <button class="btn-main btn-check-all" onclick="checkAll()">Check All</button>
+      <button class="btn-main btn-next"      onclick="newRound()">New Round ↻</button>
+      <button class="btn-main btn-empty" id="btn-empty" onclick="emptyBank()" hidden>Empty bank</button>
+    </div>
+    <div class="result-box" id="result"></div>
+  </div>
+</main>
+
+<footer><div class="footer-reset"><button class="reset-btn" onclick="resetProgress()">↺ Reset</button></div>Headway Elementary 5th edition · Grammar Practice · <a href="index.html" style="color:inherit;text-decoration:underline;">← Home</a></footer>
+
+<script>
+
+// ─── DATA ────────────────────────────────────────────────────
+// parts: {k:'t',v:'text'} | {k:'g',a:[answers],w:px}
+// dialogue: true + lines:[{speaker:'A'|'B'|'', parts:[...]}]
+const DB = [];
+function t(v){return{k:'t',v};}
+function g(a,w){return{k:'g',a:Array.isArray(a)?a:[a],w};}
+function ps(parts,hint,extra)  { DB.push({bank:'ps',   parts, hint, ...extra}); }
+function tb(parts,hint,extra)  { DB.push({bank:'tobe', parts, hint, ...extra}); }
+function pr(parts,hint,extra)  { DB.push({bank:'pron', parts, hint, ...extra}); }
+function pp(parts,hint,tr,trMark){ DB.push({bank:'prep', parts, hint, tr, trMark}); }
+// dialogue helper: dl({A:[parts], B:[parts]}, hint)
+function dl(speakers, hint, bank, tr, trMark){
+  const lines = Object.entries(speakers).map(([sp,parts])=>({speaker:sp,parts}));
+  DB.push({bank, dialogue:true, lines, hint, tr, trMark});
+}
+
+
+// ══ BANK 2 — TO BE ═══════════════════════════════════════════
+
+// AFF (35)
+tb([t(`I `),g('am',52),t(` very tired today.`)],'(be)');
+tb([t(`She `),g('is',48),t(` a teacher at the local school.`)],'(be)');
+tb([t(`He `),g('is',48),t(` a doctor at the city hospital.`)],'(be)');
+tb([t(`They `),g('are',54),t(` students at university.`)],'(be)');
+tb([t(`We `),g('are',54),t(` good friends.`)],'(be)');
+tb([t(`It `),g('is',48),t(` cold today — please close the window.`)],'(be)');
+tb([t(`My parents `),g('are',54),t(` at home right now.`)],'(be)');
+tb([t(`Tom `),g('is',48),t(` a very hardworking student.`)],'(be)');
+tb([t(`I `),g('am',52),t(` from Kazakhstan originally.`)],'(be)');
+tb([t(`She `),g('is',48),t(` thirty years old.`)],'(be)');
+tb([t(`The coffee `),g('is',48),t(` too hot to drink.`)],'(be)');
+tb([t(`My brother `),g('is',48),t(` an engineer at a big factory.`)],'(be)');
+tb([t(`The children `),g('are',54),t(` very noisy today.`)],'(be)');
+tb([t(`I `),g('am',52),t(` happy to be here.`)],'(be)');
+tb([t(`This book `),g('is',48),t(` really interesting.`)],'(be)');
+tb([t(`We `),g('are',54),t(` late — the lesson starts in two minutes!`)],'(be)');
+tb([t(`My flat `),g('is',48),t(` on the fifth floor.`)],'(be)');
+tb([t(`Anna `),g('is',48),t(` a nurse at the children's hospital.`)],'(be)');
+tb([t(`The shops `),g('are',54),t(` closed on Sundays.`)],'(be)');
+tb([t(`He `),g('is',48),t(` very good at Maths.`)],'(be)');
+tb([t(`I `),g('am',52),t(` hungry — let's have lunch!`)],'(be)');
+tb([t(`The weather `),g('is',48),t(` beautiful today.`)],'(be)');
+tb([t(`My sister `),g('is',48),t(` a journalist for a national newspaper.`)],'(be)');
+tb([t(`They `),g('are',54),t(` on holiday in Spain this week.`)],'(be)');
+tb([t(`This exercise `),g('is',48),t(` quite difficult for me.`)],'(be)');
+tb([t(`We `),g('are',54),t(` ready to start the lesson.`)],'(be)');
+tb([t(`He `),g('is',48),t(` a very friendly person.`)],'(be)');
+tb([t(`The tickets `),g('are',54),t(` very expensive this time of year.`)],'(be)');
+tb([t(`My office `),g('is',48),t(` on the third floor of the building.`)],'(be)');
+tb([t(`She `),g('is',48),t(` interested in art and music.`)],'(be)');
+tb([t(`The children `),g('are',54),t(` excited about the school trip.`)],'(be)');
+tb([t(`It `),g('is',48),t(` a lovely day for a walk in the park.`)],'(be)');
+tb([t(`My grandparents `),g('are',54),t(` from a small village in the south.`)],'(be)');
+tb([t(`He `),g('is',48),t(` ready to work — he just needs the instructions.`)],'(be)');
+tb([t(`You `),g('are',54),t(` a very good student — keep it up!`)],'(be)');
+
+// NEG (35)
+tb([t(`She `),g(["isn't","is not"],100),t(` at home right now — try calling her mobile.`)],"(not be)");
+tb([t(`They `),g(["aren't","are not"],100),t(` ready for the exam yet.`)],"(not be)");
+tb([t(`I `),g(["am not","'m not"],96),t(` tired — I slept very well.`)],"(not be)");
+tb([t(`He `),g(["isn't","is not"],100),t(` a very good driver, to be honest.`)],"(not be)");
+tb([t(`We `),g(["aren't","are not"],100),t(` from the same city originally.`)],"(not be)");
+tb([t(`It `),g(["isn't","is not"],100),t(` cold today — you don't need a coat.`)],"(not be)");
+tb([t(`My parents `),g(["aren't","are not"],100),t(` at home — they're at the shops.`)],"(not be)");
+tb([t(`She `),g(["isn't","is not"],100),t(` a teacher — she works at a school.`)],"(not be)");
+tb([t(`I `),g(["am not","'m not"],96),t(` happy about this decision.`)],"(not be)");
+tb([t(`The film `),g(["isn't","is not"],100),t(` very interesting, in my opinion.`)],"(not be)");
+tb([t(`Tom `),g(["isn't","is not"],100),t(` at the office today — he works from home on Fridays.`)],"(not be)");
+tb([t(`The shops `),g(["aren't","are not"],100),t(` open on Sunday mornings.`)],"(not be)");
+tb([t(`We `),g(["aren't","are not"],100),t(` late — we still have five minutes.`)],"(not be)");
+tb([t(`He `),g(["isn't","is not"],100),t(` very good at English yet, but he's improving.`)],"(not be)");
+tb([t(`I `),g(["am not","'m not"],96),t(` from Moscow — I'm from Saint Petersburg.`)],"(not be)");
+tb([t(`The tickets `),g(["aren't","are not"],100),t(` expensive — only twenty euros each.`)],"(not be)");
+tb([t(`She `),g(["isn't","is not"],100),t(` interested in sport at all.`)],"(not be)");
+tb([t(`My flat `),g(["isn't","is not"],100),t(` very big, but it's comfortable.`)],"(not be)");
+tb([t(`They `),g(["aren't","are not"],100),t(` on holiday — they're at work.`)],"(not be)");
+tb([t(`It `),g(["isn't","is not"],100),t(` easy to learn a new language, but it's worth it.`)],"(not be)");
+tb([t(`Anna `),g(["isn't","is not"],100),t(` a teacher — she's a journalist.`)],"(not be)");
+tb([t(`I `),g(["am not","'m not"],96),t(` sure about the address — let's check the map.`)],"(not be)");
+tb([t(`The children `),g(["aren't","are not"],100),t(` tired at all — they want to play more.`)],"(not be)");
+tb([t(`He `),g(["isn't","is not"],100),t(` ready — he needs ten more minutes.`)],"(not be)");
+tb([t(`We `),g(["aren't","are not"],100),t(` friends anymore, unfortunately.`)],"(not be)");
+tb([t(`This exercise `),g(["isn't","is not"],100),t(` difficult — you can do it!`)],"(not be)");
+tb([t(`My office `),g(["isn't","is not"],100),t(` in the city centre — it's in the suburbs.`)],"(not be)");
+tb([t(`The weather `),g(["isn't","is not"],100),t(` good today — it's raining.`)],"(not be)");
+tb([t(`She `),g(["isn't","is not"],100),t(` thirty — she's only twenty-six.`)],"(not be)");
+tb([t(`They `),g(["aren't","are not"],100),t(` students — they're teachers!`)],"(not be)");
+tb([t(`I `),g(["am not","'m not"],96),t(` hungry right now — I just had lunch.`)],"(not be)");
+tb([t(`The coffee `),g(["isn't","is not"],100),t(` hot anymore — it's gone cold.`)],"(not be)");
+tb([t(`My grandparents `),g(["aren't","are not"],100),t(` very old — they're both in their sixties.`)],"(not be)");
+tb([t(`He `),g(["isn't","is not"],100),t(` from here — he moved to the city two years ago.`)],"(not be)");
+tb([t(`This book `),g(["isn't","is not"],100),t(` mine — it belongs to my classmate.`)],"(not be)");
+
+// INT (30)
+tb([g(['Is'],52),t(` she `),t(`a doctor or a nurse?`)],'(be)');
+tb([g(['Are'],54),t(` you `),t(`from Kazakhstan originally?`)],'(be)');
+tb([g(['Is'],52),t(` he `),t(`good at Maths?`)],'(be)');
+tb([g(['Are'],54),t(` they `),t(`ready to start the lesson?`)],'(be)');
+tb([g(['Is'],52),t(` it `),t(`cold outside today?`)],'(be)');
+tb([g(['Are'],54),t(` your parents `),t(`at home right now?`)],'(be)');
+tb([g(['Is'],52),t(` Tom `),t(`a good student?`)],'(be)');
+tb([g(['Am'],52),t(` I `),t(`late for the lesson?`)],'(be)');
+tb([g(['Is'],52),t(` the coffee `),t(`too hot to drink?`)],'(be)');
+tb([g(['Are'],54),t(` the children `),t(`noisy today?`)],'(be)');
+tb([g(['Is'],52),t(` your flat `),t(`near the city centre?`)],'(be)');
+tb([g(['Are'],54),t(` we `),t(`late for the meeting?`)],'(be)');
+tb([g(['Is'],52),t(` Anna `),t(`a nurse or a doctor?`)],'(be)');
+tb([g(['Is'],52),t(` this book `),t(`interesting?`)],'(be)');
+tb([g(['Are'],54),t(` the shops `),t(`open on Sundays?`)],'(be)');
+tb([g(['Is'],52),t(` he `),t(`ready to start work?`)],'(be)');
+tb([g(['Are'],54),t(` you `),t(`hungry? Let's have lunch!`)],'(be)');
+tb([g(['Is'],52),t(` the weather `),t(`nice today?`)],'(be)');
+tb([g(['Is'],52),t(` your sister `),t(`a journalist?`)],'(be)');
+tb([g(['Are'],54),t(` they `),t(`on holiday this week?`)],'(be)');
+tb([g(['Is'],52),t(` this exercise `),t(`difficult for you?`)],'(be)');
+tb([g(['Are'],54),t(` you `),t(`from the same city?`)],'(be)');
+tb([g(['Is'],52),t(` he `),t(`interested in sport?`)],'(be)');
+tb([g(['Are'],54),t(` the tickets `),t(`expensive this time of year?`)],'(be)');
+tb([g(['Is'],52),t(` your office `),t(`in the city centre?`)],'(be)');
+tb([g(['Is'],52),t(` she `),t(`thirty years old?`)],'(be)');
+tb([g(['Are'],54),t(` your grandparents `),t(`from a village?`)],'(be)');
+tb([g(['Is'],52),t(` he `),t(`a friendly person?`)],'(be)');
+tb([g(['Are'],54),t(` you `),t(`happy in your new job?`)],'(be)');
+tb([g(['Is'],52),t(` the film `),t(`good? I want to see it.`)],'(be)');
+
+
+
+// ─── HINT ACCORDION ──────────────────────────────────────────
+let openHint = null;
+function toggleHint(id){
+  if(openHint && openHint !== id) closeHint(openHint);
+  if(openHint === id){ closeHint(id); return; }
+  openHint = id;
+  document.getElementById('hb-'+id).classList.add('open');
+  document.getElementById('ht-'+id).classList.add('open');
+}
+function closeHint(id){
+  document.getElementById('hb-'+id).classList.remove('open');
+  document.getElementById('ht-'+id).classList.remove('open');
+  if(openHint===id) openHint=null;
+}
+
+// ══ ADDITIONS — TO BE (200 more, total 300) ══
+tb([t(`The library `),g('is',52),t(` open until nine every evening.`)],'(be)');
+tb([t(`His parents `),g('are',58),t(` both retired teachers.`)],'(be)');
+tb([t(`I `),g('am',52),t(` a first-year student at the university.`)],'(be)');
+tb([t(`She `),g('is',52),t(` very kind to everyone.`)],'(be)');
+tb([t(`They `),g('are',58),t(` from a small town in the south.`)],'(be)');
+tb([t(`My phone `),g('is',52),t(` almost out of battery.`)],'(be)');
+tb([t(`We `),g('are',58),t(` very happy in our new house.`)],'(be)');
+tb([t(`He `),g('is',52),t(` the tallest person in the class.`)],'(be)');
+tb([t(`The exam `),g('is',52),t(` on Friday morning.`)],'(be)');
+tb([t(`They `),g('are',58),t(` colleagues at the same IT company.`)],'(be)');
+tb([t(`I `),g('am',52),t(` really excited about the trip next week.`)],'(be)');
+tb([t(`She `),g('is',52),t(` the manager of the whole department.`)],'(be)');
+tb([t(`The museum `),g('is',52),t(` free on the first Sunday of every month.`)],'(be)');
+tb([t(`We `),g('are',58),t(` neighbours — we live on the same floor.`)],'(be)');
+tb([t(`He `),g('is',52),t(` very talented at drawing.`)],'(be)');
+tb([t(`The class `),g('is',52),t(` at ten o'clock on Tuesday mornings.`)],'(be)');
+tb([t(`They `),g('are',58),t(` very proud of their children.`)],'(be)');
+tb([t(`I `),g('am',52),t(` a bit nervous about the interview tomorrow.`)],'(be)');
+tb([t(`She `),g('is',52),t(` usually on time — never late.`)],'(be)');
+tb([t(`The restaurant `),g('is',52),t(` fully booked every Friday evening.`)],'(be)');
+tb([t(`We `),g('are',58),t(` both big fans of this TV series.`)],'(be)');
+tb([t(`He `),g('is',52),t(` a famous blogger — a million people read his blog.`)],'(be)');
+tb([t(`The bus stop `),g('is',52),t(` just around the corner.`)],'(be)');
+tb([t(`They `),g('are',58),t(` always very kind to us when we visit.`)],'(be)');
+tb([t(`I `),g('am',52),t(` in a hurry — can we talk later?`)],'(be)');
+tb([t(`She `),g('is',52),t(` fluent in four languages — it's amazing!`)],'(be)');
+tb([t(`The supermarket `),g('is',52),t(` open twenty-four hours a day.`)],'(be)');
+tb([t(`We `),g('are',58),t(` both teachers at the same school.`)],'(be)');
+tb([t(`He `),g('is',52),t(` always full of energy in the morning.`)],'(be)');
+tb([t(`The meeting `),g('is',52),t(` in the big conference room on the second floor.`)],'(be)');
+tb([t(`They `),g('are',58),t(` boyfriend and girlfriend — they met five years ago.`)],'(be)');
+tb([t(`I `),g('am',52),t(` bad at cooking — I always make a mess!`)],'(be)');
+tb([t(`She `),g('is',52),t(` the boss of the marketing department.`)],'(be)');
+tb([t(`The station `),g('is',52),t(` about ten minutes from here on foot.`)],'(be)');
+tb([t(`We `),g('are',58),t(` lucky to have such a great team.`)],'(be)');
+tb([t(`The library `),g(['isn\'t','is not'],94),t(` open on Sundays.`)],'(not be)');
+tb([t(`His parents `),g(['aren\'t','are not'],106),t(` retired yet — they still work.`)],'(not be)');
+tb([t(`I `),g(['am not','\'m not'],94),t(` a morning person — I feel tired before nine.`)],'(not be)');
+tb([t(`She `),g(['isn\'t','is not'],94),t(` very sure about the presentation.`)],'(not be)');
+tb([t(`They `),g(['aren\'t','are not'],106),t(` from the same country — he's British and she's Irish.`)],'(not be)');
+tb([t(`My phone `),g(['isn\'t','is not'],94),t(` new — I bought it three years ago.`)],'(not be)');
+tb([t(`We `),g(['aren\'t','are not'],106),t(` in a hurry — we have plenty of time.`)],'(not be)');
+tb([t(`He `),g(['isn\'t','is not'],94),t(` the best student in the class, but he works very hard.`)],'(not be)');
+tb([t(`The exam `),g(['isn\'t','is not'],94),t(` on Monday — it's on Wednesday.`)],'(not be)');
+tb([t(`They `),g(['aren\'t','are not'],106),t(` colleagues anymore — she changed jobs.`)],'(not be)');
+tb([t(`I `),g(['am not','\'m not'],94),t(` nervous about the interview — I feel good.`)],'(not be)');
+tb([t(`She `),g(['isn\'t','is not'],94),t(` the manager — she's the team leader.`)],'(not be)');
+tb([t(`The museum `),g(['isn\'t','is not'],94),t(` free — you need to buy a ticket online.`)],'(not be)');
+tb([t(`We `),g(['aren\'t','are not'],106),t(` neighbours — I live on a completely different street.`)],'(not be)');
+tb([t(`He `),g(['isn\'t','is not'],94),t(` very good at sport, but he loves music.`)],'(not be)');
+tb([t(`The class `),g(['isn\'t','is not'],94),t(` on Tuesday — it's on Thursday this week.`)],'(not be)');
+tb([t(`They `),g(['aren\'t','are not'],106),t(` proud of the result — they expected better.`)],'(not be)');
+tb([t(`I `),g(['am not','\'m not'],94),t(` sure this is the right answer.`)],'(not be)');
+tb([t(`She `),g(['isn\'t','is not'],94),t(` usually late — her train is late today.`)],'(not be)');
+tb([t(`The restaurant `),g(['isn\'t','is not'],94),t(` expensive — lunch is only ten pounds.`)],'(not be)');
+tb([t(`We `),g(['aren\'t','are not'],106),t(` fans of that TV show — it's not our thing.`)],'(not be)');
+tb([t(`He `),g(['isn\'t','is not'],94),t(` a blogger now — he has a new job.`)],'(not be)');
+tb([t(`The bus stop `),g(['isn\'t','is not'],94),t(` nearby — you'll need to take a taxi.`)],'(not be)');
+tb([t(`They `),g(['aren\'t','are not'],106),t(` always kind — sometimes they are angry.`)],'(not be)');
+tb([t(`I `),g(['am not','\'m not'],94),t(` ready yet — give me five more minutes.`)],'(not be)');
+tb([t(`She `),g(['isn\'t','is not'],94),t(` fluent in English — she's still learning.`)],'(not be)');
+tb([t(`The supermarket `),g(['isn\'t','is not'],94),t(` open twenty-four hours — it closes at midnight.`)],'(not be)');
+tb([t(`We `),g(['aren\'t','are not'],106),t(` at the same school — I'm at a different one.`)],'(not be)');
+tb([t(`He `),g(['isn\'t','is not'],94),t(` full of energy today — he didn't sleep well.`)],'(not be)');
+tb([t(`The meeting `),g(['isn\'t','is not'],94),t(` in the conference room — it's online today.`)],'(not be)');
+tb([t(`They `),g(['aren\'t','are not'],106),t(` boyfriend and girlfriend — they're just good friends.`)],'(not be)');
+tb([t(`I `),g(['am not','\'m not'],94),t(` bad at cooking — I just need more practice.`)],'(not be)');
+tb([t(`She `),g(['isn\'t','is not'],94),t(` the boss of the whole company — only of one department.`)],'(not be)');
+tb([t(`The nearest station `),g(['isn\'t','is not'],94),t(` far — it's only ten minutes on foot.`)],'(not be)');
+tb([t(`We `),g(['aren\'t','are not'],106),t(` lucky with the weather this week — it's raining every day.`)],'(not be)');
+tb([t(`He `),g(['isn\'t','is not'],94),t(` available right now — he's in a meeting.`)],'(not be)');
+tb([t(`I `),g(['am not','\'m not'],94),t(` afraid of speaking in public — I do it all the time.`)],'(not be)');
+tb([t(`She `),g(['isn\'t','is not'],94),t(` in the office today — she's at home.`)],'(not be)');
+tb([t(`The soup `),g(['isn\'t','is not'],94),t(` hot — it's cold!`)],'(not be)');
+tb([t(`We `),g(['aren\'t','are not'],106),t(` tired — we slept really well last night.`)],'(not be)');
+tb([t(`He `),g(['isn\'t','is not'],94),t(` a doctor — he's a dentist.`)],'(not be)');
+tb([t(`They `),g(['aren\'t','are not'],106),t(` married — they're just living together.`)],'(not be)');
+tb([t(`I `),g(['am not','\'m not'],94),t(` interested in politics — I find it boring.`)],'(not be)');
+tb([t(`She `),g(['isn\'t','is not'],94),t(` very tall — about average height.`)],'(not be)');
+tb([t(`The shop `),g(['isn\'t','is not'],94),t(` open yet — it opens at ten.`)],'(not be)');
+tb([t(`We `),g(['aren\'t','are not'],106),t(` vegetarians — we eat meat.`)],'(not be)');
+tb([t(`He `),g(['isn\'t','is not'],94),t(` very friendly — he's quite shy.`)],'(not be)');
+tb([t(`They `),g(['aren\'t','are not'],106),t(` on the same team now — they work in different offices.`)],'(not be)');
+tb([t(`I `),g(['am not','\'m not'],94),t(` from here — I moved here five years ago.`)],'(not be)');
+tb([t(`She `),g(['isn\'t','is not'],94),t(` happy about the new schedule.`)],'(not be)');
+tb([t(`The answer `),g(['isn\'t','is not'],94),t(` correct — try again.`)],'(not be)');
+tb([t(`We `),g(['aren\'t','are not'],106),t(` sure about the time of the meeting.`)],'(not be)');
+tb([t(`He `),g(['isn\'t','is not'],94),t(` at his desk — he went for lunch.`)],'(not be)');
+tb([t(`They `),g(['aren\'t','are not'],106),t(` expensive restaurants — the food is cheap.`)],'(not be)');
+tb([t(`I `),g(['am not','\'m not'],94),t(` angry — just a little disappointed.`)],'(not be)');
+tb([t(`She `),g(['isn\'t','is not'],94),t(` available this afternoon — she has a meeting.`)],'(not be)');
+tb([t(`The instructions `),g(['aren\'t','are not'],106),t(` easy — I don't understand them.`)],'(not be)');
+tb([t(`We `),g(['aren\'t','are not'],106),t(` ready to go yet — we need five minutes.`)],'(not be)');
+tb([t(`He `),g(['isn\'t','is not'],94),t(` the right person for this job — he is new.`)],'(not be)');
+tb([t(`They `),g(['aren\'t','are not'],106),t(` at home — they went out for dinner.`)],'(not be)');
+tb([t(`I `),g(['am not','\'m not'],94),t(` very good at maths — I always get the answers wrong.`)],'(not be)');
+tb([t(`She `),g(['isn\'t','is not'],94),t(` your teacher — she's the head of the school!`)],'(not be)');
+tb([t(`The journey `),g(['isn\'t','is not'],94),t(` very long — about forty minutes by train.`)],'(not be)');
+tb([t(`We `),g(['aren\'t','are not'],106),t(` on the same page about this — let's discuss it more.`)],'(not be)');
+tb([t(`He `),g(['isn\'t','is not'],94),t(` very tidy — his desk is always a mess.`)],'(not be)');
+tb([g('Is',52),t(` the library open on Sundays?`)],'(be)');
+tb([g('Are',58),t(` his parents retired?`)],'(be)');
+tb([g('Am',52),t(` I late for the meeting?`)],'(be)');
+tb([g('Is',52),t(` she sure about the presentation?`)],'(be)');
+tb([g('Are',58),t(` they from the same country?`)],'(be)');
+tb([g('Is',52),t(` your phone new?`)],'(be)');
+tb([g('Are',58),t(` we in a hurry?`)],'(be)');
+tb([g('Is',52),t(` he the best student in the class?`)],'(be)');
+tb([g('Is',52),t(` the exam on Friday?`)],'(be)');
+tb([g('Are',58),t(` they colleagues at the same company?`)],'(be)');
+tb([g('Am',52),t(` I the only one who doesn't understand this?`)],'(be)');
+tb([g('Is',52),t(` she the manager of the department?`)],'(be)');
+tb([g('Is',52),t(` the museum free on Sundays?`)],'(be)');
+tb([g('Are',58),t(` you two neighbours?`)],'(be)');
+tb([g('Is',52),t(` he good at drawing?`)],'(be)');
+tb([g('Is',52),t(` the class on Tuesday morning?`)],'(be)');
+tb([g('Are',58),t(` they proud of the result?`)],'(be)');
+tb([g('Am',52),t(` I in the right room?`)],'(be)');
+tb([g('Is',52),t(` she usually on time?`)],'(be)');
+tb([g('Is',52),t(` the restaurant expensive?`)],'(be)');
+tb([g('Are',58),t(` you both fans of that TV series?`)],'(be)');
+tb([g('Is',52),t(` he a well-known blogger?`)],'(be)');
+tb([g('Is',52),t(` the bus stop nearby?`)],'(be)');
+tb([g('Are',58),t(` they always kind to you?`)],'(be)');
+tb([g('Am',52),t(` I the last one to arrive?`)],'(be)');
+tb([g('Is',52),t(` she fluent in English?`)],'(be)');
+tb([g('Is',52),t(` the supermarket open twenty-four hours?`)],'(be)');
+tb([g('Are',58),t(` you both from the same city?`)],'(be)');
+tb([g('Is',52),t(` he full of energy in the mornings?`)],'(be)');
+tb([g('Is',52),t(` the meeting in the conference room?`)],'(be)');
+tb([g('Are',58),t(` they boyfriend and girlfriend?`)],'(be)');
+tb([g('Am',52),t(` I bad at cooking?`)],'(be)');
+tb([g('Is',52),t(` she the boss of the marketing department?`)],'(be)');
+tb([g('Is',52),t(` the nearest station far from here?`)],'(be)');
+tb([g('Are',58),t(` we lucky to have such a good team?`)],'(be)');
+tb([g('Is',52),t(` he available right now?`)],'(be)');
+tb([g('Am',52),t(` I in the right queue?`)],'(be)');
+tb([g('Is',52),t(` she in the office today?`)],'(be)');
+tb([g('Is',52),t(` the soup hot?`)],'(be)');
+tb([g('Are',58),t(` you tired after the journey?`)],'(be)');
+tb([g('Is',52),t(` he a doctor or a dentist?`)],'(be)');
+tb([g('Are',58),t(` they married or just living together?`)],'(be)');
+tb([g('Am',52),t(` I too early for the lesson?`)],'(be)');
+tb([g('Is',52),t(` she very tall?`)],'(be)');
+tb([g('Is',52),t(` the shop open yet?`)],'(be)');
+tb([g('Are',58),t(` you vegetarian?`)],'(be)');
+tb([g('Is',52),t(` he very friendly?`)],'(be)');
+tb([g('Are',58),t(` they on the same team?`)],'(be)');
+tb([g('Am',52),t(` I on the right bus?`)],'(be)');
+tb([g('Is',52),t(` she happy about the new schedule?`)],'(be)');
+tb([g('Is',52),t(` the answer correct?`)],'(be)');
+tb([g('Are',58),t(` you sure about the time of the meeting?`)],'(be)');
+tb([g('Is',52),t(` he at his desk right now?`)],'(be)');
+tb([g('Are',58),t(` they expensive restaurants?`)],'(be)');
+tb([g('Am',52),t(` I in your seat?`)],'(be)');
+tb([g('Is',52),t(` she available this afternoon?`)],'(be)');
+tb([g('Are',58),t(` the instructions clear?`)],'(be)');
+tb([g('Are',58),t(` you ready to go?`)],'(be)');
+tb([g('Is',52),t(` he the right person for this job?`)],'(be)');
+tb([g('Are',58),t(` they at home?`)],'(be)');
+tb([g('Am',52),t(` I good at maths?`)],'(be)');
+tb([g('Is',52),t(` she the teacher or the head of the school?`)],'(be)');
+tb([g('Is',52),t(` the journey very long?`)],'(be)');
+tb([g('Are',58),t(` we on the same page about this?`)],'(be)');
+tb([g('Is',52),t(` he very tidy?`)],'(be)');
+tb([g('Are',58),t(` you interested in politics?`)],'(be)');
+tb([g('Is',52),t(` the office open on public holidays?`)],'(be)');
+tb([g('Are',58),t(` they happy with the new room?`)],'(be)');
+tb([g('Am',52),t(` I the first person to arrive?`)],'(be)');
+tb([g('Is',52),t(` your flat big or small?`)],'(be)');
+tb([g('Are',58),t(` the children old enough to watch this film?`)],'(be)');
+tb([g('Is',52),t(` he in charge of the whole project?`)],'(be)');
+tb([g('Are',58),t(` you comfortable in your new role?`)],'(be)');
+tb([g('Is',52),t(` the hotel near the beach?`)],'(be)');
+tb([g('Are',58),t(` they both vegetarians?`)],'(be)');
+tb([g('Am',52),t(` I the right person for this job?`)],'(be)');
+tb([g('Is',52),t(` she from this country?`)],'(be)');
+tb([g('Are',58),t(` the prices cheap at that restaurant?`)],'(be)');
+tb([g('Is',52),t(` he in the office today?`)],'(be)');
+tb([g('Are',58),t(` you both from the same university?`)],'(be)');
+tb([g('Is',52),t(` the new office bigger than the old one?`)],'(be)');
+tb([g('Are',58),t(` they in trouble?`)],'(be)');
+tb([g('Am',52),t(` I wrong about this?`)],'(be)');
+tb([g('Is',52),t(` she afraid of flying?`)],'(be)');
+tb([g('Are',58),t(` the rooms big enough for four people?`)],'(be)');
+tb([g('Is',52),t(` he a good driver?`)],'(be)');
+tb([g('Are',58),t(` you nervous about the exam?`)],'(be)');
+tb([g('Is',52),t(` the wifi free in this café?`)],'(be)');
+tb([g('Are',58),t(` they ready for the exam?`)],'(be)');
+tb([g('Am',52),t(` I on the list?`)],'(be)');
+tb([g('Is',52),t(` she good at languages?`)],'(be)');
+tb([g('Are',58),t(` the shops usually busy at this time of day?`)],'(be)');
+tb([g('Is',52),t(` he in good health?`)],'(be)');
+tb([g('Are',58),t(` you happy with your progress?`)],'(be)');
+tb([g('Is',52),t(` the course difficult?`)],'(be)');
+tb([g('Are',58),t(` they good neighbours?`)],'(be)');
+tb([g('Am',52),t(` I early for the party?`)],'(be)');
+tb([g('Is',52),t(` the exam tomorrow or next week?`)],'(be)');
+tb([g('Are',58),t(` you free for lunch on Thursday?`)],'(be)');
+tb([g('Is',52),t(` he the new teacher?`)],'(be)');
+
+// ─── HELPERS ──────────────────────────────────────────────────
+function norm(s){ return s.trim().toLowerCase().replace(/[\u2018\u2019]/g,"'").replace(/\s+/g,' '); }
+function shuffle(a){ const b=[...a]; for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];} return b; }
+
+let current=[], roundNum=1, roundCorrect=0, roundWrong=0;
+
+function classify(s){
+  const src = s.dialogue ? s.lines.flatMap(l=>l.parts) : s.parts;
+  const first = src.find(p=>p.k==='g');
+  if(!first) return 'aff';
+  const a0 = first.a[0];
+  if(["don't","doesn't","isn't","aren't","am not","'m not"].some(x=>a0.startsWith(x))||
+     ["do not","does not","is not","are not"].some(x=>a0.startsWith(x))) return 'neg';
+  if(["Do","Does","Is","Are","Am"].includes(a0)) return 'int';
+  return 'aff';
+}
+
+function pickRound(){
+  const pool = DB;
+  const aff = shuffle(pool.filter(s=>classify(s)==='aff'));
+  const neg = shuffle(pool.filter(s=>classify(s)==='neg'));
+  const int = shuffle(pool.filter(s=>classify(s)==='int'));
+  const pick=(arr,n)=>arr.slice(0,Math.min(n,arr.length));
+  return shuffle([...pick(aff,9),...pick(neg,8),...pick(int,8)]);
+}
+
+// ─── RENDER / CHECK / SAVED PROGRESS (shared engine) ───────────
+// Every sentence gets a stable id (hash of its content). The page state — current
+// round, typed answers, checked cards, score and the "My mistakes" bank — is kept
+// in localStorage, separately for every page (key = file name).
+const PAGE = (location.pathname.split('/').pop() || 'index').replace(/\.html?$/i, '') || 'index';
+const SKEY = 'hw-oleg-practice:' + PAGE;
+
+function hashItem(s){
+  const str = JSON.stringify(s.dialogue ? s.lines : s.parts) + '|' + (s.tr || '');
+  let h = 5381;
+  for (let i = 0; i < str.length; i++) h = ((h << 5) + h + str.charCodeAt(i)) | 0;
+  return (h >>> 0).toString(36);
+}
+const BYID = {};
+DB.forEach(s => { s._id = hashItem(s); if (!BYID[s._id]) BYID[s._id] = s; });
+
+// S.main = ordinary round, S.mist = round made of saved mistakes, S.mistakes = the bank (ids)
+function freshSession(){ return { round: 1, ids: [], vals: {}, done: {}, ok: 0, bad: 0 }; }
+function cleanSession(x){
+  const f = freshSession();
+  if (!x || typeof x !== 'object') return f;
+  return {
+    round: Number.isInteger(x.round) && x.round > 0 ? x.round : 1,
+    ids: Array.isArray(x.ids) ? x.ids.filter(id => BYID[id]) : [],
+    vals: x.vals && typeof x.vals === 'object' ? x.vals : {},
+    done: x.done && typeof x.done === 'object' ? x.done : {},
+    ok: Number.isInteger(x.ok) ? x.ok : 0,
+    bad: Number.isInteger(x.bad) ? x.bad : 0
+  };
+}
+let S = { mode: 'main', mistakes: [], main: freshSession(), mist: freshSession() };
+
+function loadState(){
+  try {
+    const raw = localStorage.getItem(SKEY);
+    if (!raw) return;
+    const o = JSON.parse(raw);
+    S.mode = o.mode === 'mist' ? 'mist' : 'main';
+    S.mistakes = Array.isArray(o.mistakes) ? [...new Set(o.mistakes.filter(id => BYID[id]))] : [];
+    S.main = cleanSession(o.main);
+    S.mist = cleanSession(o.mist);
+    // a saved session whose sentences changed (ids dropped) is not restored half-way
+    [['main', o.main], ['mist', o.mist]].forEach(([k, raw]) => {
+      if (raw && Array.isArray(raw.ids) && raw.ids.length !== S[k].ids.length) S[k] = freshSession();
+    });
+  } catch (e) { /* storage unavailable — the page still works, just without saving */ }
+}
+function saveState(){ try { localStorage.setItem(SKEY, JSON.stringify(S)); } catch (e) {} }
+
+function startRound(mode, bump){
+  const ss = S[mode];
+  if (bump) ss.round++;
+  ss.vals = {}; ss.done = {}; ss.ok = 0; ss.bad = 0;
+  ss.ids = mode === 'main' ? pickRound().map(s => s._id) : shuffle(S.mistakes).slice(0, 25);
+}
+
+// ─── RENDER ───────────────────────────────────────────────────
+function makeInputEl(p, idx, gapN){
+  const inp = document.createElement('input');
+  inp.type = 'text'; inp.className = 'gap'; inp.placeholder = '_____';
+  inp.style.width = (p.w || 100) + 'px';
+  inp.dataset.idx = idx; inp.dataset.gap = gapN;
+  inp.dataset.ans = JSON.stringify(p.a);
+  inp.autocomplete = 'off'; inp.autocorrect = 'off'; inp.autocapitalize = 'none'; inp.spellcheck = false;
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter') checkCard(idx, false); });
+  inp.addEventListener('input', () => rememberInputs(idx));
+  return inp;
+}
+
+function buildLine(parts, idx, gapCounter){
+  const line = document.createElement('div');
+  line.className = 'dl';
+  parts.forEach(p => {
+    if (p.k === 't') {
+      if (!p.v) return;
+      const sp = document.createElement('span'); sp.className = 'word'; sp.textContent = p.v;
+      line.appendChild(sp);
+    } else {
+      line.appendChild(makeInputEl(p, idx, gapCounter.n++));
+    }
+  });
+  return line;
+}
+
+function render(){
+  const ss = S[S.mode];
+  const c = document.getElementById('container');
+  c.innerHTML = '';
+  current = ss.ids.map(id => BYID[id]);
+  updateModeUI();
+
+  if (current.length === 0) {
+    c.innerHTML = '<div class="empty-msg">' + (S.mode === 'mist'
+      ? 'Your mistakes bank is empty. 🎉<br>Sentences you answer incorrectly will appear here.'
+      : 'No sentences found.') + '</div>';
+    document.getElementById('progress').style.width = '0%';
+    hideResult(); updateChips();
+    return;
+  }
+
+  current.forEach((s, idx) => {
+    const card = document.createElement('div');
+    card.className = 'sentence-card'; card.id = `card-${idx}`;
+
+    const numEl = document.createElement('span');
+    numEl.className = 'num'; numEl.textContent = idx + 1;
+    card.appendChild(numEl);
+
+    const body = document.createElement('div');
+    body.className = 'card-body';
+
+    const gc = { n: 0 }; // shared gap counter
+
+    if (s.dialogue) {
+      const dlWrap = document.createElement('div');
+      dlWrap.className = 'dialogue';
+      s.lines.forEach(line => {
+        const row = buildLine(line.parts, idx, gc);
+        if (line.speaker) {
+          const lbl = document.createElement('span');
+          lbl.className = 'sp-label'; lbl.textContent = line.speaker + ': ';
+          row.insertBefore(lbl, row.firstChild);
+        }
+        dlWrap.appendChild(row);
+      });
+      body.appendChild(dlWrap);
+    } else {
+      const line = document.createElement('div');
+      line.className = 'sent-line';
+      const gc2 = { n: 0 };
+      s.parts.forEach(p => {
+        if (p.k === 't') {
+          if (!p.v) return;
+          const sp = document.createElement('span'); sp.className = 'word'; sp.textContent = p.v;
+          line.appendChild(sp);
+        } else {
+          line.appendChild(makeInputEl(p, idx, gc2.n++));
+        }
+      });
+      body.appendChild(line);
+    }
+
+    // hint
+    const meta = document.createElement('div');
+    meta.className = 'meta-line';
+    if (s.bank !== 'prep') {
+      s.hint.split(' — ').forEach((part, pi) => {
+        if (pi > 0) { const sep = document.createElement('span'); sep.className = 'hint-base'; sep.textContent = ' — '; meta.appendChild(sep); }
+        const m2 = part.match(/^(\([^)]+\))\s*(\[[^\]]+\])$/);
+        const m1 = part.match(/^(\([^)]+\))$/);
+        if (m2) {
+          const b = document.createElement('span'); b.className = 'hint-base'; b.textContent = m2[1]; meta.appendChild(b);
+          const r = document.createElement('span'); r.className = 'hint-ru'; r.textContent = ' ' + m2[2]; meta.appendChild(r);
+        } else if (m1) {
+          const b = document.createElement('span'); b.className = 'hint-base'; b.textContent = m1[1]; meta.appendChild(b);
+        } else {
+          const r = document.createElement('span'); r.className = 'hint-ru'; r.textContent = part; meta.appendChild(r);
+        }
+      });
+    }
+    // correction spans — one per gap
+    const allParts = s.dialogue ? s.lines.flatMap(l => l.parts) : s.parts;
+    allParts.forEach((p, ci) => { if (p.k === 'g') { const cor = document.createElement('span'); cor.className = 'correction'; cor.id = `cor-${idx}-${ci}`; meta.appendChild(cor); } });
+    body.appendChild(meta);
+
+    // Translation line for prep sentences
+    if (s.bank === 'prep' && s.tr) {
+      const trLine = document.createElement('div');
+      trLine.className = 'sent-translation';
+      const tlines = s.tr.split('\n');
+      tlines.forEach((tl, ti) => {
+        if (ti > 0) { trLine.appendChild(document.createElement('br')); }
+        if (s.trMark && tl.length) {
+          // If trMark starts with "не " → only the preposition after it is highlighted
+          let findStr = s.trMark;
+          let markStr = s.trMark;
+          if (s.trMark.startsWith('не ')) { markStr = s.trMark.slice(3); }
+          const isCyrLetter = ch => ch && /[а-яёА-ЯЁ]/u.test(ch);
+          const findWholeWord = (str, word) => {
+            let pos = 0;
+            while (pos <= str.length - word.length) {
+              const i = str.indexOf(word, pos);
+              if (i === -1) return -1;
+              const before = str[i - 1]; const after = str[i + word.length];
+              if (!isCyrLetter(before) && !isCyrLetter(after)) return i;
+              pos = i + 1;
+            }
+            return -1;
+          };
+          const fi = findWholeWord(tl, findStr);
+          if (fi !== -1) {
+            const markStart = fi + (findStr.length - markStr.length);
+            trLine.appendChild(document.createTextNode(tl.slice(0, markStart)));
+            const mk = document.createElement('mark'); mk.textContent = markStr; trLine.appendChild(mk);
+            trLine.appendChild(document.createTextNode(tl.slice(markStart + markStr.length)));
+          } else {
+            const fi2 = findWholeWord(tl, markStr);
+            if (fi2 !== -1) {
+              trLine.appendChild(document.createTextNode(tl.slice(0, fi2)));
+              const mk = document.createElement('mark'); mk.textContent = markStr; trLine.appendChild(mk);
+              trLine.appendChild(document.createTextNode(tl.slice(fi2 + markStr.length)));
+            } else {
+              trLine.appendChild(document.createTextNode(tl));
+            }
+          }
+        } else {
+          trLine.appendChild(document.createTextNode(tl));
+        }
+      });
+      body.appendChild(trLine);
+    }
+
+    card.appendChild(body);
+
+    const btn = document.createElement('button');
+    btn.className = 'btn-check-card'; btn.textContent = 'Check';
+    btn.id = `btn-${idx}`; btn.onclick = () => checkCard(idx, true);
+    card.appendChild(btn);
+
+    c.appendChild(card);
+  });
+
+  // restore typed answers and already-checked cards (saved progress)
+  current.forEach((s, idx) => {
+    const card = document.getElementById(`card-${idx}`);
+    const inputs = card.querySelectorAll('input.gap');
+    const v = ss.vals[idx];
+    if (Array.isArray(v)) inputs.forEach((inp, i) => { inp.value = typeof v[i] === 'string' ? v[i] : ''; });
+    if (ss.done[idx]) applyGrade(idx);
+  });
+
+  updateChips(); updateProgress();
+  if (Object.keys(ss.done).length === current.length) showResult(); else hideResult();
+}
+
+// ─── CHECK ────────────────────────────────────────────────────
+// Visual grading of one card. Does not touch the score.
+function applyGrade(idx){
+  const s = current[idx]; const card = document.getElementById(`card-${idx}`);
+  const btn = document.getElementById(`btn-${idx}`);
+  const inputs = card.querySelectorAll('input.gap');
+  btn.disabled = true;
+  const allParts = s.dialogue ? s.lines.flatMap(l => l.parts) : s.parts;
+  let cardOk = true, inputIdx = 0;
+  allParts.forEach((p, ci) => {
+    if (p.k !== 'g') return;
+    const inp = inputs[inputIdx++];
+    const answers = JSON.parse(inp.dataset.ans);
+    // an EMPTY field is wrong, unless "no preposition" ('' is one of the answers)
+    const ok = answers.some(a => norm(a) === norm(inp.value));
+    inp.disabled = true; inp.classList.remove('correct', 'wrong');
+    if (ok) { inp.classList.add('correct'); }
+    else {
+      inp.classList.add('wrong'); cardOk = false;
+      const cor = document.getElementById(`cor-${idx}-${ci}`);
+      if (cor) { cor.textContent = '→ ' + answers[0]; cor.style.display = 'inline'; }
+    }
+  });
+  card.classList.remove('checked-ok', 'checked-err');
+  card.classList.add(cardOk ? 'checked-ok' : 'checked-err');
+  return cardOk;
+}
+
+// force=true  → "Check" button / "Check All": empty fields are counted as mistakes
+// force=false → Enter key: waits until every field that needs an answer is filled
+function checkCard(idx, force){
+  const ss = S[S.mode];
+  if (ss.done[idx]) return;
+  const card = document.getElementById(`card-${idx}`);
+  if (!card) return;
+  const inputs = card.querySelectorAll('input.gap');
+  if (!force) {
+    let allFilled = true;
+    inputs.forEach(i => { const ans = JSON.parse(i.dataset.ans); if (!i.value.trim() && !ans.includes('')) allFilled = false; });
+    if (!allFilled) return;
+  }
+  ss.vals[idx] = Array.from(inputs).map(i => i.value);
+  const ok = applyGrade(idx);
+  ss.done[idx] = ok ? 'ok' : 'err';
+  if (ok) ss.ok++;
+  else { ss.bad++; addMistake(current[idx]._id); }
+  updateChips(); updateProgress(); saveState();
+}
+
+function checkAll(){
+  current.forEach((_, idx) => checkCard(idx, true));
+  showResult(); saveState();
+}
+
+function hideResult(){ const res = document.getElementById('result'); res.className = 'result-box'; res.textContent = ''; }
+function showResult(){
+  const ss = S[S.mode];
+  const total = ss.ok + ss.bad;
+  if (!total) { hideResult(); return; }
+  const pct = Math.round(ss.ok / total * 100);
+  const res = document.getElementById('result');
+  if (pct >= 80) { res.className = 'result-box show great'; res.textContent = `Excellent! ${ss.ok} out of ${total} correct (${pct}%). Press "New Round" to continue.`; }
+  else if (pct >= 50) { res.className = 'result-box show ok'; res.textContent = `Good job! ${ss.ok} out of ${total} correct (${pct}%). Check the red answers.`; }
+  else { res.className = 'result-box show poor'; res.textContent = `${ss.ok} out of ${total} correct (${pct}%). Review the material and try a new round!`; }
+}
+
+function rememberInputs(idx){
+  const ss = S[S.mode];
+  const card = document.getElementById(`card-${idx}`);
+  if (!card || ss.done[idx]) return;
+  ss.vals[idx] = Array.from(card.querySelectorAll('input.gap')).map(i => i.value);
+  saveState();
+}
+
+// ─── "MY MISTAKES" BANK ───────────────────────────────────────
+function addMistake(id){
+  if (!S.mistakes.includes(id)) S.mistakes.push(id);
+  updateModeUI();
+}
+function toggleBank(){
+  S.mode = S.mode === 'main' ? 'mist' : 'main';
+  if (S.mode === 'mist') {
+    // a bank round that was not started yet is rebuilt from the latest mistakes
+    const ss = S.mist;
+    const touched = Object.keys(ss.done).length > 0 || Object.values(ss.vals).some(v => v.some(x => x && x.trim()));
+    if (!touched) startRound('mist', false);
+  }
+  render(); saveState(); window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function emptyBank(){
+  const n = S.mistakes.length;
+  if (!n) return;
+  if (!confirm(`Empty the bank? All ${n} saved mistake${n === 1 ? '' : 's'} will be removed.`)) return;
+  S.mistakes = [];
+  S.mist = freshSession();
+  render(); saveState();
+}
+// Reset: round → 1, score → 0, answers cleared, a fresh set of sentences.
+// Works on the screen you are on; the "My mistakes" bank itself is kept (use "Empty bank" for that).
+function resetProgress(){
+  const where = S.mode === 'mist' ? 'My mistakes' : 'this page';
+  if (!confirm(`Reset ${where}? The round goes back to 1, the score and all answers are cleared.` + (S.mode === 'main' ? ' Your mistakes bank is kept.' : ''))) return;
+  S[S.mode] = freshSession();
+  startRound(S.mode, false);
+  render(); saveState(); window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+// "← Back" inside the mistakes bank returns to the tasks, not to the title page
+function backClick(ev){
+  if (S.mode === 'mist') { ev.preventDefault(); toggleBank(); }
+}
+
+function updateModeUI(){
+  const m = S.mode === 'mist';
+  document.body.classList.toggle('mist-mode', m);
+  const b = document.getElementById('btn-bank');
+  b.innerHTML = m ? '← Tasks' : 'My mistakes <span class="mm-count">' + S.mistakes.length + '</span>';
+  const note = document.getElementById('mist-note');
+  note.hidden = !m;
+  if (m) note.innerHTML = '<strong>My mistakes</strong> · ' + S.mistakes.length + ' sentence' + (S.mistakes.length === 1 ? '' : 's') + ' saved';
+  document.getElementById('btn-empty').hidden = !m;
+}
+
+function updateChips(){
+  const ss = S[S.mode];
+  document.getElementById('chip-ok').textContent = '✓ ' + ss.ok;
+  document.getElementById('chip-err').textContent = '✗ ' + ss.bad;
+  document.getElementById('round-num').textContent = ss.round;
+}
+function updateProgress(){
+  const ss = S[S.mode];
+  const n = current.length;
+  document.getElementById('progress').style.width = n ? Math.round(Object.keys(ss.done).length / n * 100) + '%' : '0%';
+}
+function newRound(){
+  startRound(S.mode, true);
+  render(); saveState(); window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── START ────────────────────────────────────────────────────
+loadState();
+if (!S.main.ids.length) startRound('main', false);
+if (S.mode === 'mist' && !S.mist.ids.length) startRound('mist', false);
+render(); saveState();
+</script>
+</body>
+</html>
